@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import MainPage from "./components/Pages/MainPage/MainPage";
+import MainPage from "./screens/main/MainPage";
 import "./App.css";
 
 class App extends Component {

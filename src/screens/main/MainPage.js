@@ -1,10 +1,11 @@
 import { css, StyleSheet } from "aphrodite/no-important";
 import React, { Component } from "react";
-import Cards from "../../CardGroup/CardGroup";
-import Footer from "../../Footer/Footer";
-import Header from "../../Header/Header";
-import Menu from "../../Menu/Menu";
-import MainCarousel from "../../MainCarousel/MainCarousel";
+import Cards from "../../library/components/cardGroup/CardGroup";
+import { connect } from "react-redux";
+import Footer from "./footer/Footer";
+import Header from "./header/Header";
+import Menu from "./menu/Menu";
+import MainCarousel from "./mainCarousel/MainCarousel";
 
 class MainPage extends Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class MainPage extends Component {
   }
 
   render() {
+    const { cards, products } = this.props;
     return (
       <div className={css(styles.mainWrapper)}>
         <Menu />
@@ -22,6 +24,9 @@ class MainPage extends Component {
           <div className={css(styles.border)}>
             <div className={css(styles.mainInfo)}>
               <h2>Popular SkOUT Security products</h2>
+              <div>
+                <Cards cards={products} />
+              </div>
             </div>
           </div>
           <div className={css(styles.border)}>
@@ -40,7 +45,7 @@ class MainPage extends Component {
                   margin: "35px 0px 45px 0px"
                 }}
               />
-              <Cards />
+              <Cards cards={cards} />
             </div>
           </div>
 
@@ -59,7 +64,7 @@ const styles = StyleSheet.create({
     marginTop: 20
   },
   mainInfo: {
-    maxWidth: 900,
+    maxWidth: 1000,
     margin: "0 auto",
     textAlign: "center"
   },
@@ -77,4 +82,15 @@ const styles = StyleSheet.create({
   }
 });
 
-export default MainPage;
+function mapStateToProps({ products, cards }) {
+  return {
+    products: products.map((product, i) => ({
+      title: product.name,
+      text: product.text,
+      img: product.img
+    })),
+    cards
+  };
+}
+
+export default connect(mapStateToProps)(MainPage);

@@ -1,0 +1,28 @@
+{
+  "products": [
+    {
+      "name": "Product 1",
+      "id": "Product1",
+      "text": "Text 1",
+      "img": ""
+    },
+    {
+      "name": "Product 2",
+      "id": "Product2",
+      "text": "Text 2",
+      "img": ""
+    },
+    {
+      "name": "Product 3",
+      "id": "Product3",
+      "text": "Text 3",
+      "img": ""
+    },
+    {
+      "name": "Product 4",
+      "id": "Product4",
+      "text": "Text 4",
+      "img": ""
+    }
+  ]
+}

@@ -1,8 +1,10 @@
 import { css, StyleSheet } from "aphrodite/no-important";
 import React, { Component } from "react";
 import Button from "react-bootstrap/Button";
+import { connect } from "react-redux";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import PropTypes from "prop-types";
 
 class Menu extends Component {
   constructor(props) {
@@ -12,6 +14,7 @@ class Menu extends Component {
   }
 
   render() {
+    const { products } = this.props;
     return (
       <Navbar className={css(styles.Menu)} bg="light" expand="lg">
         <Navbar.Brand className="mr-auto logoText" href="#home">
@@ -27,10 +30,9 @@ class Menu extends Component {
             >
               Buy Now
             </Button>
-            <Nav.Link href="#home">Product</Nav.Link>
-            <Nav.Link href="#link">Product 2</Nav.Link>
-            <Nav.Link href="#link">Product 3</Nav.Link>
-            <Nav.Link href="#link">Product 4</Nav.Link>
+            {products.map((item, i) => (
+              <Nav.Link href={`/products/${item.id}`}>{item.name}</Nav.Link>
+            ))}
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -55,4 +57,24 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Menu;
+Menu.propTypes = {
+  products: PropTypes.arrayOf(
+    PropTypes.shape({
+      img: PropTypes.string,
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      text: PropTypes.string
+    })
+  )
+};
+
+Menu.defaultProps = {
+  products: []
+};
+
+function mapStateToProps({ products }) {
+  return {
+    products
+  };
+}
+export default connect(mapStateToProps)(Menu);
