@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import Footer from "../../Footer/Footer";
 import Header from "../../Header/Header";
 import Menu from "../../Menu/Menu";
+import MainCarousel from "../../MainCarousel/MainCarousel";
 
 class MainPage extends Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class MainPage extends Component {
         <Menu />
         <Header />
         <main>
-          <h2>Popular SkOUT Security products</h2>
+          <MainCarousel />
         </main>
         <Footer />
       </div>

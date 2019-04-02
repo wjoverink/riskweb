@@ -42,7 +42,12 @@ const styles = StyleSheet.create({
   Menu: {
     height: 69,
     margin: "0 36px",
-    padding: 0
+    padding: 0,
+    ":nth-child(1n) .nav-link": {
+      fontSize: 16,
+      fontWeight: "bold"
+      // color: "#4d4d4d"
+    }
   },
   button: {
     width: 100,
