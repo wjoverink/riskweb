@@ -11,7 +11,11 @@ class MainCarousel extends Component {
 
   render() {
     return (
-      <Carousel className={css(styles.carousel)}>
+      <Carousel
+        // fade={true}
+        pauseOnHover={true}
+        className={css(styles.carousel)}
+      >
         <Carousel.Item>
           <div
             style={{
