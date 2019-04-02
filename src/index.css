@@ -12,3 +12,48 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+h1 {
+  font-size: 72px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.18;
+  letter-spacing: -1.7px;
+}
+
+h2 {
+  font-size: 34px;
+  font-weight: 200;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: -0.7px;
+}
+
+h3 {
+  font-size: 38px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: -1.5px;
+}
+
+header blockquote {
+  font-size: 32px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 2.66;
+  letter-spacing: normal;
+}
+
+button {
+  text-transform: uppercase;
+}
+
+.btn-secondary {
+  background-color: #22bf95;
+  border: 1px solid transparent;
+}
