@@ -15,7 +15,9 @@ class Footer extends Component {
       <footer className={css(styles.footer)}>
         <div className={css(styles.wrapper)}>
           <Navbar expand="lg">
-            <Navbar.Brand href="#home">RSURANCE</Navbar.Brand>
+            <Navbar.Brand className="logoText" href="#home">
+              RSURANCE
+            </Navbar.Brand>
             <Nav className="flex-column mr-auto">
               <Nav.Item className={css(styles.header)}>Company</Nav.Item>
               <Nav.Item>

@@ -14,7 +14,7 @@ class Menu extends Component {
   render() {
     return (
       <Navbar className={css(styles.Menu)} bg="light" expand="lg">
-        <Navbar.Brand className="mr-auto" href="#home">
+        <Navbar.Brand className="mr-auto logoText" href="#home">
           RSURANCE
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

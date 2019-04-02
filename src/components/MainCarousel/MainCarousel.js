@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
   carousel: {
     height: 564,
     paddingTop: 73,
+    marginBottom: 65,
     ":nth-child(1n) .carousel-item": {
       margin: "0 auto",
       maxWidth: 1050,
