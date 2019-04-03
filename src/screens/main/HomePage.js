@@ -6,6 +6,12 @@ import Header from "./header/Header";
 import MainCarousel from "./mainCarousel/MainCarousel";
 
 class MainPage extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    document.title = this.props.page.title;
+  }
+
   render() {
     const { page, products } = this.props;
     return (

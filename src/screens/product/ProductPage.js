@@ -4,6 +4,12 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 class ProductPage extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    document.title = this.props.product.name;
+  }
+
   render() {
     const {
       product: { name, img, text }

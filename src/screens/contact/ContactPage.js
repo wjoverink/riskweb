@@ -1,13 +1,25 @@
 import { css, StyleSheet } from "aphrodite/no-important";
 import React, { PureComponent } from "react";
+import { connect } from "react-redux";
 
 class ContactPage extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    document.title = this.props.page.title;
+  }
+
   render() {
+    const {
+      page: {
+        block1: { header }
+      }
+    } = this.props;
     return (
       <main>
         <div className={css(styles.border)}>
           <div className={css(styles.mainInfo, styles.popular)}>
-            <h2>Contact</h2>
+            <h2>{header}</h2>
           </div>
         </div>
       </main>
@@ -37,4 +49,10 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ContactPage;
+function mapStateToProps({ pages }) {
+  return {
+    page: pages.find(page => page.name === "contact")
+  };
+}
+
+export default connect(mapStateToProps)(ContactPage);

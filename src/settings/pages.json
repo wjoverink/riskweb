@@ -2,6 +2,7 @@
   "pages": [
     {
       "name": "mainPage",
+      "title": "Cyber Risk & Analytics Coverage",
       "block1": {
         "header": "Cyber Risk & Analytics Coverage. Because everyone deserves to be secure.",
         "subHeader": "Get started now to speak to a SkOUT broker, consultant or risk manager"
@@ -56,6 +57,27 @@
             "text": "SkOUT connected with our team, provided us insights into the risks associated with cyber risk. Their affordable, world class Cyber Risk Insurance has provided our company and employees complete peace of mind."
           }
         ]
+      }
+    },
+    {
+      "name": "faq",
+      "title": "Cyber Risk & Analytics Coverage FAQ",
+      "block1": {
+        "header": "FAQ"
+      }
+    },
+    {
+      "name": "support",
+      "title": "Cyber Risk & Analytics Coverage support",
+      "block1": {
+        "header": "Support"
+      }
+    },
+    {
+      "name": "contact",
+      "title": "Cyber Risk & Analytics Coverage contact",
+      "block1": {
+        "header": "Contact"
       }
     }
   ]
