@@ -16,18 +16,22 @@ class MainWrapper extends PureComponent {
     return (
       <div className={css(styles.mainWrapper)}>
         <Menu />
-        <div className={css(styles.mainWrapper, styles.wrapper)}>
-          <Suspense fallback={<Loader />}>
-            <Switch>
-              <Route exact path="/" component={HomePage} />
-              <Route path="/faq" component={FAQPage} />
-              <Route path="/support" component={SupportPage} />
-              <Route path="/contact" component={ContactPage} />
-              <Route path="/products/:productId" component={ProductPage} />
-            </Switch>
-          </Suspense>
-          <Loader />
-        </div>
+
+        <Suspense
+          fallback={
+            <div className={css(styles.mainWrapper, styles.wrapper)}>
+              <Loader />
+            </div>
+          }
+        >
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route path="/faq" component={FAQPage} />
+            <Route path="/support" component={SupportPage} />
+            <Route path="/contact" component={ContactPage} />
+            <Route path="/products/:productId" component={ProductPage} />
+          </Switch>
+        </Suspense>
         <Footer />
       </div>
     );

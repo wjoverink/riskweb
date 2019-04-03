@@ -1,10 +1,12 @@
 import { css, StyleSheet } from "aphrodite/no-important";
-import React, { PureComponent } from "react";
+import React, { PureComponent, Suspense, lazy } from "react";
 import Cards from "../../library/components/cardGroup/CardGroup";
 import { connect } from "react-redux";
 import Header from "./header/Header";
-import MainCarousel from "./mainCarousel/MainCarousel";
+import MiniLoader from "../../library/components/miniLoader/MiniLoader";
 import PreloadImage from "react-preload-image";
+
+const MainCarousel = lazy(() => import("./mainCarousel/MainCarousel"));
 
 class MainPage extends PureComponent {
   constructor(props) {
@@ -48,8 +50,11 @@ class MainPage extends PureComponent {
               <Cards className={css(styles.cards)} cards={page.block3.cards} />
             </div>
           </div>
-
-          <MainCarousel />
+          <Suspense
+            fallback={<MiniLoader className={css(styles.miniLoader)} />}
+          >
+            <MainCarousel />
+          </Suspense>
         </main>
       </React.Fragment>
     );
@@ -61,6 +66,12 @@ const styles = StyleSheet.create({
     maxWidth: 600,
     margin: "0 auto",
     marginTop: 20
+  },
+  miniLoader: {
+    height: 564,
+    paddingTop: 73,
+    marginBottom: 65,
+    maxWidth: 1050
   },
   cardsProducts: {
     marginTop: "4rem",
