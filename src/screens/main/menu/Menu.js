@@ -11,7 +11,7 @@ class Menu extends PureComponent {
     const { products } = this.props;
     return (
       <Navbar className={css(styles.Menu)} bg="light" expand="lg">
-        <Navbar.Brand className="mr-auto logoText" href="#home">
+        <Navbar.Brand className="mr-auto logoText" href="/">
           RSURANCE
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

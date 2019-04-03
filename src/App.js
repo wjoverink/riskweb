@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import MainPage from "./screens/main/MainPage";
 import "./App.css";
+import MainWrapper from "./screens/main/MainWrapper";
+import { withRouter } from "react-router-dom";
 
 class App extends Component {
   render() {
-    return <MainPage />;
+    return <MainWrapper />;
   }
 }
 
-export default App;
+export default withRouter(App);

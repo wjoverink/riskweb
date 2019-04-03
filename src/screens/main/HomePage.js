@@ -2,21 +2,14 @@ import { css, StyleSheet } from "aphrodite/no-important";
 import React, { PureComponent } from "react";
 import Cards from "../../library/components/cardGroup/CardGroup";
 import { connect } from "react-redux";
-import Footer from "./footer/Footer";
 import Header from "./header/Header";
-import Menu from "./menu/Menu";
 import MainCarousel from "./mainCarousel/MainCarousel";
 
 class MainPage extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { cards, products } = this.props;
     return (
-      <div className={css(styles.mainWrapper)}>
-        <Menu />
+      <React.Fragment>
         <Header />
         <main>
           <div className={css(styles.border)}>
@@ -51,8 +44,7 @@ class MainPage extends PureComponent {
 
           <MainCarousel />
         </main>
-        <Footer />
-      </div>
+      </React.Fragment>
     );
   }
 }
