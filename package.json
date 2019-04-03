@@ -11,6 +11,7 @@
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.6",
     "react-dom": "^16.8.6",
+    "react-preload-image": "^1.0.4",
     "react-redux": "^6.0.1",
     "react-router-dom": "latest",
     "react-scripts": "2.1.8",

@@ -4,6 +4,7 @@ import Cards from "../../library/components/cardGroup/CardGroup";
 import { connect } from "react-redux";
 import Header from "./header/Header";
 import MainCarousel from "./mainCarousel/MainCarousel";
+import PreloadImage from "react-preload-image";
 
 class MainPage extends PureComponent {
   constructor(props) {
@@ -32,11 +33,15 @@ class MainPage extends PureComponent {
             <div className={css(styles.mainInfo)}>
               <h3>{page.block3.header}</h3>
               <p className={css(styles.text)}>{page.block3.text}</p>
-              <img
-                src={page.block3.img}
-                alt={page.block3.alt}
+              <PreloadImage
+                src={page.block3.img.src}
+                alt={page.block3.img.alt}
+                lazy
                 style={{
+                  backgroundColor: page.block3.img.color,
                   width: "100%",
+                  minHeight: 400,
+                  position: "relative",
                   margin: "35px 0px 45px 0px"
                 }}
               />

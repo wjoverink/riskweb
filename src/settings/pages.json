@@ -13,8 +13,11 @@
       "block3": {
         "header": "We know Cyber. Your Insurance Company Doesn’t.",
         "text": "Skout is a Cyber Risk and Insurance company for humans by humans. Skout’s trained team of cybersecurity and insurance professionals will train your team and ensure that the best processes and technologies are in place and ready to respond.",
-        "img": "images/we-know-cyber.png",
-        "alt": "video about Cyber Risk and Insurance ",
+        "img": {
+          "src": "images/we-know-cyber.png",
+          "alt": "video about Cyber Risk and Insurance ",
+          "color": "#01709D"
+        },
         "cards": [
           {
             "img": "images/usability.png",
