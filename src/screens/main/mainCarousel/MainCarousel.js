@@ -4,6 +4,7 @@ import arrowleft from "../../../images/arrow-left.png";
 import arrowRight from "../../../images/arrow-right.png";
 import Carousel from "react-bootstrap/Carousel";
 import { connect } from "react-redux";
+import PreloadImage from "react-preload-image";
 import PropTypes from "prop-types";
 
 class MainCarousel extends PureComponent {
@@ -18,9 +19,15 @@ class MainCarousel extends PureComponent {
       >
         {items.map((item, i) => (
           <Carousel.Item>
-            <img
-              style={item.size}
-              className={css(styles.img)}
+            <PreloadImage
+              style={{
+                ...item.size,
+                margin: "0 auto",
+                display: "block",
+                backgroundColor: "#ddd",
+                position: "relative"
+              }}
+              lazy
               src={item.img}
               alt={item.name}
             />
@@ -47,10 +54,6 @@ const styles = StyleSheet.create({
       margin: "0 auto",
       maxWidth: 1050
     }
-  },
-  img: {
-    margin: "0 auto",
-    display: "block"
   },
   name: {
     fontSize: 21

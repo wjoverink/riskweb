@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import CardGroup from "react-bootstrap/CardGroup";
 import PropTypes from "prop-types";
+import PreloadImage from "react-preload-image";
 
 class Cards extends PureComponent {
   render() {
@@ -12,7 +13,12 @@ class Cards extends PureComponent {
       <CardGroup className={className}>
         {cards.map((card, i) => (
           <Card>
-            <Card.Img style={size} variant="top" src={card.img} />
+            <PreloadImage
+              style={{ ...size, position: "relative" }}
+              variant="top"
+              lazy
+              src={card.img}
+            />
             <Card.Body>
               <Card.Title>{card.title}</Card.Title>
               <Card.Text>{card.text}</Card.Text>
