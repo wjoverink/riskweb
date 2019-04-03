@@ -1,5 +1,7 @@
 import { css, StyleSheet } from "aphrodite/no-important";
 import React, { PureComponent } from "react";
+import arrowleft from "../../../images/arrow-left.png";
+import arrowRight from "../../../images/arrow-right.png";
 import Carousel from "react-bootstrap/Carousel";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -8,7 +10,12 @@ class MainCarousel extends PureComponent {
   render() {
     const { items } = this.props;
     return (
-      <Carousel pauseOnHover={true} className={css(styles.carousel)}>
+      <Carousel
+        nextIcon={<img alt="next slide" src={arrowRight} />}
+        prevIcon={<img alt="previous slide" src={arrowleft} />}
+        pauseOnHover={true}
+        className={css(styles.carousel)}
+      >
         {items.map((item, i) => (
           <Carousel.Item>
             <div
