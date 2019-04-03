@@ -1,17 +1,11 @@
 import { css, StyleSheet } from "aphrodite/no-important";
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import CardGroup from "react-bootstrap/CardGroup";
 import PropTypes from "prop-types";
 
-class Cards extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-  }
-
+class Cards extends PureComponent {
   render() {
     const { cards, className, size } = this.props;
     return (

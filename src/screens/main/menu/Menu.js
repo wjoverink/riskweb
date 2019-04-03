@@ -1,18 +1,12 @@
 import { css, StyleSheet } from "aphrodite/no-important";
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import Button from "react-bootstrap/Button";
 import { connect } from "react-redux";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import PropTypes from "prop-types";
 
-class Menu extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-  }
-
+class Menu extends PureComponent {
   render() {
     const { products } = this.props;
     return (

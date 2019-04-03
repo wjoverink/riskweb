@@ -1,15 +1,9 @@
 import { css, StyleSheet } from "aphrodite/no-important";
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 
-class Footer extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-  }
-
+class Footer extends PureComponent {
   render() {
     return (
       <footer className={css(styles.footer)}>

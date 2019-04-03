@@ -1,5 +1,5 @@
 import { css, StyleSheet } from "aphrodite/no-important";
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import Cards from "../../library/components/cardGroup/CardGroup";
 import { connect } from "react-redux";
 import Footer from "./footer/Footer";
@@ -7,11 +7,9 @@ import Header from "./header/Header";
 import Menu from "./menu/Menu";
 import MainCarousel from "./mainCarousel/MainCarousel";
 
-class MainPage extends Component {
+class MainPage extends PureComponent {
   constructor(props) {
     super(props);
-
-    this.state = {};
   }
 
   render() {

@@ -1,16 +1,10 @@
 import { css, StyleSheet } from "aphrodite/no-important";
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 
-class Header extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-  }
-
+class Header extends PureComponent {
   render() {
     return (
       <header className={css(styles.header)}>

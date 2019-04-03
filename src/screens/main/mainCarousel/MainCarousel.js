@@ -1,16 +1,10 @@
 import { css, StyleSheet } from "aphrodite/no-important";
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-class MainCarousel extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-  }
-
+class MainCarousel extends PureComponent {
   render() {
     const { items } = this.props;
     return (
