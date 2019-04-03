@@ -13,6 +13,8 @@ class ProductPage extends PureComponent {
         <div className={css(styles.border)}>
           <div className={css(styles.mainInfo, styles.popular)}>
             <h2>{name}</h2>
+            <img alt={name} src={`/${img}`} />
+            <p>{text}</p>
           </div>
         </div>
       </main>
@@ -36,6 +38,7 @@ const styles = StyleSheet.create({
     border: "1px solid #dfdfdf",
     borderLeft: 0,
     borderRight: 0,
+    borderTop: 0,
     padding: "54px 0px 100px 0px",
     marginTop: -1
   }

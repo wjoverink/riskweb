@@ -9,19 +9,19 @@ class Footer extends PureComponent {
       <footer className={css(styles.footer)}>
         <div className={css(styles.wrapper)}>
           <Navbar expand="lg">
-            <Navbar.Brand className="logoText" href="#home">
+            <Navbar.Brand className="logoText" href="/">
               RSURANCE
             </Navbar.Brand>
             <Nav className="flex-column mr-auto">
               <Nav.Item className={css(styles.header)}>Company</Nav.Item>
               <Nav.Item>
-                <Nav.Link href="#home">FAQs</Nav.Link>
+                <Nav.Link href="/faq">FAQs</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link href="#link">Support</Nav.Link>
+                <Nav.Link href="/support">Support</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link href="#link">Contact</Nav.Link>
+                <Nav.Link href="/contact">Contact</Nav.Link>
               </Nav.Item>
             </Nav>
             <Nav className="flex-column">

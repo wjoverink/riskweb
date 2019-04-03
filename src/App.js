@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import MainWrapper from "./screens/main/MainWrapper";
+import MainWrapper from "./screens/MainWrapper";
 import { withRouter } from "react-router-dom";
 
 class App extends Component {
