@@ -30,7 +30,7 @@ class MainPage extends PureComponent {
                 src={page.block3.img}
                 alt={page.block3.alt}
                 style={{
-                  height: 411,
+                  width: "100%",
                   margin: "35px 0px 45px 0px"
                 }}
               />

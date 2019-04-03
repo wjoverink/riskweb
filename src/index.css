@@ -55,7 +55,7 @@ header blockquote {
   font-weight: 500;
   font-style: normal;
   font-stretch: normal;
-  line-height: 2.66;
+  /* line-height: 2.66; */
   letter-spacing: normal;
 }
 
@@ -110,6 +110,10 @@ button {
   background-color: #22bf95;
 }
 
+.carousel-item {
+  font-size: 26px;
+}
+
 /* card */
 .card {
   border: 0px;
@@ -132,5 +136,22 @@ button {
 .card-footer {
   border: 0px;
   background: white;
-  padding:0
+  padding: 0;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 38px;
+  }
+  h2 {
+    font-size: 24px;
+  }
+  h3 {
+    font-size: 24px;
+  }
+  header blockquote,
+  h5,
+  .carousel-item {
+    font-size: 20px;
+  }
 }

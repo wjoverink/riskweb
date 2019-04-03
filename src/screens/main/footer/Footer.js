@@ -28,7 +28,7 @@ class Footer extends PureComponent {
                 <Nav.Link href="/contact">Contact</Nav.Link>
               </Nav.Item>
             </Nav>
-            <Nav className="flex-column">
+            <Nav className="flex-column social">
               <Nav.Item className={css(styles.header)}>
                 {footer.socialHeader}
               </Nav.Item>
@@ -81,9 +81,16 @@ const styles = StyleSheet.create({
       textAlign: "left",
       marginBottom: 120
     },
-    ":nth-child(1n)>nav>.navbar-nav": {
+    ":nth-child(1n) .navbar>.navbar-nav": {
       marginTop: 6,
       marginLeft: "2em"
+    },
+    ":nth-child(1n) .navbar>.social": {
+      marginLeft: 0
+    },
+    ":nth-child(1n) .social .navbar-nav": {
+      flexWrap: "nowrap!important",
+      flexDirection: "row!important"
     },
     ":nth-child(1n)>nav .nav-link": {
       padding: 0

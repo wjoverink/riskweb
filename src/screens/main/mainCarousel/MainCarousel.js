@@ -45,8 +45,7 @@ const styles = StyleSheet.create({
     marginBottom: 65,
     ":nth-child(1n) .carousel-item": {
       margin: "0 auto",
-      maxWidth: 1050,
-      fontSize: 26
+      maxWidth: 1050
     }
   },
   img: {

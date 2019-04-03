@@ -34,7 +34,7 @@ class Header extends PureComponent {
               Get started
             </Button>
           </Form>
-          <aside className={css(styles.skout)}>
+          <aside className={`${css(styles.skout)} d-lg-block`}>
             <span style={{ fontSize: 72, fontWeight: 500 }}>SKOUT</span>
             <span>Cybersecurity</span>
           </aside>
@@ -60,7 +60,8 @@ const styles = StyleSheet.create({
     bottom: 0,
     maxWidth: 235,
     overflowWrap: "break-word",
-    textAlign: "center"
+    textAlign: "center",
+    display: "none"
   },
   button: {
     marginLeft: "auto",
