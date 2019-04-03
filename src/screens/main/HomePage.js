@@ -31,10 +31,11 @@ class MainPage extends PureComponent {
                 professionals will train your team and ensure that the best
                 processes and technologies are in place and ready to respond.
               </p>
-              <div
+              <img
+                src="/images/we-know-cyber.png"
+                alt="video about Cyber Risk and Insurance "
                 style={{
                   height: 411,
-                  backgroundColor: "black",
                   margin: "35px 0px 45px 0px"
                 }}
               />

@@ -18,15 +18,7 @@ class MainCarousel extends PureComponent {
       >
         {items.map((item, i) => (
           <Carousel.Item>
-            <div
-              style={{
-                width: 136,
-                height: 136,
-                backgroundColor: "black",
-                margin: "0 auto",
-                borderRadius: 136
-              }}
-            />
+            <img className={css(styles.img)} src={item.img} alt={item.name} />
             <Carousel.Caption>
               <p>{`« ${item.text} »`}</p>
               <p className={css(styles.name)}>{item.name}</p>
@@ -51,6 +43,12 @@ const styles = StyleSheet.create({
       maxWidth: 1050,
       fontSize: 26
     }
+  },
+  img: {
+    width: 164,
+    height: 143,
+    margin: "0 auto",
+    display: "block"
   },
   name: {
     fontSize: 21

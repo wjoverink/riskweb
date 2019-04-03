@@ -2,6 +2,8 @@ import { css, StyleSheet } from "aphrodite/no-important";
 import React, { PureComponent } from "react";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import { SocialIcon } from "react-social-icons";
+import socials from "../../../settings/social"
 
 class Footer extends PureComponent {
   render() {
@@ -27,18 +29,14 @@ class Footer extends PureComponent {
             <Nav className="flex-column">
               <Nav.Item className={css(styles.header)}>Follow us</Nav.Item>
               <Nav>
-                <Nav.Item>
-                  <Nav.Link href="#home">T</Nav.Link>
+                {socials.socials.map((social, i) => (
+                  <Nav.Item>
+                  <SocialIcon
+                    className={css(styles.marginRight)}
+                    url={social.url}
+                  />
                 </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link href="#link">F</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link href="#link">I</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link href="#link">Y</Nav.Link>
-                </Nav.Item>
+                ))}
               </Nav>
             </Nav>
           </Navbar>
@@ -61,6 +59,9 @@ const styles = StyleSheet.create({
   bottomtext: {
     fontSize: 13,
     color: "#6a6a6a"
+  },
+  marginRight: {
+    marginRight: 5
   },
   header: {
     marginBottom: 10,
