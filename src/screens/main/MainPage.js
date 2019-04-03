@@ -22,11 +22,13 @@ class MainPage extends Component {
         <Header />
         <main>
           <div className={css(styles.border)}>
-            <div className={css(styles.mainInfo)}>
+            <div className={css(styles.mainInfo, styles.popular)}>
               <h2>Popular SkOUT Security products</h2>
-              <div>
-                <Cards cards={products} />
-              </div>
+              <Cards
+                className={css(styles.cardsProducts)}
+                cards={products}
+                size={{ width: 233, height: 296 }}
+              />
             </div>
           </div>
           <div className={css(styles.border)}>
@@ -45,7 +47,7 @@ class MainPage extends Component {
                   margin: "35px 0px 45px 0px"
                 }}
               />
-              <Cards cards={cards} />
+              <Cards className={css(styles.cards)} cards={cards} />
             </div>
           </div>
 
@@ -63,8 +65,33 @@ const styles = StyleSheet.create({
     margin: "0 auto",
     marginTop: 20
   },
+  cardsProducts: {
+    marginTop: "4rem",
+    ":nth-child(1n) .card-body": {
+      padding: "1rem 24px 1rem 0"
+    },
+    ":nth-child(1n) .card-footer": {
+      padding: "1rem 24px 1rem 0"
+    }
+  },
+  cards: {
+    margin: "0px 20px",
+    ":nth-child(1n) .card-img-top": {
+      marginLeft: -8
+    },
+    ":nth-child(1n) .card": {
+      padding: "0 60px"
+    },
+    ":nth-child(1n) .card-body": {
+      padding: "1rem 0px"
+    }
+  },
+  popular: {
+    textAlign: "left"
+  },
   mainInfo: {
-    maxWidth: 1000,
+    maxWidth: 1050,
+    paddingTop: 20,
     margin: "0 auto",
     textAlign: "center"
   },
@@ -87,7 +114,11 @@ function mapStateToProps({ products, cards }) {
     products: products.map((product, i) => ({
       title: product.name,
       text: product.text,
-      img: product.img
+      img: product.img,
+      footer: {
+        url: `/products/${product.id}`,
+        buttonText: "MORE"
+      }
     })),
     cards
   };

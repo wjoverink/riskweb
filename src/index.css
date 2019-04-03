@@ -113,7 +113,6 @@ button {
 /* card */
 .card {
   border: 0px;
-  padding: 0 40px;
   text-align: left;
 }
 .card-text {
@@ -124,4 +123,14 @@ button {
   line-height: 1.5;
   letter-spacing: normal;
   color: #696969;
+}
+
+.card-body {
+  padding: 1rem;
+}
+
+.card-footer {
+  border: 0px;
+  background: white;
+  padding:0
 }
