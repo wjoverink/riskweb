@@ -1,10 +1,8 @@
 import { combineReducers } from "redux";
+import pages from "./pages";
 import products from "./products";
-import cards from "./cards";
-import carousel from "./carousel";
 
 export default combineReducers({
   products,
-  cards,
-  carousel
+  pages
 });

@@ -1,0 +1,59 @@
+{
+  "pages": [
+    {
+      "name": "mainPage",
+      "block1": {
+        "header": "Cyber Risk & Analytics Coverage. Because everyone deserves to be secure.",
+        "subHeader": "Get started now to speak to a SkOUT broker, consultant or risk manager"
+      },
+      "block2": {
+        "header": "Popular SkOUT Security products"
+      },
+      "block3": {
+        "header": "We know Cyber. Your Insurance Company Doesn’t.",
+        "text": "Skout is a Cyber Risk and Insurance company for humans by humans. Skout’s trained team of cybersecurity and insurance professionals will train your team and ensure that the best processes and technologies are in place and ready to respond.",
+        "img": "images/we-know-cyber.png",
+        "alt": "video about Cyber Risk and Insurance ",
+        "cards": [
+          {
+            "img": "images/usability.png",
+            "title": "Usability",
+            "text": "Talk to a cyber expert who wants to make your business more secure now."
+          },
+          {
+            "img": "images/comfortable.png",
+            "title": "Comfortable",
+            "text": "Cyber Risk People that are Personable. Real human service without the Bots or forms."
+          },
+          {
+            "img": "images/free_updates.png",
+            "title": "Free updates",
+            "text": "Your Cyber insurance policy can always be up to date, providing you with complete peace of mind."
+          }
+        ]
+      },
+      "block4": {
+        "carousel": [
+          {
+            "img": "images/gary.png",
+            "name": "Gary Vaynerchuk",
+            "company": "VaynerMedia",
+            "text": "SkOUT connected with our team, provided us insights into the risks associated with cyber risk. Their affordable, world class Cyber Risk Insurance has provided our company and employees complete peace of mind."
+          },
+          {
+            "img": "images/gary.png",
+            "name": "Gary Vaynerchuk",
+            "company": "VaynerMedia",
+            "text": "SkOUT connected with our team, provided us insights into the risks associated with cyber risk. Their affordable, world class Cyber Risk Insurance has provided our company and employees complete peace of mind."
+          },
+          {
+            "img": "images/gary.png",
+            "name": "Gary Vaynerchuk",
+            "company": "VaynerMedia",
+            "text": "SkOUT connected with our team, provided us insights into the risks associated with cyber risk. Their affordable, world class Cyber Risk Insurance has provided our company and employees complete peace of mind."
+          }
+        ]
+      }
+    }
+  ]
+}

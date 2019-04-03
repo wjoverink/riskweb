@@ -2,21 +2,18 @@ import { css, StyleSheet } from "aphrodite/no-important";
 import React, { PureComponent } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
+import { connect } from "react-redux";
 import Form from "react-bootstrap/Form";
+import PropTypes from "prop-types";
 
 class Header extends PureComponent {
   render() {
+    const { header, subHeader } = this.props;
     return (
       <header className={css(styles.header)}>
         <div className={css(styles.wrapper)}>
-          <h1>
-            Cyber Risk & Analytics Coverage. <br /> Because everyone deserves to
-            be secure.
-          </h1>
-          <blockquote>
-            Get started now to speak to a SkOUT broker, consultant or risk
-            manager
-          </blockquote>
+          <h1>{header}</h1>
+          <blockquote>{subHeader}</blockquote>
           <Form className={css(styles.form)}>
             <Form.Row>
               <Form.Group as={Col} controlId="formGridFirstName">
@@ -80,4 +77,17 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Header;
+Header.propTypes = {
+  header: PropTypes.string.isRequired,
+  subHeader: PropTypes.string.isRequired
+};
+
+function mapStateToProps({ pages }) {
+  const mainPage = pages.find(page => page.name === "mainPage");
+  return {
+    header: mainPage.block1.header,
+    subHeader: mainPage.block1.subHeader
+  };
+}
+
+export default connect(mapStateToProps)(Header);

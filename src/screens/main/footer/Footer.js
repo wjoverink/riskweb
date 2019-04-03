@@ -3,7 +3,7 @@ import React, { PureComponent } from "react";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { SocialIcon } from "react-social-icons";
-import socials from "../../../settings/social"
+import footer from "../../../settings/footer";
 
 class Footer extends PureComponent {
   render() {
@@ -15,7 +15,9 @@ class Footer extends PureComponent {
               RSURANCE
             </Navbar.Brand>
             <Nav className="flex-column mr-auto">
-              <Nav.Item className={css(styles.header)}>Company</Nav.Item>
+              <Nav.Item className={css(styles.header)}>
+                {footer.menuHeader}
+              </Nav.Item>
               <Nav.Item>
                 <Nav.Link href="/faq">FAQs</Nav.Link>
               </Nav.Item>
@@ -27,23 +29,23 @@ class Footer extends PureComponent {
               </Nav.Item>
             </Nav>
             <Nav className="flex-column">
-              <Nav.Item className={css(styles.header)}>Follow us</Nav.Item>
+              <Nav.Item className={css(styles.header)}>
+                {footer.socialHeader}
+              </Nav.Item>
               <Nav>
-                {socials.socials.map((social, i) => (
+                {footer.socials.map((social, i) => (
                   <Nav.Item>
-                  <SocialIcon
-                    className={css(styles.marginRight)}
-                    url={social.url}
-                  />
-                </Nav.Item>
+                    <SocialIcon
+                      className={css(styles.marginRight)}
+                      url={social.url}
+                    />
+                  </Nav.Item>
                 ))}
               </Nav>
             </Nav>
           </Navbar>
           <hr />
-          <p className={css(styles.bottomtext)}>
-            © 2019 SKOUT RSURANCE. All rights reserved
-          </p>
+          <p className={css(styles.bottomtext)}>{footer.copy}</p>
         </div>
       </footer>
     );

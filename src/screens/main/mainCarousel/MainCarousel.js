@@ -74,9 +74,10 @@ MainCarousel.defaultProps = {
   items: []
 };
 
-function mapStateToProps({ carousel }) {
+function mapStateToProps({ pages }) {
   return {
-    items: carousel
+    items: pages.find(page => page.name === "mainPage").block4.carousel
   };
 }
+
 export default connect(mapStateToProps)(MainCarousel);

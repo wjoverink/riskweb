@@ -7,14 +7,14 @@ import MainCarousel from "./mainCarousel/MainCarousel";
 
 class MainPage extends PureComponent {
   render() {
-    const { cards, products } = this.props;
+    const { page, products } = this.props;
     return (
       <React.Fragment>
         <Header />
         <main>
           <div className={css(styles.border)}>
             <div className={css(styles.mainInfo, styles.popular)}>
-              <h2>Popular SkOUT Security products</h2>
+              <h2>{page.block2.header}</h2>
               <Cards
                 className={css(styles.cardsProducts)}
                 cards={products}
@@ -24,22 +24,17 @@ class MainPage extends PureComponent {
           </div>
           <div className={css(styles.border)}>
             <div className={css(styles.mainInfo)}>
-              <h3>We know Cyber. Your Insurance Company Doesn’t.</h3>
-              <p className={css(styles.text)}>
-                Skout is a Cyber Risk and Insurance company for humans by
-                humans. Skout’s trained team of cybersecurity and insurance
-                professionals will train your team and ensure that the best
-                processes and technologies are in place and ready to respond.
-              </p>
+              <h3>{page.block3.header}</h3>
+              <p className={css(styles.text)}>{page.block3.text}</p>
               <img
-                src="/images/we-know-cyber.png"
-                alt="video about Cyber Risk and Insurance "
+                src={page.block3.img}
+                alt={page.block3.alt}
                 style={{
                   height: 411,
                   margin: "35px 0px 45px 0px"
                 }}
               />
-              <Cards className={css(styles.cards)} cards={cards} />
+              <Cards className={css(styles.cards)} cards={page.block3.cards} />
             </div>
           </div>
 
@@ -100,7 +95,7 @@ const styles = StyleSheet.create({
   }
 });
 
-function mapStateToProps({ products, cards }) {
+function mapStateToProps({ products, pages }) {
   return {
     products: products.map((product, i) => ({
       title: product.name,
@@ -111,7 +106,7 @@ function mapStateToProps({ products, cards }) {
         buttonText: "MORE"
       }
     })),
-    cards
+    page: pages.find(page => page.name === "mainPage")
   };
 }
 
