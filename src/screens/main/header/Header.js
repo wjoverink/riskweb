@@ -84,11 +84,11 @@ const styles = StyleSheet.create({
     maxWidth: 1050,
     position: "relative",
     height: 500
-  },
-  form: {
-    maxWidth: 480,
-    marginTop: 58
   }
+  // form: {
+  //   maxWidth: 480,
+  //   marginTop: 58
+  // }
 });
 
 Header.propTypes = {

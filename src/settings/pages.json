@@ -86,10 +86,16 @@
     {
       "name": "quiz",
       "title": "Cyber Risk & Analytics Coverage quiz",
+      "img": {
+        "src": "/images/leonard-navarro@2x.png",
+        "alt": "Leonard Navarro",
+        "color": "transparent",
+        "size": { "width": 136, "height": 136 }
+      },
       "quiz": [
         {
           "id": "1",
-          "question": "first quiz question"
+          "question": "Hey! I’m Leonard, I’ll get you an awesome price in seconds. Ready to do this?"
         },
         {
           "id": "2",
