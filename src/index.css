@@ -84,6 +84,7 @@ button {
 
 .carousel-caption {
   color: #191919;
+  overflow: hidden;
 }
 .carousel,
 .carousel-inner {
@@ -92,6 +93,7 @@ button {
 
 .carousel-item {
   margin: 0 auto;
+  min-width: 400px;
 }
 
 .carousel > a > span {

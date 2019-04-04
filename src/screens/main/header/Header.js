@@ -51,7 +51,10 @@ const styles = StyleSheet.create({
     padding: "100px 100px 77px 100px",
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
+    "@media (max-width: 500px)": {
+      padding: "100px 20px 77px 20px"
+    }
   },
   skout: {
     position: "absolute",

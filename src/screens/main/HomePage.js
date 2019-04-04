@@ -64,9 +64,10 @@ class MainPage extends PureComponent {
 
 const styles = StyleSheet.create({
   text: {
-    maxWidth: 600,
+    maxWidth: 640,
     margin: "0 auto",
-    marginTop: 20
+    marginTop: 20,
+    padding: "0 20px"
   },
   miniLoader: {
     height: 564,
