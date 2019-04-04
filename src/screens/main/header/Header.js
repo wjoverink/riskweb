@@ -14,7 +14,7 @@ class Header extends PureComponent {
         <div className={css(styles.wrapper)}>
           <h1>{header}</h1>
           <blockquote>{subHeader}</blockquote>
-          <Form className={css(styles.form)}>
+          {/* <Form className={css(styles.form)}>
             <Form.Row>
               <Form.Group as={Col} controlId="formGridFirstName">
                 <Form.Control placeholder="First name" />
@@ -33,7 +33,15 @@ class Header extends PureComponent {
             >
               Get started
             </Button>
-          </Form>
+          </Form> */}
+          <Button
+            className={css(styles.button)}
+            variant="secondary"
+            type="submit"
+            href={"/quiz/1"}
+          >
+            LETS DO THIS
+          </Button>
           <aside className={`${css(styles.skout)} d-lg-block`}>
             <span style={{ fontSize: 72, fontWeight: 500 }}>SKOUT</span>
             <span>Cybersecurity</span>
@@ -67,13 +75,15 @@ const styles = StyleSheet.create({
     display: "none"
   },
   button: {
-    marginLeft: "auto",
+    // marginLeft: "auto",
+    marginTop: 50,
     display: "block",
     width: 234
   },
   wrapper: {
     maxWidth: 1050,
-    position: "relative"
+    position: "relative",
+    height: 500
   },
   form: {
     maxWidth: 480,
