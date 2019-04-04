@@ -82,6 +82,24 @@
       "block1": {
         "header": "Contact"
       }
+    },
+    {
+      "name": "quiz",
+      "title": "Cyber Risk & Analytics Coverage quiz",
+      "quiz": [
+        {
+          "id": "1",
+          "question": "first quiz question"
+        },
+        {
+          "id": "2",
+          "question": "second quiz question"
+        },
+        {
+          "id": "3",
+          "question": "third quiz question"
+        }
+      ]
     }
   ]
 }

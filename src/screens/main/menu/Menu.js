@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   button: {
     //width: 100,
     marginRight: 39,
-    boxShadow: "0px 10px 40px -10px rgba(255,0,131,0.5)"
+    boxShadow: "0px 4px 10px -5px rgba(255,0,131,0.5)"
   }
 });
 

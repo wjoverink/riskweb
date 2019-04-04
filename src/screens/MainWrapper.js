@@ -10,6 +10,7 @@ const ProductPage = lazy(() => import("./product/ProductPage"));
 const SupportPage = lazy(() => import("./support/SupportPage"));
 const ContactPage = lazy(() => import("./contact/ContactPage"));
 const FAQPage = lazy(() => import("./faq/FAQPage"));
+const QuizPage = lazy(() => import("./quiz/QuizPage"));
 
 class MainWrapper extends PureComponent {
   render() {
@@ -30,9 +31,12 @@ class MainWrapper extends PureComponent {
             <Route path="/support" component={SupportPage} />
             <Route path="/contact" component={ContactPage} />
             <Route path="/products/:productId" component={ProductPage} />
+            <Route exact path="/quiz" component={QuizPage} />
+            <Route path="/quiz/:quizId" component={QuizPage} />
           </Switch>
         </Suspense>
-        <Footer />
+
+        <Route path={/^(?!.*(\/quiz)).*$/} component={Footer} />
       </div>
     );
   }
