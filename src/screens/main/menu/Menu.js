@@ -1,20 +1,28 @@
 import { css, StyleSheet } from "aphrodite/no-important";
 import React, { PureComponent } from "react";
 import Button from "react-bootstrap/Button";
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
+import ScrollInNav from "../../../library/components/scrollIn/ScrollInNav";
 
 class Menu extends PureComponent {
   render() {
-    const { products } = this.props;
+    // const { products } = this.props;
     return (
-      <Navbar className={css(styles.Menu)} expand="lg">
+      <Navbar sticky="top" className={css(styles.Menu)} expand="lg">
         <Navbar.Brand className="mr-auto logoText" href="/">
           RSURANCE
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Nav>
+          <ScrollInNav className={css(styles.ScrollInNav)} scrollInHeight={420}>
+            <Button className={css(styles.button)} variant="danger" size="sm">
+              Check our prices
+            </Button>
+          </ScrollInNav>
+        </Nav>
+        {/* <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav>
             <Button
@@ -28,7 +36,7 @@ class Menu extends PureComponent {
               <Nav.Link href={`/products/${item.id}`}>{item.name}</Nav.Link>
             ))}
           </Nav>
-        </Navbar.Collapse>
+        </Navbar.Collapse> */}
       </Navbar>
     );
   }
@@ -37,38 +45,47 @@ class Menu extends PureComponent {
 const styles = StyleSheet.create({
   Menu: {
     height: 69,
-    margin: "0 36px",
-    padding: 0,
+    padding: "0 36px",
+    backgroundColor: "white",
     ":nth-child(1n) .nav-link": {
       fontSize: 16,
       fontWeight: "bold"
-      // color: "#4d4d4d"
     }
   },
+  ScrollInNav: {
+    display: "flex",
+    height: 69,
+    flexDirection: "column",
+    alignItems: "flex-end",
+    justifyContent: "center"
+  },
   button: {
-    width: 100,
-    marginRight: 39
+    //width: 100,
+    marginRight: 39,
+    boxShadow: "0px 10px 40px -10px rgba(255,0,131,0.5)"
   }
 });
 
-Menu.propTypes = {
-  products: PropTypes.arrayOf(
-    PropTypes.shape({
-      img: PropTypes.string,
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      text: PropTypes.string
-    })
-  )
-};
+// Menu.propTypes = {
+//   products: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       img: PropTypes.string,
+//       id: PropTypes.string.isRequired,
+//       name: PropTypes.string.isRequired,
+//       text: PropTypes.string
+//     })
+//   )
+// };
 
-Menu.defaultProps = {
-  products: []
-};
+// Menu.defaultProps = {
+//   products: []
+// };
 
-function mapStateToProps({ products }) {
-  return {
-    products
-  };
-}
-export default connect(mapStateToProps)(Menu);
+// function mapStateToProps({ products }) {
+//   return {
+//     products
+//   };
+// }
+// export default connect(mapStateToProps)(Menu);
+
+export default Menu;
