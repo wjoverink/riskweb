@@ -38,6 +38,7 @@ class MainPage extends PureComponent {
               <PreloadImage
                 src={page.block3.img.src}
                 alt={page.block3.img.alt}
+                duration={150}
                 lazy
                 style={{
                   backgroundColor: page.block3.img.color,
