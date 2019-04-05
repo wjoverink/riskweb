@@ -5,8 +5,8 @@ import Col from "react-bootstrap/Col";
 import { connect } from "react-redux";
 import Form from "react-bootstrap/Form";
 import PreloadImage from "react-preload-image";
-import "firebase/database";
-import { FirebaseDatabaseMutation } from "@react-firebase/database";
+import "firebase/firestore";
+import { FirestoreMutation } from "@react-firebase/firestore";
 
 class QuizPage extends PureComponent {
   constructor(props) {
@@ -39,7 +39,7 @@ class QuizPage extends PureComponent {
               alt={img.alt}
             />
             <h3>{question}</h3>
-            <FirebaseDatabaseMutation type="push" path="answers">
+            <FirestoreMutation type="add" path="/answers">
               {({ runMutation }) => (
                 <Form
                   onSubmit={async ev => {
@@ -76,7 +76,7 @@ class QuizPage extends PureComponent {
                   </Button>
                 </Form>
               )}
-            </FirebaseDatabaseMutation>
+            </FirestoreMutation>
             <aside className={`${css(styles.skout)} d-lg-block`}>
               <span>POWERED BY</span>
               <span style={{ fontSize: 72, fontWeight: 500, marginTop: -30 }}>
