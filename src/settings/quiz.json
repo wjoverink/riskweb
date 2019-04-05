@@ -1,0 +1,31 @@
+{
+  "quiz": [
+    {
+      "id": "0",
+      "question": "Hey! I’m Leonard, I’ll get you an awesome price in seconds. Ready to do this?",
+      "elements": [
+        {
+          "type": "text",
+          "placeHolder": "First name"
+        },
+        {
+          "type": "text",
+          "placeHolder": "Last name"
+        }
+      ],
+      "button": "Lets do this"
+    },
+    {
+      "id": "1",
+      "question": "second quiz question",
+      "elements": [],
+      "button": "Lets do this"
+    },
+    {
+      "id": "2",
+      "question": "third quiz question",
+      "elements": [],
+      "button": "Lets do this"
+    }
+  ]
+}

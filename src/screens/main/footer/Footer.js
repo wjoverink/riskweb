@@ -34,7 +34,7 @@ class Footer extends PureComponent {
               </Nav.Item>
               <Nav>
                 {footer.socials.map((social, i) => (
-                  <Nav.Item>
+                  <Nav.Item key={social.url}>
                     <SocialIcon
                       className={css(styles.marginRight)}
                       url={social.url}

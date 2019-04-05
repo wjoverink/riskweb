@@ -18,7 +18,7 @@ class MainCarousel extends PureComponent {
         className={css(styles.carousel)}
       >
         {items.map((item, i) => (
-          <Carousel.Item>
+          <Carousel.Item key={item.id}>
             <PreloadImage
               style={{
                 ...item.size,

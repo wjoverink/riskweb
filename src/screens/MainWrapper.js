@@ -14,6 +14,7 @@ const QuizPage = lazy(() => import("./quiz/QuizPage"));
 
 class MainWrapper extends PureComponent {
   render() {
+    const path = /^(?!.*(\/quiz)).*$/;
     return (
       <div className={css(styles.mainWrapper)}>
         <Menu />
@@ -36,7 +37,7 @@ class MainWrapper extends PureComponent {
           </Switch>
         </Suspense>
 
-        <Route path={/^(?!.*(\/quiz)).*$/} component={Footer} />
+        <Route path={path} component={Footer} />
       </div>
     );
   }

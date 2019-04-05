@@ -5,6 +5,13 @@ import Col from "react-bootstrap/Col";
 import { connect } from "react-redux";
 import Form from "react-bootstrap/Form";
 import PreloadImage from "react-preload-image";
+import firebase from "firebase/app";
+import "firebase/database";
+import {
+  FirebaseDatabaseProvider,
+  FirebaseDatabaseNode,
+  FirebaseDatabaseMutation
+} from "@react-firebase/database";
 
 class QuizPage extends PureComponent {
   constructor(props) {
@@ -16,7 +23,8 @@ class QuizPage extends PureComponent {
   render() {
     const {
       page: { img },
-      quiz
+      quiz: { button, question, elements },
+      quizAnswers
     } = this.props;
     return (
       <main>
@@ -28,30 +36,52 @@ class QuizPage extends PureComponent {
                 margin: "0 auto",
                 display: "block",
                 backgroundColor: img.color,
-                position: "relative"
+                position: "relative",
+                marginBottom: 36
               }}
               lazy
               src={img.src}
               alt={img.alt}
             />
-            <h1>{quiz.question}</h1>
-            <Form className={css(styles.form)}>
-              <Form.Row>
-                <Form.Group as={Col} controlId="formGridFirstName">
-                  <Form.Control placeholder="First name" />
-                </Form.Group>
-                <Form.Group as={Col} controlId="formGridLastName">
-                  <Form.Control placeholder="Last name" />
-                </Form.Group>
-              </Form.Row>
-              <Button
-                className={css(styles.button)}
-                variant="secondary"
-                type="submit"
-              >
-                LETS DO THIS
-              </Button>
-            </Form>
+            <h3>{question}</h3>
+            <FirebaseDatabaseMutation type="push" path="answers">
+              {({ runMutation }) => (
+                <Form
+                  onSubmit={async ev => {
+                    ev.preventDefault();
+                    var t = await runMutation({
+                      FirstName: ev.target[0].value,
+                      LastName: ev.target[1].value
+                      // created_at: firebase.database.ServerValue.TIMESTAMP,
+                      // updated_at: firebase.database.ServerValue.TIMESTAMP
+                    });
+                  }}
+                  className={css(styles.form)}
+                >
+                  <Form.Row>
+                    {elements.map((item, i) => (
+                      <Form.Group
+                        as={Col}
+                        controlId={`formGrid${item.placeHolder.trim()}`}
+                      >
+                        <Form.Control
+                          value={quizAnswers ? quizAnswers[i] : undefined}
+                          type={item.type}
+                          placeholder={item.placeHolder}
+                        />
+                      </Form.Group>
+                    ))}
+                  </Form.Row>
+                  <Button
+                    className={css(styles.button)}
+                    variant="secondary"
+                    type="submit"
+                  >
+                    {button}
+                  </Button>
+                </Form>
+              )}
+            </FirebaseDatabaseMutation>
             <aside className={`${css(styles.skout)} d-lg-block`}>
               <span>POWERED BY</span>
               <span style={{ fontSize: 72, fontWeight: 500, marginTop: -30 }}>
@@ -66,14 +96,8 @@ class QuizPage extends PureComponent {
 }
 
 const styles = StyleSheet.create({
-  text: {
-    maxWidth: 600,
-    margin: "0 auto",
-    marginTop: 20
-  },
   skout: {
     display: "flex!important",
-    flexDirection: "row",
     justifyContent: "start",
     alignItems: "center",
     flexDirection: "column",
@@ -82,7 +106,7 @@ const styles = StyleSheet.create({
   },
   mainInfo: {
     maxWidth: 1050,
-    paddingTop: 20,
+    padding: "20px 20px",
     margin: "0 auto",
     textAlign: "center"
   },
@@ -97,20 +121,26 @@ const styles = StyleSheet.create({
   },
   button: {
     width: 200,
-    margin: 58
+    margin: 58,
+    textTransform: "uppercase"
   },
   form: {
     maxWidth: 480,
-    margin: "58px auto"
+    margin: "58px auto",
+    ":nth-child(1n) .form-row": {
+      "@media (max-width: 500px)": {
+        flexDirection: "column"
+      }
+    }
   }
 });
 
-function mapStateToProps({ pages }, { match }) {
-  const page = pages.find(page => page.name === "quiz");
-  const id = match.params.quizId || "1";
+function mapStateToProps({ pages, quiz, quizAnswers }, { match }) {
+  const id = match.params.quizId ? parseInt(match.params.quizId) : 0;
   return {
-    page,
-    quiz: page.quiz.find(q => q.id === id)
+    page: pages.find(page => page.name === "quiz"),
+    quiz: quiz[id],
+    quizAnswers: quizAnswers.find(q => q.id === id)
   };
 }
 

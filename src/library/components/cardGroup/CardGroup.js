@@ -12,7 +12,7 @@ class Cards extends PureComponent {
     return (
       <CardGroup className={className}>
         {cards.map((card, i) => (
-          <Card>
+          <Card key={card.title.trim()}>
             <PreloadImage
               style={{ ...size, position: "relative" }}
               variant="top"

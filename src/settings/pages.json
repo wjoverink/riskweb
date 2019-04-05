@@ -39,6 +39,7 @@
       "block4": {
         "carousel": [
           {
+            "id": "id0",
             "img": "images/gary.png",
             "size": { "width": 164, "height": 143 },
             "name": "Gary Vaynerchuk",
@@ -46,6 +47,7 @@
             "text": "SkOUT connected with our team, provided us insights into the risks associated with cyber risk. Their affordable, world class Cyber Risk Insurance has provided our company and employees complete peace of mind."
           },
           {
+            "id": "id1",
             "img": "images/gary.png",
             "size": { "width": 164, "height": 143 },
             "name": "Gary Vaynerchuk",
@@ -53,6 +55,7 @@
             "text": "SkOUT connected with our team, provided us insights into the risks associated with cyber risk. Their affordable, world class Cyber Risk Insurance has provided our company and employees complete peace of mind."
           },
           {
+            "id": "id2",
             "img": "images/gary.png",
             "size": { "width": 164, "height": 143 },
             "name": "Gary Vaynerchuk",
@@ -91,21 +94,7 @@
         "alt": "Leonard Navarro",
         "color": "transparent",
         "size": { "width": 136, "height": 136 }
-      },
-      "quiz": [
-        {
-          "id": "1",
-          "question": "Hey! I’m Leonard, I’ll get you an awesome price in seconds. Ready to do this?"
-        },
-        {
-          "id": "2",
-          "question": "second quiz question"
-        },
-        {
-          "id": "3",
-          "question": "third quiz question"
-        }
-      ]
+      }
     }
   ]
 }

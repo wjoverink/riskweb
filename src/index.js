@@ -1,3 +1,4 @@
+import "firebase/firestore";
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
@@ -5,15 +6,28 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
+import firebase from "firebase/app";
+// import { FirestoreProvider } from "@react-firebase/firestore";
+import { FirebaseDatabaseProvider } from "@react-firebase/database";
 import rootReducer from "./redux/reducers";
 import * as serviceWorker from "./serviceWorker";
 
 const store = createStore(rootReducer);
+const config = {
+  apiKey: "AIzaSyDfpuy73hTULR7DCZijiQLuyM5iVqAE6SM",
+  authDomain: "rsurance-web.firebaseapp.com",
+  databaseURL: "https://rsurance-web.firebaseio.com",
+  projectId: "rsurance-web",
+  storageBucket: "rsurance-web.appspot.com",
+  messagingSenderId: "965473148228"
+};
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <FirebaseDatabaseProvider {...config} firebase={firebase}>
+        <App />
+      </FirebaseDatabaseProvider>
     </BrowserRouter>
   </Provider>,
   document.getElementById("root")

@@ -38,7 +38,7 @@ class Header extends PureComponent {
             className={css(styles.button)}
             variant="secondary"
             type="submit"
-            href={"/quiz/1"}
+            href={"/quiz"}
           >
             LETS DO THIS
           </Button>

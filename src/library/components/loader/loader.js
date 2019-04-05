@@ -3,9 +3,9 @@ import "./loader.css";
 
 function Loader() {
   return (
-    <div class="loader">
-      <div class="text">Loading</div>
-      <div class="dots">
+    <div className="loader">
+      <div className="text">Loading</div>
+      <div className="dots">
         <div />
         <div />
         <div />

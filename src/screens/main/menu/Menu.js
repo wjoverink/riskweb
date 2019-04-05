@@ -20,7 +20,7 @@ class Menu extends PureComponent {
             <Button
               className={css(styles.button)}
               variant="secondary"
-              href={"/quiz/1"}
+              href={"/quiz"}
               size="sm"
             >
               LETS GET SECURED
