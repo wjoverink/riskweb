@@ -42,7 +42,7 @@ class Header extends PureComponent {
           >
             LETS DO THIS
           </Button>
-          <aside className={`${css(styles.skout)} d-lg-block`}>
+          <aside className={`${css(styles.skout)}`}>
             <span style={{ fontSize: 72, fontWeight: 500 }}>SKOUT</span>
             <span>Cybersecurity</span>
           </aside>
@@ -61,18 +61,18 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     "@media (max-width: 500px)": {
-      padding: "100px 20px 77px 20px"
+      padding: "100px 30px 77px 30px"
     }
   },
   skout: {
-    position: "absolute",
     textTransform: "uppercase",
-    right: 0,
-    bottom: 0,
+    marginLeft: "auto",
     maxWidth: 235,
     overflowWrap: "break-word",
     textAlign: "center",
-    display: "none"
+    "@media (max-width: 600px)": {
+      margin: "40px auto"
+    }
   },
   button: {
     // marginLeft: "auto",
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   wrapper: {
     maxWidth: 1050,
     position: "relative",
-    height: 500
+    minHeight: 500
   }
   // form: {
   //   maxWidth: 480,

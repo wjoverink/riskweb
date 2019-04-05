@@ -85,6 +85,7 @@ button {
 .carousel-caption {
   color: #191919;
   overflow: hidden;
+  position: initial;
 }
 .carousel,
 .carousel-inner {
@@ -94,6 +95,7 @@ button {
 .carousel-item {
   margin: 0 auto;
   min-width: 400px;
+  padding: 0 30px;
 }
 
 .carousel > a > span {
@@ -146,10 +148,10 @@ button {
     font-size: 38px;
   }
   h2 {
-    font-size: 24px;
+    font-size: 26px;
   }
   h3 {
-    font-size: 24px;
+    font-size: 26px;
   }
   header blockquote,
   h5,

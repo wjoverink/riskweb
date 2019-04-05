@@ -55,6 +55,9 @@ const styles = StyleSheet.create({
     ":nth-child(1n) .nav-link": {
       fontSize: 16,
       fontWeight: "bold"
+    },
+    "@media (max-width: 500px)": {
+      padding: "0 30px"
     }
   },
   ScrollInNav: {
@@ -66,8 +69,10 @@ const styles = StyleSheet.create({
   },
   button: {
     width: 200,
-    marginRight: 39
-    // boxShadow: "0px 4px 10px -5px rgba(255,0,131,0.5)"
+    marginRight: 39,
+    "@media (max-width: 500px)": {
+      width: "auto"
+    }
   }
 });
 

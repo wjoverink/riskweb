@@ -77,27 +77,39 @@ const styles = StyleSheet.create({
   },
   cardsProducts: {
     marginTop: "4rem",
+    ":nth-child(1n) .card>div:first-child": {
+      margin: "0 auto"
+    },
+    ":nth-child(1n) .card": {
+      minWidth: 200
+    },
     ":nth-child(1n) .card-body": {
       padding: "1rem 24px 1rem 0"
     },
     ":nth-child(1n) .card-footer": {
       padding: "1rem 24px 1rem 0"
-    }
+    },
+    padding: "0 30px"
   },
   cards: {
     margin: "0px 20px",
-    ":nth-child(1n) .card-img-top": {
+    ":nth-child(1n) .card>div:first-child": {
       marginLeft: -8
     },
     ":nth-child(1n) .card": {
-      padding: "0 60px"
+      padding: "0 40px",
+      "@media (max-width: 500px)": {
+        padding: "0 30px"
+      }
     },
     ":nth-child(1n) .card-body": {
       padding: "1rem 0px"
     }
   },
   popular: {
-    textAlign: "left"
+    "@media (min-width: 1000px)": {
+      textAlign: "left"
+    }
   },
   mainInfo: {
     maxWidth: 1050,

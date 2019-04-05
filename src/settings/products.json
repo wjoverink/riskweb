@@ -4,25 +4,25 @@
       "name": "Product 1",
       "id": "Product1",
       "text": "Our Team will quickly determine what your risk is and guide you through  the best policies for your business budget.",
-      "img": "images/square-gallery-image@2x.png"
+      "img": "images/product1.png"
     },
     {
       "name": "Product 2",
       "id": "Product2",
       "text": "Confused about your coverage? We get it. Let us be your advisor and determine the best way to solve your cyber risk problems.",
-      "img": "images/square-gallery-image@2x1.png"
+      "img": "images/product2.png"
     },
     {
       "name": "Product 3",
       "id": "Product3",
       "text": "The SkOUT incident response team sits on panels  to give Carriers the state of the art tools and quick response time that clients need.",
-      "img": "images/square-gallery-image@2x2.png"
+      "img": "images/product3.png"
     },
     {
       "name": "Product 4",
       "id": "Product4",
       "text": "Want to know your risk in real time?Running a business is hard work and we deploy technologies to update you in real time so you can feel secure.",
-      "img": "images/square-gallery-image@2x3.png"
+      "img": "images/product4.png"
     }
   ]
 }
