@@ -82,7 +82,8 @@ const styles = StyleSheet.create({
     height: 69,
     flexDirection: "column",
     alignItems: "flex-end",
-    justifyContent: "center"
+    justifyContent: "center",
+    zIndex: "2!important"
   },
   button: {
     width: 200,

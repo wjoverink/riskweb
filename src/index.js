@@ -1,4 +1,4 @@
-import "firebase/firestore";
+import "firebase/database";
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
@@ -7,7 +7,6 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import firebase from "firebase/app";
-// import { FirestoreProvider } from "@react-firebase/firestore";
 import { FirebaseDatabaseProvider } from "@react-firebase/database";
 import rootReducer from "./redux/reducers";
 import * as serviceWorker from "./serviceWorker";

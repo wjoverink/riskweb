@@ -5,13 +5,8 @@ import Col from "react-bootstrap/Col";
 import { connect } from "react-redux";
 import Form from "react-bootstrap/Form";
 import PreloadImage from "react-preload-image";
-import firebase from "firebase/app";
 import "firebase/database";
-import {
-  FirebaseDatabaseProvider,
-  FirebaseDatabaseNode,
-  FirebaseDatabaseMutation
-} from "@react-firebase/database";
+import { FirebaseDatabaseMutation } from "@react-firebase/database";
 
 class QuizPage extends PureComponent {
   constructor(props) {
