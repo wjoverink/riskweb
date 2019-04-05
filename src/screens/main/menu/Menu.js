@@ -11,12 +11,12 @@ class Menu extends PureComponent {
   render() {
     // const { products } = this.props;
     return (
-      <Navbar sticky="top" className={css(styles.Menu)} expand="lg">
+      <Navbar sticky="top" className={css(styles.menu)} expand="lg">
         <Navbar.Brand className="mr-auto logoText" href="/">
           RSURANCE
         </Navbar.Brand>
         <Nav>
-          <ScrollInNav className={css(styles.ScrollInNav)} scrollInHeight={420}>
+          <ScrollInNav className={css(styles.scrollInNav)} scrollInHeight={420}>
             <Button
               className={css(styles.button)}
               variant="secondary"
@@ -42,13 +42,19 @@ class Menu extends PureComponent {
             ))}
           </Nav>
         </Navbar.Collapse> */}
+        <ScrollInNav
+          className={css(styles.scrollinBorder)}
+          scrollInHeight={600}
+        >
+          <div className={css(styles.border)} />
+        </ScrollInNav>
       </Navbar>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  Menu: {
+  menu: {
     height: 69,
     padding: "0 36px",
     backgroundColor: "white",
@@ -60,7 +66,18 @@ const styles = StyleSheet.create({
       padding: "0 30px"
     }
   },
-  ScrollInNav: {
+  scrollinBorder: {
+    bottom: 0,
+    display: "flex"
+  },
+  border: {
+    borderBottom: "1px solid #dfdfdf",
+    alignSelf: " flex-end",
+    position: "absolute",
+    left: 0,
+    right: 0
+  },
+  scrollInNav: {
     display: "flex",
     height: 69,
     flexDirection: "column",

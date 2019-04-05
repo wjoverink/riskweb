@@ -56,7 +56,8 @@ const styles = StyleSheet.create({
   footer: {
     height: 347,
     backgroundColor: "#f6f6f6",
-    textAlign: "center"
+    textAlign: "center",
+    padding: "0 30px"
   },
   bottomtext: {
     fontSize: 13,
