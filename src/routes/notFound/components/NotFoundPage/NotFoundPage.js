@@ -1,12 +1,12 @@
-import { css, StyleSheet } from "aphrodite/no-important";
-import React, { PureComponent } from "react";
-import Footer from "../../../../containers/Footer";
+import { css, StyleSheet } from 'aphrodite/no-important'
+import React, { PureComponent } from 'react'
+import Footer from '../../../../containers/Footer'
 
 class NotFoundPage extends PureComponent {
   constructor(props) {
-    super(props);
+    super(props)
 
-    document.title = "Oooops page not found";
+    document.title = 'Oooops page not found'
   }
 
   render() {
@@ -21,30 +21,30 @@ class NotFoundPage extends PureComponent {
         </main>
         <Footer />
       </React.Fragment>
-    );
+    )
   }
 }
 
 const styles = StyleSheet.create({
   text: {
     maxWidth: 600,
-    margin: "0 auto",
+    margin: '0 auto',
     marginTop: 20
   },
   mainInfo: {
     maxWidth: 1050,
     paddingTop: 20,
-    margin: "0 auto",
-    textAlign: "center"
+    margin: '0 auto',
+    textAlign: 'center'
   },
   border: {
-    border: "1px solid #dfdfdf",
+    border: '1px solid #dfdfdf',
     borderLeft: 0,
     borderRight: 0,
     borderTop: 0,
-    padding: "54px 0px 100px 0px",
+    padding: '54px 0px 100px 0px',
     marginTop: -1
   }
-});
+})
 
-export default NotFoundPage;
+export default NotFoundPage

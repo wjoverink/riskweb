@@ -1,24 +1,19 @@
-import { css, StyleSheet } from "aphrodite/no-important";
-import React, { PureComponent } from "react";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
-import CardGroup from "react-bootstrap/CardGroup";
-import PropTypes from "prop-types";
-import PreloadImage from "react-preload-image";
+import { css, StyleSheet } from 'aphrodite/no-important'
+import React, { PureComponent } from 'react'
+import Button from 'react-bootstrap/Button'
+import Card from 'react-bootstrap/Card'
+import CardGroup from 'react-bootstrap/CardGroup'
+import PreloadImage from 'react-preload-image'
+import PropTypes from 'prop-types'
 
 class Cards extends PureComponent {
   render() {
-    const { cards, className, size } = this.props;
+    const { cards, className, size } = this.props
     return (
       <CardGroup className={className}>
-        {cards.map((card, i) => (
+        {cards.map(card => (
           <Card key={card.title.trim()}>
-            <PreloadImage
-              style={{ ...size, position: "relative" }}
-              variant="top"
-              lazy
-              src={card.img}
-            />
+            <PreloadImage style={{ ...size, position: 'relative' }} variant="top" lazy src={card.img} />
             <Card.Body>
               <Card.Title>{card.title}</Card.Title>
               <Card.Text>{card.text}</Card.Text>
@@ -27,11 +22,7 @@ class Cards extends PureComponent {
               <Card.Footer>
                 {card.footer.text && <span>{card.footer.text}</span>}
                 {card.footer.url && (
-                  <Button
-                    className={css(styles.button)}
-                    variant="secondary"
-                    href={card.footer.url}
-                  >
+                  <Button className={css(styles.button)} variant="secondary" href={card.footer.url}>
                     {card.footer.buttonText}
                   </Button>
                 )}
@@ -40,16 +31,16 @@ class Cards extends PureComponent {
           </Card>
         ))}
       </CardGroup>
-    );
+    )
   }
 }
 
 const styles = StyleSheet.create({
   button: {
-    marginLeft: "auto",
-    float: "right"
+    marginLeft: 'auto',
+    float: 'right'
   }
-});
+})
 
 Cards.propTypes = {
   cards: PropTypes.arrayOf(
@@ -69,12 +60,12 @@ Cards.propTypes = {
     height: PropTypes.number.isRequired
   }),
   className: PropTypes.string
-};
+}
 
 Cards.defaultProps = {
   cards: [],
   size: { width: 32, height: 32 },
   className: undefined
-};
+}
 
-export default Cards;
+export default Cards

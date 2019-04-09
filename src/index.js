@@ -1,17 +1,17 @@
-import "firebase/firestore";
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
-import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
-import configureStore from "./store/configureStore";
-import * as serviceWorker from "./serviceWorker";
+import 'firebase/firestore'
+import './index.css'
+import * as serviceWorker from './serviceWorker'
+import App from './App'
+import { BrowserRouter } from 'react-router-dom'
+import configureStore from './store/configureStore'
+import { Provider } from 'react-redux'
+import React from 'react'
+import ReactDOM from 'react-dom'
 
 const initialState = window.__INITIAL_STATE__ || {
   firebase: { authError: null }
-};
-const store = configureStore(initialState);
+}
+const store = configureStore(initialState)
 
 ReactDOM.render(
   <Provider store={store}>
@@ -19,10 +19,10 @@ ReactDOM.render(
       <App />
     </BrowserRouter>
   </Provider>,
-  document.getElementById("root")
-);
+  document.getElementById('root')
+)
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.register();
+serviceWorker.register()

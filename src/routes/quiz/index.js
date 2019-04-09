@@ -1,2 +1,2 @@
-import QuizPage from "./components/quizPage";
-export default QuizPage;
+import QuizPage from './components/quizPage'
+export default QuizPage

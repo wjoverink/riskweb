@@ -1,2 +1,2 @@
-import SupportPage from "./components/SupportPage";
-export default SupportPage;
+import SupportPage from './components/SupportPage'
+export default SupportPage

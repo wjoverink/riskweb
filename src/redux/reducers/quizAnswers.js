@@ -1,8 +1,8 @@
 const quizAnswers = (state = [], action) => {
   switch (action.type) {
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default quizAnswers;
+export default quizAnswers

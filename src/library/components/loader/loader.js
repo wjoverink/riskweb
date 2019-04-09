@@ -1,5 +1,5 @@
-import React from "react";
-import "./loader.css";
+import './loader.css'
+import React from 'react'
 
 function Loader() {
   return (
@@ -12,7 +12,7 @@ function Loader() {
         <div />
       </div>
     </div>
-  );
+  )
 }
 
-export default React.memo(Loader);
+export default React.memo(Loader)

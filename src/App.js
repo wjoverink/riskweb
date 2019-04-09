@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import "./App.css";
-import CreateRoutes from "./routes";
-import { withRouter } from "react-router-dom";
+import './App.css'
+import React, { Component } from 'react'
+import CreateRoutes from './routes'
+import { withRouter } from 'react-router-dom'
 
 class App extends Component {
   render() {
-    return <CreateRoutes />;
+    return <CreateRoutes />
   }
 }
 
-export default withRouter(App);
+export default withRouter(App)

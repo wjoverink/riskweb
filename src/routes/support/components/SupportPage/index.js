@@ -1,2 +1,2 @@
-import SupportPage from "./SupportPage";
-export default SupportPage;
+import SupportPage from './SupportPage'
+export default SupportPage

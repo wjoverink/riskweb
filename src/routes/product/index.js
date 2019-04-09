@@ -1,2 +1,2 @@
-import ProductPage from "./components/ProductPage";
-export default ProductPage;
+import ProductPage from './components/ProductPage'
+export default ProductPage

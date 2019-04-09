@@ -1,9 +1,9 @@
-import { css, StyleSheet } from "aphrodite/no-important";
-import React, { PureComponent } from "react";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import { SocialIcon } from "react-social-icons";
-import footerInfo from "../../settings/footerInfo";
+import { css, StyleSheet } from 'aphrodite/no-important'
+import React, { PureComponent } from 'react'
+import footerInfo from '../../settings/footerInfo'
+import Nav from 'react-bootstrap/Nav'
+import Navbar from 'react-bootstrap/Navbar'
+import { SocialIcon } from 'react-social-icons'
 
 class Footer extends PureComponent {
   render() {
@@ -15,9 +15,7 @@ class Footer extends PureComponent {
               RSURANCE
             </Navbar.Brand>
             <Nav className="flex-column mr-auto">
-              <Nav.Item className={css(styles.header)}>
-                {footerInfo.menuHeader}
-              </Nav.Item>
+              <Nav.Item className={css(styles.header)}>{footerInfo.menuHeader}</Nav.Item>
               <Nav.Item>
                 <Nav.Link href="/faq">FAQs</Nav.Link>
               </Nav.Item>
@@ -29,16 +27,11 @@ class Footer extends PureComponent {
               </Nav.Item>
             </Nav>
             <Nav className="flex-column social">
-              <Nav.Item className={css(styles.header)}>
-                {footerInfo.socialHeader}
-              </Nav.Item>
+              <Nav.Item className={css(styles.header)}>{footerInfo.socialHeader}</Nav.Item>
               <Nav>
-                {footerInfo.socials.map((social, i) => (
+                {footerInfo.socials.map(social => (
                   <Nav.Item key={social.url}>
-                    <SocialIcon
-                      className={css(styles.marginRight)}
-                      url={social.url}
-                    />
+                    <SocialIcon className={css(styles.marginRight)} url={social.url} />
                   </Nav.Item>
                 ))}
               </Nav>
@@ -48,20 +41,20 @@ class Footer extends PureComponent {
           <p className={css(styles.bottomtext)}>{footerInfo.copy}</p>
         </div>
       </footer>
-    );
+    )
   }
 }
 
 const styles = StyleSheet.create({
   footer: {
     height: 347,
-    backgroundColor: "#f6f6f6",
-    textAlign: "center",
-    padding: "0 30px"
+    backgroundColor: '#f6f6f6',
+    textAlign: 'center',
+    padding: '0 30px'
   },
   bottomtext: {
     fontSize: 13,
-    color: "#6a6a6a"
+    color: '#6a6a6a'
   },
   marginRight: {
     marginRight: 5
@@ -69,35 +62,35 @@ const styles = StyleSheet.create({
   header: {
     marginBottom: 10,
     fontSize: 16,
-    color: "#000"
+    color: '#000'
   },
   wrapper: {
     maxWidth: 1050,
-    padding: "40px 0px 0px",
-    position: "relative",
-    margin: "0 auto",
-    textAlign: "center",
-    ":nth-child(1n)>nav": {
-      alignItems: "flex-start",
-      textAlign: "left",
+    padding: '40px 0px 0px',
+    position: 'relative',
+    margin: '0 auto',
+    textAlign: 'center',
+    ':nth-child(1n)>nav': {
+      alignItems: 'flex-start',
+      textAlign: 'left',
       marginBottom: 120
     },
-    ":nth-child(1n) .navbar>.navbar-nav": {
+    ':nth-child(1n) .navbar>.navbar-nav': {
       marginTop: 6,
-      marginLeft: "2em"
+      marginLeft: '2em'
     },
-    ":nth-child(1n) .navbar>.social": {
+    ':nth-child(1n) .navbar>.social': {
       marginLeft: 0
     },
-    ":nth-child(1n) .social .navbar-nav": {
-      flexWrap: "nowrap!important",
-      flexDirection: "row!important"
+    ':nth-child(1n) .social .navbar-nav': {
+      flexWrap: 'nowrap!important',
+      flexDirection: 'row!important'
     },
-    ":nth-child(1n)>nav .nav-link": {
+    ':nth-child(1n)>nav .nav-link': {
       padding: 0
     }
   },
   menu: {}
-});
+})
 
-export default Footer;
+export default Footer

@@ -1,10 +1,10 @@
-import productsJSON from "../../settings/products";
+import productsJSON from '../../settings/products'
 
 const products = (state = productsJSON.products, action) => {
   switch (action.type) {
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default products;
+export default products

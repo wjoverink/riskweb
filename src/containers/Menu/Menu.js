@@ -1,11 +1,11 @@
-import { css, StyleSheet } from "aphrodite/no-important";
-import React, { PureComponent } from "react";
-import Button from "react-bootstrap/Button";
+import { css, StyleSheet } from 'aphrodite/no-important'
+import React, { PureComponent } from 'react'
+import Button from 'react-bootstrap/Button'
 // import { connect } from "react-redux";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
+import Nav from 'react-bootstrap/Nav'
+import Navbar from 'react-bootstrap/Navbar'
 // import PropTypes from "prop-types";
-import ScrollInNav from "../../library/components/scrollIn/ScrollInNav";
+import ScrollInNav from '../../library/components/scrollIn/ScrollInNav'
 
 class Menu extends PureComponent {
   render() {
@@ -17,12 +17,7 @@ class Menu extends PureComponent {
         </Navbar.Brand>
         <Nav>
           <ScrollInNav className={css(styles.scrollInNav)} scrollInHeight={420}>
-            <Button
-              className={css(styles.button)}
-              variant="secondary"
-              href={"/quiz"}
-              size="sm"
-            >
+            <Button className={css(styles.button)} variant="secondary" href={'/quiz'} size="sm">
               LETS GET SECURED
             </Button>
           </ScrollInNav>
@@ -42,57 +37,54 @@ class Menu extends PureComponent {
             ))}
           </Nav>
         </Navbar.Collapse> */}
-        <ScrollInNav
-          className={css(styles.scrollinBorder)}
-          scrollInHeight={600}
-        >
+        <ScrollInNav className={css(styles.scrollinBorder)} scrollInHeight={600}>
           <div className={css(styles.border)} />
         </ScrollInNav>
       </Navbar>
-    );
+    )
   }
 }
 
 const styles = StyleSheet.create({
   menu: {
     height: 69,
-    padding: "0 36px",
-    backgroundColor: "white",
-    ":nth-child(1n) .nav-link": {
+    padding: '0 36px',
+    backgroundColor: 'white',
+    ':nth-child(1n) .nav-link': {
       fontSize: 16,
-      fontWeight: "bold"
+      fontWeight: 'bold'
     },
-    "@media (max-width: 500px)": {
-      padding: "0 30px"
+    '@media (max-width: 500px)': {
+      padding: '0 30px'
     }
   },
   scrollinBorder: {
     bottom: 0,
-    display: "flex"
+    display: 'flex'
   },
   border: {
-    borderBottom: "1px solid #dfdfdf",
-    alignSelf: " flex-end",
-    position: "absolute",
+    borderBottom: '1px solid #dfdfdf',
+    alignSelf: ' flex-end',
+    position: 'absolute',
     left: 0,
     right: 0
   },
   scrollInNav: {
-    display: "flex",
+    display: 'flex',
     height: 69,
-    flexDirection: "column",
-    alignItems: "flex-end",
-    justifyContent: "center",
-    zIndex: "2!important"
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+    zIndex: '2!important'
   },
   button: {
     width: 200,
     marginRight: 39,
-    "@media (max-width: 500px)": {
-      width: "auto"
+    '@media (max-width: 500px)': {
+      width: 'auto'
     }
   }
-});
+})
 
 // Menu.propTypes = {
 //   products: PropTypes.arrayOf(
@@ -116,4 +108,4 @@ const styles = StyleSheet.create({
 // }
 // export default connect(mapStateToProps)(Menu);
 
-export default Menu;
+export default Menu

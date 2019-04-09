@@ -1,10 +1,10 @@
-import pagesJSON from "../../settings/pages";
+import pagesJSON from '../../settings/pages'
 
 const pages = (state = pagesJSON.pages, action) => {
   switch (action.type) {
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default pages;
+export default pages

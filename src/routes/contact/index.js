@@ -1,2 +1,2 @@
-import ContactPage from "./components/ContactPage";
-export default ContactPage;
+import ContactPage from './components/ContactPage'
+export default ContactPage
