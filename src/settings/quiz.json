@@ -5,10 +5,12 @@
       "question": "Hey! I’m Leonard, I’ll get you an awesome price in seconds. Ready to do this?",
       "elements": [
         {
+          "name": "FirstName",
           "type": "text",
           "placeHolder": "First name"
         },
         {
+          "name": "LastName",
           "type": "text",
           "placeHolder": "Last name"
         }

@@ -1,9 +1,9 @@
 import { css, StyleSheet } from "aphrodite/no-important";
 import React, { PureComponent } from "react";
 import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
+// import Col from "react-bootstrap/Col";
 import { connect } from "react-redux";
-import Form from "react-bootstrap/Form";
+// import Form from "react-bootstrap/Form";
 import PropTypes from "prop-types";
 
 class Header extends PureComponent {

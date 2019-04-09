@@ -1,29 +1,58 @@
 import { css, StyleSheet } from "aphrodite/no-important";
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import { connect } from "react-redux";
 import Form from "react-bootstrap/Form";
 import PreloadImage from "react-preload-image";
-import "firebase/firestore";
-import { FirestoreMutation } from "@react-firebase/firestore";
+import MiniLoader from "../../library/components/miniLoader/MiniLoader";
+import { compose } from "redux";
+import { firestoreConnect, isLoaded, isEmpty } from "react-redux-firebase";
+import PropTypes from "prop-types";
+import quizJSON from "../../settings/quiz";
+import arrowleft from "../../images/arrow-left.png";
 
-class QuizPage extends PureComponent {
+class QuizPage extends Component {
   constructor(props) {
     super(props);
 
     document.title = this.props.page.title;
+
+    this.formSubmit = this.formSubmit.bind(this);
+  }
+
+  formSubmit(ev) {
+    this.props.firestore.add("answers", {
+      FirstName: ev.target[0].value,
+      LastName: ev.target[1].value
+    });
   }
 
   render() {
     const {
       page: { img },
-      quiz: { button, question, elements },
-      quizAnswers
+      question,
+      buttonText,
+      elements,
+      isLoading,
+      quizAnswers,
+      prevId,
+      nextId
     } = this.props;
+
     return (
       <main>
         <div className={css(styles.border)}>
+          {prevId >= 0 && (
+            <a className={css(styles.backLink)} href={"/quiz/" + prevId}>
+              <img
+                className={css(styles.arrowLeft)}
+                alt="previous question"
+                src={arrowleft}
+              />
+            </a>
+          )}
+
           <div className={css(styles.mainInfo, styles.popular)}>
             <PreloadImage
               style={{
@@ -38,26 +67,17 @@ class QuizPage extends PureComponent {
               src={img.src}
               alt={img.alt}
             />
-            <h3>{question}</h3>
-            <FirestoreMutation type="add" path="/answers">
-              {({ runMutation }) => (
-                <Form
-                  onSubmit={async ev => {
-                    ev.preventDefault();
-                    var t = await runMutation({
-                      FirstName: ev.target[0].value,
-                      LastName: ev.target[1].value
-                      // created_at: firebase.database.ServerValue.TIMESTAMP,
-                      // updated_at: firebase.database.ServerValue.TIMESTAMP
-                    });
-                  }}
-                  className={css(styles.form)}
-                >
+            {!isLoading && (
+              <React.Fragment>
+                <h3>{question}</h3>
+
+                <Form onSubmit={this.formSubmit} className={css(styles.form)}>
                   <Form.Row>
                     {elements.map((item, i) => (
                       <Form.Group
+                        key={item.name}
                         as={Col}
-                        controlId={`formGrid${item.placeHolder.trim()}`}
+                        controlId={`formGrid${item.name}`}
                       >
                         <Form.Control
                           value={quizAnswers ? quizAnswers[i] : undefined}
@@ -67,16 +87,19 @@ class QuizPage extends PureComponent {
                       </Form.Group>
                     ))}
                   </Form.Row>
-                  <Button
-                    className={css(styles.button)}
-                    variant="secondary"
-                    type="submit"
-                  >
-                    {button}
-                  </Button>
+                  {nextId >= 0 && (
+                    <Button
+                      className={css(styles.button)}
+                      variant="secondary"
+                      href={"/quiz/" + nextId}
+                    >
+                      {buttonText}
+                    </Button>
+                  )}
                 </Form>
-              )}
-            </FirestoreMutation>
+              </React.Fragment>
+            )}
+            {isLoading && <MiniLoader />}
             <aside className={`${css(styles.skout)} d-lg-block`}>
               <span>POWERED BY</span>
               <span style={{ fontSize: 72, fontWeight: 500, marginTop: -30 }}>
@@ -98,6 +121,22 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     fontWeight: 500,
     marginTop: 200
+  },
+  backLink: {
+    width: 90,
+    height: 100,
+    position: "fixed",
+    top: " calc(50% - 50px)",
+    display: "flex",
+    ":hover": {
+      opacity: 0.6
+    }
+  },
+  arrowLeft: {
+    width: 32,
+    height: 32,
+    alignSelf: "center",
+    margin: "0 auto"
   },
   mainInfo: {
     maxWidth: 1050,
@@ -130,13 +169,45 @@ const styles = StyleSheet.create({
   }
 });
 
-function mapStateToProps({ pages, quiz, quizAnswers }, { match }) {
-  const id = match.params.quizId ? parseInt(match.params.quizId) : 0;
+QuizPage.propTypes = {
+  question: PropTypes.string,
+  buttonText: PropTypes.string,
+  elements: PropTypes.array,
+  isLoading: PropTypes.bool,
+  isFirst: PropTypes.bool
+};
+
+QuizPage.defaultProps = {
+  question: undefined,
+  buttonText: undefined,
+  elements: [],
+  isLoading: true,
+  isFirst: true
+};
+
+function mapStateToProps({ pages, quizAnswers, firestore }, { match }) {
+  const id = match.params.quizId ? match.params.quizId : "0";
+  // const quiz =
+  //   firestore.ordered.quiz && firestore.ordered.quiz.find(q => q.id === id);
+  const quiz = quizJSON.quiz.find(q => q.id === id);
+  const prevId = parseInt(id) - 1;
+  let nextId = parseInt(id) + 1;
+  const nextQuiz = quizJSON.quiz.find(q => q.id == parseInt(id) + 1);
+  nextId = nextQuiz ? nextId : -1;
   return {
     page: pages.find(page => page.name === "quiz"),
-    quiz: quiz[id],
-    quizAnswers: quizAnswers.find(q => q.id === id)
+    quizAnswers: quizAnswers.find(q => q.id === id),
+    question: quiz && quiz.question,
+    buttonText: quiz && quiz.button,
+    elements: quiz && quiz.elements, //.map(i => JSON.parse(i)),
+    isLoading: !isLoaded(quiz),
+    prevId,
+    firestore,
+    nextId
   };
 }
 
-export default connect(mapStateToProps)(QuizPage);
+export default compose(
+  firestoreConnect([{ collection: "quiz" }]),
+  connect(mapStateToProps)
+)(QuizPage);

@@ -3,24 +3,20 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
-import firebase from "firebase/app";
-import { FirestoreProvider } from "@react-firebase/firestore";
-// import { FirebaseDatabaseProvider } from "@react-firebase/database";
-import rootReducer from "./redux/reducers";
+import { BrowserRouter } from "react-router-dom";
+import configureStore from "./store";
 import * as serviceWorker from "./serviceWorker";
 
-const store = createStore(rootReducer);
-const config = {};
+const initialState = window.__INITIAL_STATE__ || {
+  firebase: { authError: null }
+};
+const store = configureStore(initialState);
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <FirestoreProvider {...config} firebase={firebase}>
-        <App />
-      </FirestoreProvider>
+      <App />
     </BrowserRouter>
   </Provider>,
   document.getElementById("root")
