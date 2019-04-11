@@ -2,50 +2,60 @@ import { css, StyleSheet } from 'aphrodite/no-important'
 import { firestoreConnect, isLoaded } from 'react-redux-firebase'
 import React, { Component } from 'react'
 import arrowleft from '../../../../images/arrow-left.png'
-import Button from 'react-bootstrap/Button'
-import Col from 'react-bootstrap/Col'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
-import Form from 'react-bootstrap/Form'
 import MiniLoader from '../../../../library/components/miniLoader/MiniLoader'
 import PreloadImage from 'react-preload-image'
 import PropTypes from 'prop-types'
+import Quiz from '../Quiz/Quiz'
 import quizJSON from '../../../../settings/quiz'
+import { withRouter } from 'react-router-dom'
 
 class QuizPage extends Component {
   constructor(props) {
     super(props)
 
     document.title = this.props.page.title
-
-    this.formSubmit = this.formSubmit.bind(this)
+    this.onSubmit = this.onSubmit.bind(this)
+    this.state = {
+      formData: []
+    }
   }
 
-  formSubmit(ev) {
-    this.props.firestore.add('answers', {
-      FirstName: ev.target[0].value,
-      LastName: ev.target[1].value
+  onSubmit(ev, button) {
+    const { quiz, history } = this.props
+    const data = new FormData(ev.target)
+    var arr = Array.from(data.entries()).map(item => ({ field: item[0], value: item[1] }))
+    if (button.field) {
+      arr.push({ field: button.field, value: button.value })
+    }
+    this.setState(state => {
+      const data = state.formData
+      data[quiz.id] = arr
+      return {
+        formData: data
+      }
     })
+    history.push('/quiz/' + button.goto)
   }
 
   render() {
     const {
       page: { img },
-      question,
-      buttonText,
-      elements,
-      isLoading,
-      prevId,
-      nextId
+      quiz,
+      isFirst,
+      history,
+      isLoading
     } = this.props
-
+    const { formData } = this.state
+    const firstName = formData[0] && formData[0].find(a => a.field === 'FirstName').value
     return (
       <main>
         <div className={css(styles.border)}>
-          {prevId >= 0 && (
-            <a className={css(styles.backLink)} href={'/quiz/' + prevId}>
+          {!isFirst && (
+            <button className={css(styles.backLink)} onClick={history.goBack}>
               <img className={css(styles.arrowLeft)} alt="previous question" src={arrowleft} />
-            </a>
+            </button>
           )}
 
           <div className={css(styles.mainInfo, styles.popular)}>
@@ -58,33 +68,12 @@ class QuizPage extends Component {
                 position: 'relative',
                 marginBottom: 36
               }}
-              lazy
+              duration="0ms"
               src={img.src}
               alt={img.alt}
             />
             {!isLoading && (
-              <React.Fragment>
-                <h3>{question}</h3>
-
-                <Form onSubmit={this.formSubmit} className={css(styles.form)}>
-                  <Form.Row>
-                    {elements.map(item => (
-                      <Form.Group key={item.name} as={Col} controlId={`formGrid${item.name}`}>
-                        <Form.Control
-                          //value={quizAnswers ? quizAnswers[i] : undefined}
-                          type={item.type}
-                          placeholder={item.placeHolder}
-                        />
-                      </Form.Group>
-                    ))}
-                  </Form.Row>
-                  {nextId >= 0 && (
-                    <Button className={css(styles.button)} variant="secondary" href={'/quiz/' + nextId}>
-                      {buttonText}
-                    </Button>
-                  )}
-                </Form>
-              </React.Fragment>
+              <Quiz onSubmit={this.onSubmit} firstName={firstName} answer={formData[quiz.id]} quiz={quiz} />
             )}
             {isLoading && <MiniLoader />}
             <aside className={`${css(styles.skout)} d-lg-block`}>
@@ -110,6 +99,8 @@ const styles = StyleSheet.create({
   backLink: {
     width: 90,
     height: 100,
+    backgroundColor: 'transparent',
+    border: 0,
     position: 'fixed',
     top: ' calc(50% - 50px)',
     display: 'flex',
@@ -137,71 +128,46 @@ const styles = StyleSheet.create({
     padding: '54px 0px 100px 0px',
     marginTop: -1,
     backgroundColor: '#f6f6f6'
-  },
-  button: {
-    width: 200,
-    margin: 58,
-    textTransform: 'uppercase'
-  },
-  form: {
-    maxWidth: 480,
-    margin: '58px auto',
-    ':nth-child(1n) .form-row': {
-      '@media (max-width: 500px)': {
-        flexDirection: 'column'
-      }
-    }
   }
 })
 
 QuizPage.propTypes = {
-  question: PropTypes.string,
-  buttonText: PropTypes.string,
-  elements: PropTypes.array,
   isLoading: PropTypes.bool,
   isFirst: PropTypes.bool,
+  history: PropTypes.object.isRequired,
+  quiz: PropTypes.object.isRequired,
   page: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired
-  }).isRequired,
-  firestore: PropTypes.object.isRequired,
-  prevId: PropTypes.number,
-  nextId: PropTypes.number
+    img: PropTypes.object.isRequired
+  }).isRequired
 }
 
 QuizPage.defaultProps = {
-  question: undefined,
-  buttonText: undefined,
-  elements: [],
   isLoading: true,
   isFirst: true,
   prevId: -1,
   nextId: -1
 }
-
-function mapStateToProps({ pages, quizAnswers, firestore }, { match }) {
+//function mapStateToProps({ pages, quizAnswers, firestore }, { match }) {
+function mapStateToProps({ pages, firestore }, { match }) {
   const id = match.params.quizId ? match.params.quizId : '0'
   // const quiz =
   //   firestore.ordered.quiz && firestore.ordered.quiz.find(q => q.id === id);
   const quiz = quizJSON.quiz.find(q => q.id === id)
-  const prevId = parseInt(id) - 1
-  let nextId = parseInt(id) + 1
-  const nextQuiz = quizJSON.quiz.find(q => q.id === (parseInt(id) + 1).toString())
-  nextId = nextQuiz ? nextId : -1
+
   return {
     page: pages.find(page => page.name === 'quiz'),
-    quizAnswers: quizAnswers.find(q => q.id === id),
-    question: quiz && quiz.question,
-    buttonText: quiz && quiz.button,
-    elements: quiz && quiz.elements, //.map(i => JSON.parse(i)),
+    //quizAnswers: quizAnswers.find(q => q.id === id),
+    quiz: quiz,
     isLoading: !isLoaded(quiz),
-    prevId,
     firestore,
-    nextId
+    isFirst: id === '0'
   }
 }
 
-export default compose(
-  firestoreConnect([{ collection: 'quiz' }]),
-  connect(mapStateToProps)
-)(QuizPage)
+export default withRouter(
+  compose(
+    firestoreConnect([{ collection: 'quiz' }]),
+    connect(mapStateToProps)
+  )(QuizPage)
+)

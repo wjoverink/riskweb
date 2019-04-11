@@ -5,29 +5,150 @@
       "question": "Hey! I’m Leonard, I’ll get you an awesome price in seconds. Ready to do this?",
       "elements": [
         {
-          "name": "FirstName",
+          "field": "FirstName",
           "type": "text",
           "placeHolder": "First name"
         },
         {
-          "name": "LastName",
+          "field": "LastName",
           "type": "text",
           "placeHolder": "Last name"
         }
       ],
-      "button": "Lets do this"
+      "buttons": [
+        {
+          "text": "Lets do this",
+          "goto": "1"
+        }
+      ]
     },
     {
       "id": "1",
-      "question": "second quiz question",
+      "question": "Hi FirstName, do you have a cyber security policy?",
       "elements": [],
-      "button": "Lets do this"
+      "buttons": [
+        {
+          "text": "Yes",
+          "field": "HavePolicy",
+          "value": true,
+          "goto": "3"
+        },
+        {
+          "text": "No",
+          "field": "HavePolicy",
+          "value": false,
+          "goto": "2"
+        }
+      ]
     },
     {
       "id": "2",
-      "question": "third quiz question",
+      "question": "How many employees do you have?",
       "elements": [],
-      "button": "Lets do this"
+      "buttons": [
+        {
+          "text": "1 - 9",
+          "field": "Employees",
+          "value": "1",
+          "goto": "5"
+        },
+        {
+          "text": "10 - 99",
+          "field": "Employees",
+          "value": "10",
+          "goto": "5"
+        },
+        {
+          "text": "100 - 999",
+          "field": "Employees",
+          "value": "100",
+          "goto": "5"
+        },
+        {
+          "text": "1000+",
+          "field": "Employees",
+          "value": "1000",
+          "goto": "5"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "question": "Did you work with a broker to obtain it?",
+      "elements": [],
+      "buttons": [
+        {
+          "text": "Yes",
+          "field": "Broker",
+          "value": true,
+          "goto": "4"
+        },
+        {
+          "text": "No",
+          "field": "Broker",
+          "value": false,
+          "goto": "2"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "question": "What type of broker assisted you with this?",
+      "elements": [],
+      "buttons": [
+        {
+          "text": "Cyber broker",
+          "field": "BrokerType",
+          "value": "Cyber",
+          "goto": "2"
+        },
+        {
+          "text": "Commercial Broker",
+          "field": "BrokerType",
+          "value": "Commercial",
+          "goto": "2"
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "question": "What's your email address?",
+      "elements": [
+        {
+          "field": "Email",
+          "type": "email",
+          "placeHolder": "Email address"
+        }
+      ],
+      "buttons": [
+        {
+          "text": "Next",
+          "goto": "6"
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "question": "Thanks FirstName, what is the best number for our Cyber Risk team to reach you on?",
+      "elements": [
+        {
+          "field": "Phone",
+          "type": "text",
+          "placeHolder": "Phone number"
+        }
+      ],
+      "buttons": [
+        {
+          "text": "LET'S DO THIS",
+          "goto": "7"
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "question": "Outstanding, we'll be in touch with you shortly!",
+      "elements": [],
+      "buttons": []
     }
   ]
 }
