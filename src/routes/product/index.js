@@ -1,2 +1,7 @@
-import ProductPage from './components/ProductPage'
-export default ProductPage
+import { lazy } from 'react'
+
+const ProductPage = lazy(() => import('./components/ProductPage'))
+export default {
+  path: '/products/:productId',
+  component: ProductPage
+}

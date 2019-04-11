@@ -1,12 +1,21 @@
 import { css, StyleSheet } from 'aphrodite/no-important'
+import React, { Suspense } from 'react'
+import Loader from '../../library/components/loader/loader'
 import Menu from '../../containers/Menu'
 import PropTypes from 'prop-types'
-import React from 'react'
 
 export const CoreLayout = ({ children }) => (
   <div className={css(styles.mainWrapper)}>
     <Menu />
-    {children}
+    <Suspense
+      fallback={
+        <div className={css(styles.mainWrapper, styles.wrapper)}>
+          <Loader />
+        </div>
+      }
+    >
+      {children}
+    </Suspense>
   </div>
 )
 
@@ -19,6 +28,11 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     flex: 1
+  },
+  wrapper: {
+    minHeight: 600,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 })
 

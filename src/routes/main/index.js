@@ -1,2 +1,7 @@
-import HomePage from './components/HomePage'
-export default HomePage
+import { lazy } from 'react'
+
+const HomePage = lazy(() => import('./components/HomePage'))
+export default {
+  path: '/',
+  component: HomePage
+}

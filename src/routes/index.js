@@ -1,51 +1,27 @@
-import { css, StyleSheet } from 'aphrodite/no-important'
-import React, { lazy, Suspense } from 'react'
 import { Route, Switch } from 'react-router-dom'
+import ContactPage from './contact'
 import CoreLayout from '../layouts/CoreLayout'
-import Loader from '../library/components/loader/loader'
-
-const HomePage = lazy(() => import('./main'))
-const ProductPage = lazy(() => import('./product'))
-const SupportPage = lazy(() => import('./support'))
-const ContactPage = lazy(() => import('./contact'))
-const FAQPage = lazy(() => import('./faq'))
-const QuizPage = lazy(() => import('./quiz'))
-const NotFoundPage = lazy(() => import('./notFound'))
+import FAQPage from './faq'
+import HomePage from './main'
+import NotFoundPage from './notFound'
+import ProductPage from './product'
+import QuizPage from './quiz'
+import React from 'react'
+import SupportPage from './support'
 
 export default function CreateRoutes() {
   return (
     <CoreLayout>
-      <Suspense
-        fallback={
-          <div className={css(styles.mainWrapper, styles.wrapper)}>
-            <Loader />
-          </div>
-        }
-      >
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/faq" component={FAQPage} />
-          <Route path="/support" component={SupportPage} />
-          <Route path="/contact" component={ContactPage} />
-          <Route path="/products/:productId" component={ProductPage} />
-          <Route exact path="/quiz" component={QuizPage} />
-          <Route path="/quiz/:quizId" component={QuizPage} />
-          <Route component={NotFoundPage} />
-        </Switch>
-      </Suspense>
+      <Switch>
+        <Route exact path={HomePage.path} component={HomePage.component} />
+        <Route path={FAQPage.path} component={FAQPage.component} />
+        <Route path={SupportPage.path} component={SupportPage.component} />
+        <Route path={ContactPage.path} component={ContactPage.component} />
+        <Route path={ProductPage.path} component={ProductPage.component} />
+        <Route exact path={QuizPage.path} component={QuizPage.component} />
+        <Route path={QuizPage.pathWithId} component={QuizPage.component} />
+        <Route component={NotFoundPage.component} />
+      </Switch>
     </CoreLayout>
   )
 }
-
-const styles = StyleSheet.create({
-  mainWrapper: {
-    display: 'flex',
-    flexDirection: 'column',
-    flex: 1
-  },
-  wrapper: {
-    minHeight: 600,
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-})
