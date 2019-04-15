@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button'
 import { connect } from 'react-redux'
 // import Form from "react-bootstrap/Form";
 import PropTypes from 'prop-types'
+import SkoutLogo from '../../../../library/components/logos/SkoutLogo'
 
 class Header extends PureComponent {
   render() {
@@ -34,17 +35,10 @@ class Header extends PureComponent {
               Get started
             </Button>
           </Form> */}
-          <Button
-            className={css(styles.button)}
-            variant="secondary"
-            href={'/quiz'}
-          >
+          <Button className={css(styles.button)} variant="secondary" href={'/quiz'}>
             LETS DO THIS
           </Button>
-          <aside className={`${css(styles.skout)}`}>
-            <span style={{ fontSize: 72, fontWeight: 500 }}>SKOUT</span>
-            <span>Cybersecurity</span>
-          </aside>
+          <SkoutLogo className={`${css(styles.skout)}`} />
         </div>
       </header>
     )
@@ -64,13 +58,11 @@ const styles = StyleSheet.create({
     }
   },
   skout: {
-    textTransform: 'uppercase',
-    marginLeft: 'auto',
-    maxWidth: 235,
-    overflowWrap: 'break-word',
-    textAlign: 'center',
+    float: 'right',
+    margin: '53px auto 0px auto',
     '@media (max-width: 600px)': {
-      margin: '40px auto'
+      margin: '40px auto',
+      float: 'left'
     }
   },
   button: {

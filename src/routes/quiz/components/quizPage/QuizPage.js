@@ -5,6 +5,7 @@ import arrowleft from '../../../../images/arrow-left.png'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import MiniLoader from '../../../../library/components/miniLoader/MiniLoader'
+import PoweredBySkoutLogo from '../../../../library/components/logos/PoweredBySkoutLogo'
 import PreloadImage from 'react-preload-image'
 import PropTypes from 'prop-types'
 import Quiz from '../Quiz/Quiz'
@@ -18,17 +19,15 @@ class QuizPage extends Component {
     document.title = this.props.page.title
     this.onSubmit = this.onSubmit.bind(this)
     this.state = {
-      formData: []
+      formData: {}
     }
   }
 
-  onSubmit(ev, button) {
+  onSubmit(ev) {
     const { quiz, history } = this.props
     const data = new FormData(ev.target)
     var arr = Array.from(data.entries()).map(item => ({ field: item[0], value: item[1] }))
-    if (button.field) {
-      arr.push({ field: button.field, value: button.value })
-    }
+    const button = quiz.buttons[0]
     this.setState(state => {
       const data = state.formData
       data[quiz.id] = arr
@@ -36,7 +35,17 @@ class QuizPage extends Component {
         formData: data
       }
     })
-    history.push('/quiz/' + button.goto)
+    if (button.field) {
+      const valueItem = arr.find(item => item.field === button.field)
+      const element = quiz.groups
+          .map(group => group.find(el => el.value === valueItem.value))
+          .filter(Boolean)
+          .shift()
+
+      history.push('/quiz/' + element.goto)
+    } else {
+      history.push('/quiz/' + button.goto)
+    }
   }
 
   render() {
@@ -76,10 +85,7 @@ class QuizPage extends Component {
               <Quiz onSubmit={this.onSubmit} firstName={firstName} answer={formData[quiz.id]} quiz={quiz} />
             )}
             {isLoading && <MiniLoader />}
-            <aside className={`${css(styles.skout)} d-lg-block`}>
-              <span>POWERED BY</span>
-              <span style={{ fontSize: 72, fontWeight: 500, marginTop: -30 }}>SKOUT</span>
-            </aside>
+            <PoweredBySkoutLogo className={`${css(styles.skout)} d-lg-block`} />
           </div>
         </div>
       </main>
@@ -89,12 +95,7 @@ class QuizPage extends Component {
 
 const styles = StyleSheet.create({
   skout: {
-    display: 'flex!important',
-    justifyContent: 'start',
-    alignItems: 'center',
-    flexDirection: 'column',
-    fontWeight: 500,
-    marginTop: 200
+    margin: '300px auto 0 auto'
   },
   backLink: {
     width: 90,

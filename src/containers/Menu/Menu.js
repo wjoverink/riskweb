@@ -1,42 +1,34 @@
 import { css, StyleSheet } from 'aphrodite/no-important'
 import React, { PureComponent } from 'react'
 import Button from 'react-bootstrap/Button'
-// import { connect } from "react-redux";
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
-// import PropTypes from "prop-types";
+import PropTypes from 'prop-types'
 import ScrollInNav from '../../library/components/scrollIn/ScrollInNav'
+import { withRouter } from 'react-router-dom'
 
 class Menu extends PureComponent {
   render() {
-    // const { products } = this.props;
+    const { location } = this.props
+    let hide = false
+    if (location.pathname.match(/quiz/)) {
+      hide = true
+    }
+
     return (
       <Navbar sticky="top" className={css(styles.menu)} expand="lg">
         <Navbar.Brand className="mr-auto logoText" href="/">
           RSURANCE
         </Navbar.Brand>
         <Nav>
-          <ScrollInNav className={css(styles.scrollInNav)} scrollInHeight={420}>
-            <Button className={css(styles.button)} variant="secondary" href={'/quiz'} size="sm">
-              LETS GET SECURED
-            </Button>
-          </ScrollInNav>
+          {!hide && (
+            <ScrollInNav className={css(styles.scrollInNav)} scrollInHeight={420}>
+              <Button className={css(styles.button)} variant="secondary" href={'/quiz'} size="sm">
+                LETS GET SECURED
+              </Button>
+            </ScrollInNav>
+          )}
         </Nav>
-        {/* <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
-          <Nav>
-            <Button
-              className={css(styles.button)}
-              variant="secondary"
-              size="sm"
-            >
-              Buy Now
-            </Button>
-            {products.map((item, i) => (
-              <Nav.Link href={`/products/${item.id}`}>{item.name}</Nav.Link>
-            ))}
-          </Nav>
-        </Navbar.Collapse> */}
         <ScrollInNav className={css(styles.scrollinBorder)} scrollInHeight={600}>
           <div className={css(styles.border)} />
         </ScrollInNav>
@@ -86,26 +78,8 @@ const styles = StyleSheet.create({
   }
 })
 
-// Menu.propTypes = {
-//   products: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       img: PropTypes.string,
-//       id: PropTypes.string.isRequired,
-//       name: PropTypes.string.isRequired,
-//       text: PropTypes.string
-//     })
-//   )
-// };
+Menu.propTypes = {
+  location: PropTypes.any
+}
 
-// Menu.defaultProps = {
-//   products: []
-// };
-
-// function mapStateToProps({ products }) {
-//   return {
-//     products
-//   };
-// }
-// export default connect(mapStateToProps)(Menu);
-
-export default Menu
+export default withRouter(Menu)

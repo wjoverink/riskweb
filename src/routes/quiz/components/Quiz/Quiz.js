@@ -4,61 +4,104 @@ import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import PropTypes from 'prop-types'
+import QuizFormControl from './QuizFormControl'
 
 class Quiz extends Component {
   constructor(props) {
     super(props)
 
     this.formSubmit = this.formSubmit.bind(this)
-    this.buttonClick = this.buttonClick.bind(this)
-    this.buttonValue = undefined
+    this.handleClick = this.handleClick.bind(this)
+
+    this.submitButtonRef = React.createRef()
+
+    this.state = {
+      answer: this.props.answer,
+      oldanswer: this.props.answer
+    }
   }
 
-  buttonClick(ev) {
-    this.buttonValue = this.props.quiz.buttons.find(b => b.text.toLowerCase() === ev.target.textContent.toLowerCase())
+  static getDerivedStateFromProps(nextProps, state) {
+    if (nextProps.answer && nextProps.answer !== state.oldanswer) {
+      return {
+        answer: nextProps.answer,
+        oldanswer: nextProps.answer
+      }
+    }
+    return state
+  }
+
+  handleClick(checked, field, value) {
+    let answer = []
+    if (this.state.answer) {
+      answer = this.state.answer.filter(a => a.field !== field)
+    }
+
+    answer.push({ field, value })
+    this.setState({ answer })
+
+    const { quiz } = this.props
+    if (quiz.buttons[0] && quiz.buttons[0].hidden) {
+      this.submitButtonRef.current.click()
+    }
   }
 
   formSubmit(ev) {
     ev.preventDefault()
-    this.props.onSubmit(ev, this.buttonValue)
+    this.props.onSubmit(ev)
   }
 
   render() {
-    const { quiz, answer, firstName } = this.props
+    const { quiz, firstName } = this.props
+    const { answer } = this.state
     const question = quiz.question.replace('FirstName', firstName)
     return (
       <React.Fragment>
-        <h3>{question}</h3>
+        <h1 style={{ fontSize: 62 }}>{question}</h1>
 
         <Form onSubmit={this.formSubmit} className={css(styles.form)}>
           <Form.Row>
-            {quiz.elements.map(item => (
-              <Form.Group key={item.field} as={Col} controlId={`formGrid${item.field}`}>
-                <Form.Control
-                  value={answer && answer.find(a => a.field === item.field).value}
-                  type={item.type}
-                  name={item.field}
-                  required
-                  placeholder={item.placeHolder}
-                />
+            {quiz.groups.map((group, i) => (
+              <Form.Group key={i} as={Col}>
+                {group.map(item => {
+                  const an = answer && answer.find(a => a.field === item.field)
+                  const value = an && an.value
+                  return (
+                    <QuizFormControl
+                      key={item.placeHolder.trim()}
+                      value={value}
+                      inputValue={item.value}
+                      onClick={ev => {
+                        this.handleClick(ev, item.field, item.type !== 'radio' ? ev.target.value : item.value)
+                      }}
+                      style={item.style}
+                      type={item.type}
+                      name={item.field}
+                      className={css(styles.radioButton)}
+                      required={true}
+                      label={item.placeHolder}
+                    />
+                  )
+                })}
               </Form.Group>
             ))}
           </Form.Row>
-          <Form.Row className={css(styles.buttonRow)}>
-            {quiz.buttons.map(item => (
-              <Form.Group key={item.text.trim()} as={Col}>
-                <Button
-                  className={css(styles.button)}
-                  variant="secondary"
-                  name={item.field}
-                  type="submit"
-                  onClick={this.buttonClick}
-                >
-                  {item.text}
-                </Button>
-              </Form.Group>
-            ))}
-          </Form.Row>
+          {/* <Form.Row className={css(styles.buttonRow)}> */}
+          {quiz.buttons.map(item => (
+            // <Form.Group key={item.text.trim()} as={Col}>
+            <Button
+              key={item.text.trim()}
+              className={css(styles.button, item.hidden && styles.buttonHidden)}
+              variant="secondary"
+              name={item.field}
+              type="submit"
+              ref={this.submitButtonRef}
+            >
+              {item.text}
+            </Button>
+            // </Form.Group>
+          ))}
+          {/* </Form.Row> */}
         </Form>
       </React.Fragment>
     )
@@ -68,14 +111,22 @@ class Quiz extends Component {
 const styles = StyleSheet.create({
   button: {
     width: 200,
+    // height: 60,
     // margin: 58,
     textTransform: 'uppercase'
   },
+  buttonHidden: {
+    display: 'none'
+  },
   buttonRow: {
-    marginTop: 58
+    marginTop: 44
+  },
+  radioButton: {
+    minWidth: 200,
+    margin: '0px auto 1em auto'
   },
   form: {
-    maxWidth: 480,
+    maxWidth: 420,
     margin: '58px auto',
     ':nth-child(1n) .form-row': {
       '@media (max-width: 500px)': {

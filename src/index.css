@@ -20,6 +20,7 @@ h1 {
   font-stretch: normal;
   line-height: 1.18;
   letter-spacing: -1.7px;
+  white-space: pre-wrap;
 }
 
 h2 {
@@ -48,6 +49,10 @@ h5 {
   line-height: 1.48;
   letter-spacing: normal;
   color: #000000;
+}
+
+.h5 {
+  font-size: 16px;
 }
 
 header blockquote {

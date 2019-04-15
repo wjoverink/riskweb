@@ -2,18 +2,22 @@
   "quiz": [
     {
       "id": "0",
-      "question": "Hey! I’m Leonard, I’ll get you an awesome price in seconds. Ready to do this?",
-      "elements": [
-        {
-          "field": "FirstName",
-          "type": "text",
-          "placeHolder": "First name"
-        },
-        {
-          "field": "LastName",
-          "type": "text",
-          "placeHolder": "Last name"
-        }
+      "question": "Hey! I’m Leonard, I’ll get you an awesome price in seconds.\nReady to do this?",
+      "groups": [
+        [
+          {
+            "field": "FirstName",
+            "type": "text",
+            "placeHolder": "First name"
+          }
+        ],
+        [
+          {
+            "field": "LastName",
+            "type": "text",
+            "placeHolder": "Last name"
+          }
+        ]
       ],
       "buttons": [
         {
@@ -24,101 +28,163 @@
     },
     {
       "id": "1",
-      "question": "Hi FirstName, do you have a cyber security policy?",
-      "elements": [],
+      "question": "Hi FirstName, do you have a cyber\nsecurity policy?",
+      "groups": [
+        [
+          {
+            "field": "HavePolicy",
+            "type": "radio",
+            "value": "Yes",
+            "placeHolder": "Yes",
+            "goto": "3"
+          },
+          {
+            "field": "HavePolicy",
+            "type": "radio",
+            "value": "No",
+            "placeHolder": "No",
+            "goto": "2"
+          }
+        ]
+      ],
       "buttons": [
         {
-          "text": "Yes",
+          "text": "Next",
           "field": "HavePolicy",
-          "value": true,
-          "goto": "3"
-        },
-        {
-          "text": "No",
-          "field": "HavePolicy",
-          "value": false,
-          "goto": "2"
+          "hidden": true
         }
       ]
     },
     {
       "id": "2",
-      "question": "How many employees do you have?",
-      "elements": [],
+      "question": "How many employees\ndo you have?",
+      "groups": [
+        [
+          {
+            "placeHolder": "1 - 9",
+            "field": "Employees",
+            "type": "radio",
+            "goto": "5",
+            "value": "1"
+          },
+          {
+            "placeHolder": "10 - 99",
+            "field": "Employees",
+            "type": "radio",
+            "goto": "5",
+            "value": "10"
+          },
+          {
+            "placeHolder": "100 - 999",
+            "field": "Employees",
+            "type": "radio",
+            "goto": "5",
+            "value": "100"
+          },
+          {
+            "placeHolder": "1000+",
+            "field": "Employees",
+            "type": "radio",
+            "goto": "5",
+            "value": "1000"
+          }
+        ]
+      ],
       "buttons": [
         {
-          "text": "1 - 9",
+          "text": "Next",
           "field": "Employees",
-          "value": "1",
-          "goto": "5"
-        },
-        {
-          "text": "10 - 99",
-          "field": "Employees",
-          "value": "10",
-          "goto": "5"
-        },
-        {
-          "text": "100 - 999",
-          "field": "Employees",
-          "value": "100",
-          "goto": "5"
-        },
-        {
-          "text": "1000+",
-          "field": "Employees",
-          "value": "1000",
-          "goto": "5"
+          "hidden": true
         }
       ]
     },
     {
       "id": "3",
-      "question": "Did you work with a broker to obtain it?",
-      "elements": [],
+      "question": "Did you work with a broker\nto obtain it?",
+      "groups": [
+        [
+          {
+            "placeHolder": "Yes",
+            "field": "Broker",
+            "value": "Yes",
+            "type": "radio",
+            "goto": "4"
+          },
+          {
+            "placeHolder": "No",
+            "field": "Broker",
+            "value": "No",
+            "type": "radio",
+            "goto": "2"
+          }
+        ]
+      ],
       "buttons": [
         {
-          "text": "Yes",
+          "text": "Next",
           "field": "Broker",
-          "value": true,
-          "goto": "4"
-        },
-        {
-          "text": "No",
-          "field": "Broker",
-          "value": false,
-          "goto": "2"
+          "hidden": true
         }
       ]
     },
     {
       "id": "4",
-      "question": "What type of broker assisted you with this?",
-      "elements": [],
+      "question": "What type of broker assisted\nyou with this?",
+      "groups": [
+        [
+          {
+            "placeHolder": "CYBER BROKER",
+            "value": "Cyber",
+            "field": "BrokerType",
+            "type": "radio",
+            "goto": "2",
+            "style": { "width": 302 }
+          },
+          {
+            "placeHolder": "COMMERCIAL BROKER",
+            "value": "Commercial",
+            "field": "BrokerType",
+            "type": "radio",
+            "goto": "2",
+            "style": { "width": 302 }
+          },
+          {
+            "placeHolder": "I DON'T KNOW",
+            "value": "DontKnow",
+            "field": "BrokerType",
+            "type": "radio",
+            "goto": "2",
+            "style": { "width": 302 }
+          },
+          {
+            "placeHolder": "NONE",
+            "value": "None",
+            "field": "BrokerType",
+            "type": "radio",
+            "goto": "2",
+            "style": { "width": 302 }
+          }
+        ]
+      ],
       "buttons": [
         {
-          "text": "Cyber broker",
+          "text": "Next",
           "field": "BrokerType",
-          "value": "Cyber",
-          "goto": "2"
-        },
-        {
-          "text": "Commercial Broker",
-          "field": "BrokerType",
-          "value": "Commercial",
-          "goto": "2"
+          "hidden": true
         }
       ]
     },
     {
       "id": "5",
-      "question": "What's your email address?",
-      "elements": [
-        {
-          "field": "Email",
-          "type": "email",
-          "placeHolder": "Email address"
-        }
+      "question": "What's your\nemail address?",
+      "groups": [
+        [
+          {
+            "field": "Email",
+            "type": "email",
+            "placeHolder": "Email address"
+          }
+        ]
       ],
       "buttons": [
         {
@@ -129,13 +195,15 @@
     },
     {
       "id": "6",
-      "question": "Thanks FirstName, what is the best number for our Cyber Risk team to reach you on?",
-      "elements": [
-        {
-          "field": "Phone",
-          "type": "text",
-          "placeHolder": "Phone number"
-        }
+      "question": "Thanks FirstName, what is the best\nnumber for our Cyber Risk team\nto reach you on?",
+      "groups": [
+        [
+          {
+            "field": "Phone",
+            "type": "text",
+            "placeHolder": "Phone number"
+          }
+        ]
       ],
       "buttons": [
         {
@@ -146,7 +214,7 @@
     },
     {
       "id": "7",
-      "question": "Outstanding, we'll be in touch with you shortly!",
+      "question": "Outstanding, we'll be in touch\nwith you shortly!",
       "elements": [],
       "buttons": []
     }
