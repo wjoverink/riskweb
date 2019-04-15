@@ -136,7 +136,7 @@ function mapStateToProps({ products, pages }) {
       img: product.img,
       footer: {
         // url: `/products/${product.id}`,
-        url: '/quiz',
+        url: `/quiz/${product.id}/`,
         buttonText: 'MORE'
       }
     })),

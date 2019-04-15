@@ -1,22 +1,26 @@
 import { css, StyleSheet } from 'aphrodite/no-important'
 import React, { PureComponent } from 'react'
 import Button from 'react-bootstrap/Button'
+import { connect } from 'react-redux'
+import PoweredBySkoutLogo from '../../../../library/components/logos/PoweredBySkoutLogo'
 import PreloadImage from 'react-preload-image'
+import PropTypes from 'prop-types'
 
 class NotFoundPage extends PureComponent {
   constructor(props) {
     super(props)
 
-    document.title = 'Cyber Accidents Happen'
+    document.title = this.props.page.title
   }
 
   render() {
-    const img = {
-      src: '/images/leonard-navarro@2x.png',
-      alt: 'Leonard Navarro',
-      color: 'transparent',
-      size: { width: 136, height: 136 }
-    }
+    const {
+      page: {
+        title,
+        block1: { header },
+        img
+      }
+    } = this.props
     return (
       <React.Fragment>
         <main>
@@ -36,16 +40,13 @@ class NotFoundPage extends PureComponent {
                 src={img.src}
                 alt={img.alt}
               />
-              <h3>Cyber Accidents Happen</h3>
-              <h5>nothing we did not foresee</h5>
+              <h3>{title}</h3>
+              <h5>{header}</h5>
               <h3>404</h3>
               <Button className={css(styles.button)} variant="secondary" href={'/'}>
                 GET SECURED
               </Button>
-              <aside className={`${css(styles.skout)} d-lg-block`}>
-                <span>POWERED BY</span>
-                <span style={{ fontSize: 72, fontWeight: 500, marginTop: -30 }}>SKOUT</span>
-              </aside>
+              <PoweredBySkoutLogo className={`${css(styles.skout)} d-lg-block`} />
             </div>
           </div>
         </main>
@@ -66,12 +67,7 @@ const styles = StyleSheet.create({
     width: 234
   },
   skout: {
-    display: 'flex!important',
-    justifyContent: 'start',
-    alignItems: 'center',
-    flexDirection: 'column',
-    fontWeight: 500,
-    marginTop: 200
+    margin: '200px auto 0 auto'
   },
   mainInfo: {
     maxWidth: 1050,
@@ -90,4 +86,18 @@ const styles = StyleSheet.create({
   }
 })
 
-export default NotFoundPage
+function mapStateToProps({ pages }) {
+  return {
+    page: pages.find(page => page.name === '404')
+  }
+}
+
+NotFoundPage.propTypes = {
+  page: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    block1: PropTypes.shape({
+      header: PropTypes.string.isRequired
+    }).isRequired
+  }).isRequired
+}
+export default connect(mapStateToProps)(NotFoundPage)

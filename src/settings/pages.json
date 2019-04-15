@@ -87,6 +87,19 @@
       }
     },
     {
+      "name": "404",
+      "title": "Cyber Accidents Happen",
+      "block1": {
+        "header": "nothing we did not foresee"
+      },
+      "img": {
+        "src": "/images/leonard-navarro@2x.png",
+        "alt": "Leonard Navarro",
+        "color": "transparent",
+        "size": { "width": 136, "height": 136 }
+      }
+    },
+    {
       "name": "quiz",
       "title": "Cyber Risk & Analytics Coverage quiz",
       "img": {

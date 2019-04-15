@@ -1,5 +1,5 @@
 {
-  "quiz": [
+  "insurance": [
     {
       "id": "0",
       "question": "Hey! I’m Leonard, I’ll get you an awesome price in seconds.\nReady to do this?",
@@ -100,19 +100,19 @@
     },
     {
       "id": "3",
-      "question": "Did you work with a broker\nto obtain it?",
+      "question": "Are you confident your coverage\nlimits are adequate?",
       "groups": [
         [
           {
             "placeHolder": "Yes",
-            "field": "Broker",
+            "field": "coverageLimits",
             "value": "Yes",
             "type": "radio",
-            "goto": "4"
+            "goto": "2"
           },
           {
             "placeHolder": "No",
-            "field": "Broker",
+            "field": "coverageLimits",
             "value": "No",
             "type": "radio",
             "goto": "2"
@@ -122,54 +122,7 @@
       "buttons": [
         {
           "text": "Next",
-          "field": "Broker",
-          "hidden": true
-        }
-      ]
-    },
-    {
-      "id": "4",
-      "question": "What type of broker assisted\nyou with this?",
-      "groups": [
-        [
-          {
-            "placeHolder": "CYBER BROKER",
-            "value": "Cyber",
-            "field": "BrokerType",
-            "type": "radio",
-            "goto": "2",
-            "style": { "width": 302 }
-          },
-          {
-            "placeHolder": "COMMERCIAL BROKER",
-            "value": "Commercial",
-            "field": "BrokerType",
-            "type": "radio",
-            "goto": "2",
-            "style": { "width": 302 }
-          },
-          {
-            "placeHolder": "I DON'T KNOW",
-            "value": "DontKnow",
-            "field": "BrokerType",
-            "type": "radio",
-            "goto": "2",
-            "style": { "width": 302 }
-          },
-          {
-            "placeHolder": "NONE",
-            "value": "None",
-            "field": "BrokerType",
-            "type": "radio",
-            "goto": "2",
-            "style": { "width": 302 }
-          }
-        ]
-      ],
-      "buttons": [
-        {
-          "text": "Next",
-          "field": "BrokerType",
+          "field": "coverageLimits",
           "hidden": true
         }
       ]

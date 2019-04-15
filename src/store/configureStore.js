@@ -2,7 +2,7 @@ import 'firebase/firestore' // make sure you add this for firestore
 import 'firebase/functions' // <- needed if using httpsCallable
 import 'firebase/firestore' // <- needed if using firestore
 import { compose, createStore } from 'redux'
-import { firebase as fbConfig, rrfConfig } from '../settings/config'
+import { firebase as fbConfig, rrfConfig } from '../config/fireBase'
 import firebase from 'firebase/app'
 import { reactReduxFirebase } from 'react-redux-firebase'
 import { reduxFirestore } from 'redux-firestore'

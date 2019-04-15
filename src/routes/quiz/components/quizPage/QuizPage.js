@@ -9,7 +9,6 @@ import PoweredBySkoutLogo from '../../../../library/components/logos/PoweredBySk
 import PreloadImage from 'react-preload-image'
 import PropTypes from 'prop-types'
 import Quiz from '../Quiz/Quiz'
-import quizJSON from '../../../../settings/quiz'
 import { withRouter } from 'react-router-dom'
 
 class QuizPage extends Component {
@@ -18,14 +17,17 @@ class QuizPage extends Component {
 
     document.title = this.props.page.title
     this.onSubmit = this.onSubmit.bind(this)
+
     this.state = {
       formData: {}
     }
   }
 
   onSubmit(ev) {
-    const { quiz, history } = this.props
+    const { history, quizType, quiz } = this.props
+
     const data = new FormData(ev.target)
+
     var arr = Array.from(data.entries()).map(item => ({ field: item[0], value: item[1] }))
     const button = quiz.buttons[0]
     this.setState(state => {
@@ -42,9 +44,9 @@ class QuizPage extends Component {
           .filter(Boolean)
           .shift()
 
-      history.push('/quiz/' + element.goto)
+      history.push(`/quiz/${quizType}/${element.goto}`)
     } else {
-      history.push('/quiz/' + button.goto)
+      history.push(`/quiz/${quizType}/${button.goto}`)
     }
   }
 
@@ -137,6 +139,7 @@ QuizPage.propTypes = {
   isFirst: PropTypes.bool,
   history: PropTypes.object.isRequired,
   quiz: PropTypes.object.isRequired,
+  quizType: PropTypes.string.isRequired,
   page: PropTypes.shape({
     title: PropTypes.string.isRequired,
     img: PropTypes.object.isRequired
@@ -149,19 +152,20 @@ QuizPage.defaultProps = {
   prevId: -1,
   nextId: -1
 }
-//function mapStateToProps({ pages, quizAnswers, firestore }, { match }) {
-function mapStateToProps({ pages, firestore }, { match }) {
-  const id = match.params.quizId ? match.params.quizId : '0'
+
+function mapStateToProps({ quiz, pages, firestore }, { match }) {
+  const id = match.params.id ? match.params.id : '0'
+  const type = match.params.type ? match.params.type : 'generic'
   // const quiz =
   //   firestore.ordered.quiz && firestore.ordered.quiz.find(q => q.id === id);
-  const quiz = quizJSON.quiz.find(q => q.id === id)
+  const quizQuestions = quiz[type].find(q => q.id === id)
 
   return {
     page: pages.find(page => page.name === 'quiz'),
-    //quizAnswers: quizAnswers.find(q => q.id === id),
-    quiz: quiz,
+    quiz: quizQuestions,
     isLoading: !isLoaded(quiz),
     firestore,
+    quizType: type,
     isFirst: id === '0'
   }
 }

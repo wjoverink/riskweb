@@ -18,8 +18,9 @@ export default function CreateRoutes() {
         <Route path={SupportPage.path} component={SupportPage.component} />
         <Route path={ContactPage.path} component={ContactPage.component} />
         <Route path={ProductPage.path} component={ProductPage.component} />
+        <Route exact path={QuizPage.pathWithTypeAndId} component={QuizPage.component} />
+        <Route exact path={QuizPage.pathWithId} component={QuizPage.component} />
         <Route exact path={QuizPage.path} component={QuizPage.component} />
-        <Route path={QuizPage.pathWithId} component={QuizPage.component} />
         <Route component={NotFoundPage.component} />
       </Switch>
     </CoreLayout>

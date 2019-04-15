@@ -2,25 +2,25 @@
   "products": [
     {
       "name": "CYBER RISK BROKERAGE",
-      "id": "Product1",
+      "id": "brokerage",
       "text": "Our Team will quickly determine what your risk is and guide you through  the best policies for your business budget.",
       "img": "images/product1.png"
     },
     {
       "name": "CYBER RISK AND INSURANCE CONSULTING",
-      "id": "Product2",
+      "id": "insurance",
       "text": "Confused about your coverage? We get it. Let us be your advisor and determine the best way to solve your cyber risk problems.",
       "img": "images/product2.png"
     },
     {
       "name": "CARRIER PANELS",
-      "id": "Product3",
+      "id": "carrier",
       "text": "The SkOUT incident response team sits on panels  to give Carriers the state of the art tools and quick response time that clients need.",
       "img": "images/product3.png"
     },
     {
       "name": "CYBER RISK ANALYTICS",
-      "id": "Product4",
+      "id": "analytics",
       "text": "Want to know your risk in real time?Running a business is hard work and we deploy technologies to update you in real time so you can feel secure.",
       "img": "images/product4.png"
     }
