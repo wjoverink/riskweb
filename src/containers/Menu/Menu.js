@@ -1,15 +1,15 @@
 import { css, StyleSheet } from 'aphrodite/no-important'
 import React, { PureComponent } from 'react'
-import Button from 'react-bootstrap/Button'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import PropTypes from 'prop-types'
+import RouteButton from '../../library/components/buttons/RouteButton'
 import ScrollInNav from '../../library/components/scrollIn/ScrollInNav'
 import { withRouter } from 'react-router-dom'
 
 class Menu extends PureComponent {
   render() {
-    const { location } = this.props
+    const { location, history } = this.props
     let hide = false
     if (location.pathname.match(/quiz/)) {
       hide = true
@@ -17,15 +17,26 @@ class Menu extends PureComponent {
 
     return (
       <Navbar sticky="top" className={css(styles.menu)} expand="lg">
-        <Navbar.Brand className="mr-auto logoText" href="/">
+        <Navbar.Brand
+          className="mr-auto logoText"
+          href={'/'}
+          onClick={e => {
+            e.preventDefault()
+            history.push('/')
+          }}
+        >
           RSURANCE
         </Navbar.Brand>
         <Nav>
           {!hide && (
             <ScrollInNav className={css(styles.scrollInNav)} scrollInHeight={420}>
-              <Button className={css(styles.button)} variant="secondary" href={'/quiz'} size="sm">
-                LETS GET SECURED
-              </Button>
+              <RouteButton
+                label="LETS GET SECURED"
+                className={css(styles.button)}
+                variant="secondary"
+                href={'/quiz'}
+                size="sm"
+              />
             </ScrollInNav>
           )}
         </Nav>
@@ -79,7 +90,8 @@ const styles = StyleSheet.create({
 })
 
 Menu.propTypes = {
-  location: PropTypes.any
+  location: PropTypes.any.isRequired,
+  history: PropTypes.any.isRequired
 }
 
 export default withRouter(Menu)

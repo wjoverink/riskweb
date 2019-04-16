@@ -54,14 +54,15 @@ class Quiz extends Component {
   render() {
     const { quiz, firstName } = this.props
     const { answer } = this.state
-    const question = quiz.question.replace('FirstName', firstName)
+    const question = quiz && quiz.question.replace('FirstName', firstName)
     return (
       <React.Fragment>
         <h1 style={{ fontSize: 62 }}>{question}</h1>
 
         <Form onSubmit={this.formSubmit} className={css(styles.form)}>
           <Form.Row>
-            {quiz.groups &&
+            {quiz &&
+              quiz.groups &&
               quiz.groups.map((group, i) => (
                 <Form.Group key={i} as={Col}>
                   {group &&
@@ -88,7 +89,8 @@ class Quiz extends Component {
                 </Form.Group>
               ))}
           </Form.Row>
-          {quiz.buttons &&
+          {quiz &&
+            quiz.buttons &&
             quiz.buttons.map(item => (
               <Button
                 key={item.text.trim()}

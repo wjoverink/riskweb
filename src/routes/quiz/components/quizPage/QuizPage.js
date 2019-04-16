@@ -1,10 +1,10 @@
 import { css, StyleSheet } from 'aphrodite/no-important'
-import { firestoreConnect, isLoaded } from 'react-redux-firebase'
 import React, { Component } from 'react'
 import { addAnswer } from '../../../../redux/actions/answers'
 import arrowleft from '../../../../images/arrow-left.png'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
+import { getQuiz } from '../../../../redux/actions/quiz'
 import MiniLoader from '../../../../library/components/miniLoader/MiniLoader'
 import PoweredBySkoutLogo from '../../../../library/components/logos/PoweredBySkoutLogo'
 import PreloadImage from 'react-preload-image'
@@ -18,6 +18,12 @@ class QuizPage extends Component {
 
     document.title = this.props.page.title
     this.onSubmit = this.onSubmit.bind(this)
+  }
+
+  componentDidMount() {
+    if (!this.props.quiz) {
+      this.props.getQuiz()
+    }
   }
 
   onSubmit(ev) {
@@ -49,7 +55,6 @@ class QuizPage extends Component {
       answer,
       isFirst,
       history,
-      isLoading,
       firstName
     } = this.props
 
@@ -76,8 +81,8 @@ class QuizPage extends Component {
               src={img.src}
               alt={img.alt}
             />
-            {!isLoading && <Quiz onSubmit={this.onSubmit} firstName={firstName} answer={answer} quiz={quiz} />}
-            {isLoading && <MiniLoader />}
+            {quiz && <Quiz onSubmit={this.onSubmit} firstName={firstName} answer={answer} quiz={quiz} />}
+            {!quiz && <MiniLoader />}
             <PoweredBySkoutLogo className={`${css(styles.skout)} d-lg-block`} />
           </div>
         </div>
@@ -130,13 +135,13 @@ QuizPage.propTypes = {
   answer: PropTypes.object,
   firstName: PropTypes.string,
   history: PropTypes.object.isRequired,
+  getQuiz: PropTypes.func.isRequired,
   isFirst: PropTypes.bool,
-  isLoading: PropTypes.bool,
   page: PropTypes.shape({
     title: PropTypes.string.isRequired,
     img: PropTypes.object.isRequired
   }).isRequired,
-  quiz: PropTypes.object.isRequired,
+  quiz: PropTypes.object,
   quizType: PropTypes.string.isRequired
 }
 
@@ -144,9 +149,9 @@ QuizPage.defaultProps = {
   answer: undefined,
   firstName: 'John Doe',
   isFirst: true,
-  isLoading: true,
   nextId: -1,
-  prevId: -1
+  prevId: -1,
+  quiz: undefined
 }
 //function mapStateToProps({ quiz, pages, firestore, quizAnswers }, { match }) {
 // const quiz =
@@ -155,7 +160,7 @@ function mapStateToProps({ quiz, pages, quizAnswers }, { match }) {
   const id = match.params.id ? match.params.id : '0'
   const type = match.params.type ? match.params.type : 'generic'
 
-  const quizQuestions = quiz[type].find(q => q.id === id)
+  const quizQuestions = quiz && quiz[type] && quiz[type].find(q => q.id === id)
   const answer = quizAnswers[type] && quizAnswers[type].answers[id] ? quizAnswers[type].answers[id] : undefined
   const firstName =
     quizAnswers[type] && quizAnswers[type].answers[0]
@@ -164,8 +169,6 @@ function mapStateToProps({ quiz, pages, quizAnswers }, { match }) {
   return {
     page: pages.find(page => page.name === 'quiz'),
     quiz: quizQuestions,
-    isLoading: !isLoaded(quiz),
-    //firestore,
     quizType: type,
     isFirst: id === '0',
     answer,
@@ -175,10 +178,11 @@ function mapStateToProps({ quiz, pages, quizAnswers }, { match }) {
 
 export default withRouter(
   compose(
-    firestoreConnect([{ collection: 'quiz' }]),
+    // firestoreConnect([{ collection: 'quiz' }]),
     connect(
       mapStateToProps,
       {
+        getQuiz,
         addAnswer
       }
     )

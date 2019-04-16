@@ -1,2 +1,5 @@
 export const ADD_ANSWER = 'ADD_ANSWER'
 export const ADD_ANSWER_ID = 'ADD_ANSWER_ID'
+export const ADD_QUIZ = 'ADD_QUIZ'
+export const ADD_SOCIALS = 'ADD_SOCIALS'
+export const ADD_PRODUCTS = 'ADD_PRODUCTS'

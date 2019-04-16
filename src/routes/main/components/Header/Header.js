@@ -1,10 +1,8 @@
 import { css, StyleSheet } from 'aphrodite/no-important'
 import React, { PureComponent } from 'react'
-import Button from 'react-bootstrap/Button'
-// import Col from "react-bootstrap/Col";
 import { connect } from 'react-redux'
-// import Form from "react-bootstrap/Form";
 import PropTypes from 'prop-types'
+import RouteButton from '../../../../library/components/buttons/RouteButton'
 import SkoutLogo from '../../../../library/components/logos/SkoutLogo'
 
 class Header extends PureComponent {
@@ -15,29 +13,7 @@ class Header extends PureComponent {
         <div className={css(styles.wrapper)}>
           <h1>{header}</h1>
           <blockquote>{subHeader}</blockquote>
-          {/* <Form className={css(styles.form)}>
-            <Form.Row>
-              <Form.Group as={Col} controlId="formGridFirstName">
-                <Form.Control placeholder="First name" />
-              </Form.Group>
-              <Form.Group as={Col} controlId="formGridLastName">
-                <Form.Control placeholder="Last name" />
-              </Form.Group>
-            </Form.Row>
-            <Form.Group controlId="formGridEmail">
-              <Form.Control type="email" placeholder="Email Address" />
-            </Form.Group>
-            <Button
-              className={css(styles.button)}
-              variant="secondary"
-              type="submit"
-            >
-              Get started
-            </Button>
-          </Form> */}
-          <Button className={css(styles.button)} variant="secondary" href={'/quiz'}>
-            LETS DO THIS
-          </Button>
+          <RouteButton label={'LETS DO THIS'} className={css(styles.button)} href={'/quiz'} />
           <SkoutLogo className={`${css(styles.skout)}`} />
         </div>
       </header>

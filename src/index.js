@@ -7,6 +7,7 @@ import configureStore from './store/configureStore'
 import { Provider } from 'react-redux'
 import React from 'react'
 import ReactDOM from 'react-dom'
+import ScrollToTop from './library/components/ScrollToTop/ScrollToTop'
 
 const initialState = window.__INITIAL_STATE__ || {
   firebase: { authError: null }
@@ -16,7 +17,9 @@ const store = configureStore(initialState)
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <ScrollToTop>
+        <App />
+      </ScrollToTop>
     </BrowserRouter>
   </Provider>,
   document.getElementById('root')

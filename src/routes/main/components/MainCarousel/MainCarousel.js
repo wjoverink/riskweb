@@ -27,7 +27,6 @@ class MainCarousel extends PureComponent {
                 backgroundColor: '#ddd',
                 position: 'relative'
               }}
-              lazy
               src={item.img}
               alt={item.name}
             />

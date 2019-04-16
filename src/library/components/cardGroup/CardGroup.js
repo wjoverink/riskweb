@@ -1,19 +1,21 @@
 import { css, StyleSheet } from 'aphrodite/no-important'
 import React, { PureComponent } from 'react'
-import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 import CardGroup from 'react-bootstrap/CardGroup'
+import MiniLoader from '../../../library/components/miniLoader/MiniLoader'
 import PreloadImage from 'react-preload-image'
 import PropTypes from 'prop-types'
+import RouteButton from '../../../library/components/buttons/RouteButton'
 
 class Cards extends PureComponent {
   render() {
     const { cards, className, size } = this.props
     return (
       <CardGroup className={className}>
-        {cards.map(card => (
-          <Card key={card.title.trim()}>
-            <PreloadImage style={{ ...size, position: 'relative' }} variant="top" lazy src={card.img} />
+        {cards.map((card, index) => (
+          <Card key={card.title ? card.title.trim() : 'key' + index}>
+            <PreloadImage style={{ ...size, position: 'relative' }} variant="top" src={card.img} />
+            {card.isLoading && <MiniLoader style={{ ...size }} className={css(styles.loading)} />}
             <Card.Body>
               <Card.Title>{card.title}</Card.Title>
               <Card.Text>{card.text}</Card.Text>
@@ -22,9 +24,7 @@ class Cards extends PureComponent {
               <Card.Footer>
                 {card.footer.text && <span>{card.footer.text}</span>}
                 {card.footer.url && (
-                  <Button className={css(styles.button)} variant="secondary" href={card.footer.url}>
-                    {card.footer.buttonText}
-                  </Button>
+                  <RouteButton label={card.footer.buttonText} className={css(styles.button)} href={card.footer.url} />
                 )}
               </Card.Footer>
             )}
@@ -36,6 +36,9 @@ class Cards extends PureComponent {
 }
 
 const styles = StyleSheet.create({
+  loading: {
+    position: 'absolute'
+  },
   button: {
     marginLeft: 'auto',
     float: 'right'

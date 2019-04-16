@@ -6,6 +6,7 @@ import Footer from '../../../../containers/Footer'
 import Header from '../Header'
 import MiniLoader from '../../../../library/components/miniLoader/MiniLoader'
 import PreloadImage from 'react-preload-image'
+import ProductCardGroup from '../ProductCardGroup'
 import PropTypes from 'prop-types'
 
 const MainCarousel = lazy(() => import('../MainCarousel/'))
@@ -18,7 +19,7 @@ class MainPage extends PureComponent {
   }
 
   render() {
-    const { page, products } = this.props
+    const { page } = this.props
     return (
       <React.Fragment>
         <Header />
@@ -26,7 +27,7 @@ class MainPage extends PureComponent {
           <div className={css(styles.border)}>
             <div className={css(styles.mainInfo, styles.popular)}>
               <h2>{page.block2.header}</h2>
-              <Cards className={css(styles.cardsProducts)} cards={products} size={{ width: 233, height: 296 }} />
+              <ProductCardGroup />
             </div>
           </div>
           <div className={css(styles.border)}>
@@ -37,7 +38,6 @@ class MainPage extends PureComponent {
                 src={page.block3.img.src}
                 alt={page.block3.img.alt}
                 duration={150}
-                lazy
                 style={{
                   backgroundColor: page.block3.img.color,
                   width: '100%',
@@ -71,22 +71,6 @@ const styles = StyleSheet.create({
     paddingTop: 73,
     marginBottom: 65,
     maxWidth: 1050
-  },
-  cardsProducts: {
-    marginTop: '4rem',
-    ':nth-child(1n) .card>div:first-child': {
-      margin: '0 auto'
-    },
-    ':nth-child(1n) .card': {
-      minWidth: 200
-    },
-    ':nth-child(1n) .card-body': {
-      padding: '1rem 24px 1rem 0'
-    },
-    ':nth-child(1n) .card-footer': {
-      padding: '1rem 24px 1rem 0'
-    },
-    padding: '0 30px'
   },
   cards: {
     margin: '0px 20px',
@@ -128,18 +112,8 @@ const styles = StyleSheet.create({
   }
 })
 
-function mapStateToProps({ products, pages }) {
+function mapStateToProps({ pages }) {
   return {
-    products: products.map(product => ({
-      title: product.name,
-      text: product.text,
-      img: product.img,
-      footer: {
-        // url: `/products/${product.id}`,
-        url: `/quiz/${product.id}/`,
-        buttonText: 'MORE'
-      }
-    })),
     page: pages.find(page => page.name === 'mainPage')
   }
 }
@@ -150,18 +124,7 @@ MainPage.propTypes = {
     block1: PropTypes.object,
     block2: PropTypes.object,
     block3: PropTypes.object
-  }).isRequired,
-  products: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string,
-      text: PropTypes.string,
-      img: PropTypes.string,
-      footer: PropTypes.shape({
-        url: PropTypes.string,
-        buttonText: PropTypes.object
-      })
-    })
-  )
+  }).isRequired
 }
 
 export default connect(mapStateToProps)(MainPage)

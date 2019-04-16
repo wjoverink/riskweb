@@ -1,41 +1,86 @@
 import { css, StyleSheet } from 'aphrodite/no-important'
 import React, { PureComponent } from 'react'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
 import footerInfo from '../../settings/footerInfo'
+import { getSocials } from '../../redux/actions/socials'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
+import PropTypes from 'prop-types'
 import { SocialIcon } from 'react-social-icons'
+import { withRouter } from 'react-router-dom'
 
 class Footer extends PureComponent {
+  componentDidMount() {
+    if (this.props.socials.length === 0) {
+      this.props.getSocials()
+    }
+  }
+
   render() {
+    const { socials, history } = this.props
     return (
       <footer className={css(styles.footerInfo)}>
         <div className={css(styles.wrapper)}>
           <Navbar expand="lg">
-            <Navbar.Brand className="logoText" href="/">
+            <Navbar.Brand
+              className="logoText"
+              href="/"
+              onClick={e => {
+                e.preventDefault()
+                history.push('/')
+              }}
+            >
               RSURANCE
             </Navbar.Brand>
             <Nav className="flex-column mr-auto">
               <Nav.Item className={css(styles.header)}>{footerInfo.menuHeader}</Nav.Item>
               <Nav.Item>
-                <Nav.Link href="/faq">FAQs</Nav.Link>
+                <Nav.Link
+                  href={'/faq'}
+                  onClick={e => {
+                    e.preventDefault()
+                    history.push('/faq')
+                  }}
+                >
+                  FAQs
+                </Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link href="/support">Support</Nav.Link>
+                <Nav.Link
+                  href={'/support'}
+                  onClick={e => {
+                    e.preventDefault()
+                    history.push('/support')
+                  }}
+                >
+                  Support
+                </Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link href="/contact">Contact</Nav.Link>
+                <Nav.Link
+                  href={'/contact'}
+                  onClick={e => {
+                    e.preventDefault()
+                    history.push('/contact')
+                  }}
+                >
+                  Contact
+                </Nav.Link>
               </Nav.Item>
             </Nav>
-            <Nav className="flex-column social">
-              <Nav.Item className={css(styles.header)}>{footerInfo.socialHeader}</Nav.Item>
-              <Nav>
-                {footerInfo.socials.map(social => (
-                  <Nav.Item key={social.url}>
-                    <SocialIcon className={css(styles.marginRight)} url={social.url} />
-                  </Nav.Item>
-                ))}
+            {socials.length > 0 && (
+              <Nav className="flex-column social">
+                <Nav.Item className={css(styles.header)}>{footerInfo.socialHeader}</Nav.Item>
+                <Nav>
+                  {socials.map(social => (
+                    <Nav.Item key={social.url}>
+                      <SocialIcon className={css(styles.marginRight)} url={social.url} />
+                    </Nav.Item>
+                  ))}
+                </Nav>
               </Nav>
-            </Nav>
+            )}
           </Navbar>
           <hr />
           <p className={css(styles.bottomtext)}>{footerInfo.copy}</p>
@@ -93,4 +138,31 @@ const styles = StyleSheet.create({
   menu: {}
 })
 
-export default Footer
+Footer.propTypes = {
+  history: PropTypes.any.isRequired,
+  socials: PropTypes.array,
+  getSocials: PropTypes.func.isRequired
+}
+
+Footer.defaultProps = {
+  socials: []
+}
+
+function mapStateToProps({ socials }) {
+  return {
+    socials: Object.values(socials).map(item => ({
+      url: item
+    }))
+  }
+}
+
+export default withRouter(
+  compose(
+    connect(
+      mapStateToProps,
+      {
+        getSocials
+      }
+    )
+  )(Footer)
+)
