@@ -21,7 +21,8 @@ export const addAnswer = (answers, question, product) => (dispatch, getState, ge
             result[value.field] = value.value
             return result
           }, {}),
-          AddDate: Date()
+          AddDate: Date(),
+          Product: product
         })
         .then(function (docRef) {
           dispatch({ type: ADD_ANSWER_ID, value: { product, id: docRef.id } })
