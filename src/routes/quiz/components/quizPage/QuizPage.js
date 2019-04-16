@@ -18,10 +18,6 @@ class QuizPage extends Component {
 
     document.title = this.props.page.title
     this.onSubmit = this.onSubmit.bind(this)
-
-    this.state = {
-      formData: {}
-    }
   }
 
   onSubmit(ev) {
@@ -30,17 +26,9 @@ class QuizPage extends Component {
     const data = new FormData(ev.target)
 
     var arr = Array.from(data.entries()).map(item => ({ field: item[0], value: item[1] }))
+    this.props.addAnswer(arr, quiz.id, quizType)
+
     const button = quiz.buttons[0]
-    this.setState(state => {
-      const data = state.formData
-      data[quiz.id] = arr
-      return {
-        formData: data
-      }
-    })
-
-    this.props.addAnswer(arr)
-
     if (button.field) {
       const valueItem = arr.find(item => item.field === button.field)
       const element = quiz.groups
@@ -58,12 +46,13 @@ class QuizPage extends Component {
     const {
       page: { img },
       quiz,
+      answer,
       isFirst,
       history,
-      isLoading
+      isLoading,
+      firstName
     } = this.props
-    const { formData } = this.state
-    const firstName = formData[0] && formData[0].find(a => a.field === 'FirstName').value
+
     return (
       <main>
         <div className={css(styles.border)}>
@@ -87,9 +76,7 @@ class QuizPage extends Component {
               src={img.src}
               alt={img.alt}
             />
-            {!isLoading && (
-              <Quiz onSubmit={this.onSubmit} firstName={firstName} answer={formData[quiz.id]} quiz={quiz} />
-            )}
+            {!isLoading && <Quiz onSubmit={this.onSubmit} firstName={firstName} answer={answer} quiz={quiz} />}
             {isLoading && <MiniLoader />}
             <PoweredBySkoutLogo className={`${css(styles.skout)} d-lg-block`} />
           </div>
@@ -139,39 +126,50 @@ const styles = StyleSheet.create({
 })
 
 QuizPage.propTypes = {
-  isLoading: PropTypes.bool,
-  isFirst: PropTypes.bool,
+  addAnswer: PropTypes.func.isRequired,
+  answer: PropTypes.object,
+  firstName: PropTypes.string,
   history: PropTypes.object.isRequired,
-  quiz: PropTypes.object.isRequired,
-  quizType: PropTypes.string.isRequired,
+  isFirst: PropTypes.bool,
+  isLoading: PropTypes.bool,
   page: PropTypes.shape({
     title: PropTypes.string.isRequired,
     img: PropTypes.object.isRequired
   }).isRequired,
-  addAnswer: PropTypes.func.isRequired
+  quiz: PropTypes.object.isRequired,
+  quizType: PropTypes.string.isRequired
 }
 
 QuizPage.defaultProps = {
-  isLoading: true,
+  answer: undefined,
+  firstName: 'John Doe',
   isFirst: true,
-  prevId: -1,
-  nextId: -1
+  isLoading: true,
+  nextId: -1,
+  prevId: -1
 }
-
-function mapStateToProps({ quiz, pages, firestore }, { match }) {
+//function mapStateToProps({ quiz, pages, firestore, quizAnswers }, { match }) {
+// const quiz =
+//   firestore.ordered.quiz && firestore.ordered.quiz.find(q => q.id === id);
+function mapStateToProps({ quiz, pages, quizAnswers }, { match }) {
   const id = match.params.id ? match.params.id : '0'
   const type = match.params.type ? match.params.type : 'generic'
-  // const quiz =
-  //   firestore.ordered.quiz && firestore.ordered.quiz.find(q => q.id === id);
-  const quizQuestions = quiz[type].find(q => q.id === id)
 
+  const quizQuestions = quiz[type].find(q => q.id === id)
+  const answer = quizAnswers[type] && quizAnswers[type].answers[id] ? quizAnswers[type].answers[id] : undefined
+  const firstName =
+    quizAnswers[type] && quizAnswers[type].answers[0]
+      ? quizAnswers[type].answers[0].find(a => a.field === 'FirstName').value
+      : undefined
   return {
     page: pages.find(page => page.name === 'quiz'),
     quiz: quizQuestions,
     isLoading: !isLoaded(quiz),
-    firestore,
+    //firestore,
     quizType: type,
-    isFirst: id === '0'
+    isFirst: id === '0',
+    answer,
+    firstName
   }
 }
 

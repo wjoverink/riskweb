@@ -1,17 +1,40 @@
-import { ADD_ANSWER } from '../types'
+import { ADD_ANSWER, ADD_ANSWER_ID } from '../types'
+import { flatMap } from 'lodash'
 
-export const addAnswer = answer => (dispatch, getState, getFirebase) => {
-  // const firebase = getFirebase().firestore()
-  // const firstName = answer.find(a => a.field === 'FirstName')
-  // const lastName = answer.find(a => a.field === 'LastName')
-  // const email = answer.find(a => a.field === 'Email')
-  // const value = {
-  //   FirstName: firstName ? firstName.value : '',
-  //   LastName: lastName ? lastName.value : '',
-  //   Email: email ? email.value : '',
-  //   Quiz: answer
-  // }
-  // firebase.push('answers', value).then(payload => {
-  //   dispatch({ type: ADD_ANSWER, value: payload })
-  // })
+export const addAnswer = (answers, question, product) => (dispatch, getState, getFirebase) => {
+  var answer = getState().quizAnswers[product]
+  dispatch({
+    type: ADD_ANSWER,
+    value: {
+      product,
+      answers,
+      question
+    }
+  })
+  const firestore = getFirebase().firestore()
+
+  if (!answer || !answer.id) {
+    firestore
+        .collection('answers')
+        .add({
+          ...answers.reduce(function (result, value) {
+            result[value.field] = value.value
+            return result
+          }, {}),
+          AddDate: Date()
+        })
+        .then(function (docRef) {
+          dispatch({ type: ADD_ANSWER_ID, value: { product, id: docRef.id } })
+        })
+  } else {
+    firestore
+        .collection('answers')
+        .doc(answer.id)
+        .update({
+          ...flatMap(getState().quizAnswers[product]['answers']).reduce(function (result, value) {
+            result[value.field] = value.value
+            return result
+          }, {})
+        })
+  }
 }
