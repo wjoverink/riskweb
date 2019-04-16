@@ -61,47 +61,47 @@ class Quiz extends Component {
 
         <Form onSubmit={this.formSubmit} className={css(styles.form)}>
           <Form.Row>
-            {quiz.groups.map((group, i) => (
-              <Form.Group key={i} as={Col}>
-                {group.map(item => {
-                  const an = answer && answer.find(a => a.field === item.field)
-                  const value = an && an.value
-                  return (
-                    <QuizFormControl
-                      key={item.placeHolder.trim()}
-                      value={value}
-                      inputValue={item.value}
-                      onClick={ev => {
-                        this.handleClick(ev, item.field, item.type !== 'radio' ? ev.target.value : item.value)
-                      }}
-                      style={item.style}
-                      type={item.type}
-                      name={item.field}
-                      className={css(styles.radioButton)}
-                      required={true}
-                      label={item.placeHolder}
-                    />
-                  )
-                })}
-              </Form.Group>
-            ))}
+            {quiz.groups &&
+              quiz.groups.map((group, i) => (
+                <Form.Group key={i} as={Col}>
+                  {group &&
+                    group.map(item => {
+                      const an = answer && answer.find(a => a.field === item.field)
+                      const value = an && an.value
+                      return (
+                        <QuizFormControl
+                          key={item.placeHolder.trim()}
+                          value={value}
+                          inputValue={item.value}
+                          onClick={ev => {
+                            this.handleClick(ev, item.field, item.type !== 'radio' ? ev.target.value : item.value)
+                          }}
+                          style={item.style}
+                          type={item.type}
+                          name={item.field}
+                          className={css(styles.radioButton)}
+                          required={true}
+                          label={item.placeHolder}
+                        />
+                      )
+                    })}
+                </Form.Group>
+              ))}
           </Form.Row>
-          {/* <Form.Row className={css(styles.buttonRow)}> */}
-          {quiz.buttons.map(item => (
-            // <Form.Group key={item.text.trim()} as={Col}>
-            <Button
-              key={item.text.trim()}
-              className={css(styles.button, item.hidden && styles.buttonHidden)}
-              variant="secondary"
-              name={item.field}
-              type="submit"
-              ref={this.submitButtonRef}
-            >
-              {item.text}
-            </Button>
-            // </Form.Group>
-          ))}
-          {/* </Form.Row> */}
+          {quiz.buttons &&
+            quiz.buttons.map(item => (
+              <Button
+                key={item.text.trim()}
+                className={css(styles.button, item.hidden && styles.buttonHidden)}
+                variant="secondary"
+                name={item.field}
+                type={item.type || 'submit'}
+                href={item.type ? item.goto : undefined}
+                ref={this.submitButtonRef}
+              >
+                {item.text}
+              </Button>
+            ))}
         </Form>
       </React.Fragment>
     )

@@ -2,26 +2,26 @@
   "brokerage": [
     {
       "id": "0",
-      "question": "Hey! I’m Leonard, I’ll get you an awesome price in seconds.\nReady to do this?",
+      "question": "Hey! I’m Leonard, I’ll get you an\nawesome price in seconds.\nReady to do this?",
       "groups": [
         [
           {
             "field": "FirstName",
             "type": "text",
-            "placeHolder": "First name"
+            "placeHolder": "First Name"
           }
         ],
         [
           {
             "field": "LastName",
             "type": "text",
-            "placeHolder": "Last name"
+            "placeHolder": "Last Name"
           }
         ]
       ],
       "buttons": [
         {
-          "text": "Lets do this",
+          "text": "Let's do this",
           "goto": "1"
         }
       ]
@@ -153,7 +153,7 @@
           {
             "field": "Email",
             "type": "email",
-            "placeHolder": "Email address"
+            "placeHolder": "Email Address"
           }
         ]
       ],
@@ -172,7 +172,7 @@
           {
             "field": "Phone",
             "type": "text",
-            "placeHolder": "Phone number"
+            "placeHolder": "Phone Number"
           }
         ]
       ],
@@ -186,8 +186,14 @@
     {
       "id": "7",
       "question": "Outstanding, we'll be in touch\nwith you shortly!",
-      "elements": [],
-      "buttons": []
+      "groups": [],
+      "buttons": [
+        {
+          "text": "HOME",
+          "goto": "/",
+          "type": "button"
+        }
+      ]
     }
   ]
 }

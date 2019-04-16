@@ -1,6 +1,7 @@
 import { css, StyleSheet } from 'aphrodite/no-important'
 import { firestoreConnect, isLoaded } from 'react-redux-firebase'
 import React, { Component } from 'react'
+import { addAnswer } from '../../../../redux/actions/answers'
 import arrowleft from '../../../../images/arrow-left.png'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
@@ -37,6 +38,9 @@ class QuizPage extends Component {
         formData: data
       }
     })
+
+    this.props.addAnswer(arr)
+
     if (button.field) {
       const valueItem = arr.find(item => item.field === button.field)
       const element = quiz.groups
@@ -143,7 +147,8 @@ QuizPage.propTypes = {
   page: PropTypes.shape({
     title: PropTypes.string.isRequired,
     img: PropTypes.object.isRequired
-  }).isRequired
+  }).isRequired,
+  addAnswer: PropTypes.func.isRequired
 }
 
 QuizPage.defaultProps = {
@@ -173,6 +178,11 @@ function mapStateToProps({ quiz, pages, firestore }, { match }) {
 export default withRouter(
   compose(
     firestoreConnect([{ collection: 'quiz' }]),
-    connect(mapStateToProps)
+    connect(
+      mapStateToProps,
+      {
+        addAnswer
+      }
+    )
   )(QuizPage)
 )
