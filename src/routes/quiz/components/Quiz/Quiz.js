@@ -55,20 +55,25 @@ class Quiz extends Component {
     const { quiz, firstName } = this.props
     const { answer } = this.state
     const question = quiz && quiz.question.replace('FirstName', firstName)
+    const hasGroups = quiz && quiz.groups
+    const hasButtons = quiz && quiz.buttons
+    let tabindex = 1
+    let autoFocus = true
     return (
       <React.Fragment>
-        <h1 style={{ fontSize: 62 }}>{question}</h1>
+        <h1 className={css(styles.quiz)}>{question}</h1>
 
         <Form onSubmit={this.formSubmit} className={css(styles.form)}>
           <Form.Row>
-            {quiz &&
-              quiz.groups &&
+            {hasGroups &&
               quiz.groups.map((group, i) => (
                 <Form.Group key={i} as={Col}>
                   {group &&
                     group.map(item => {
                       const an = answer && answer.find(a => a.field === item.field)
                       const value = an && an.value
+                      const focus = autoFocus
+                      autoFocus = false
                       return (
                         <QuizFormControl
                           key={item.placeHolder.trim()}
@@ -77,6 +82,8 @@ class Quiz extends Component {
                           onClick={ev => {
                             this.handleClick(ev, item.field, item.type !== 'radio' ? ev.target.value : item.value)
                           }}
+                          autoFocus={focus}
+                          tabIndex={tabindex++}
                           style={item.style}
                           type={item.type}
                           name={item.field}
@@ -89,8 +96,7 @@ class Quiz extends Component {
                 </Form.Group>
               ))}
           </Form.Row>
-          {quiz &&
-            quiz.buttons &&
+          {hasButtons &&
             quiz.buttons.map(item => (
               <Button
                 key={item.text.trim()}
@@ -100,6 +106,7 @@ class Quiz extends Component {
                 type={item.type || 'submit'}
                 href={item.type ? item.goto : undefined}
                 ref={this.submitButtonRef}
+                tabIndex={tabindex++}
               >
                 {item.text}
               </Button>
@@ -113,8 +120,6 @@ class Quiz extends Component {
 const styles = StyleSheet.create({
   button: {
     width: 200,
-    // height: 60,
-    // margin: 58,
     textTransform: 'uppercase'
   },
   buttonHidden: {
@@ -126,6 +131,12 @@ const styles = StyleSheet.create({
   radioButton: {
     minWidth: 200,
     margin: '0px auto 1em auto'
+  },
+  quiz: {
+    fontSize: 62,
+    '@media (max-width: 768px)': {
+      fontSize: 38
+    }
   },
   form: {
     maxWidth: 420,

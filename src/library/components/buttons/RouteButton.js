@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom'
 
 class RouteButton extends React.PureComponent {
   render() {
-    const { history, label, href, className, size } = this.props
+    const { history, label, href, className, size, tabIndex } = this.props
     return (
       <Button
         type="button"
@@ -13,6 +13,7 @@ class RouteButton extends React.PureComponent {
         className={className}
         href={href}
         variant="secondary"
+        tabIndex={tabIndex}
         onClick={e => {
           e.preventDefault()
           history.push(href)
@@ -29,7 +30,8 @@ RouteButton.propTypes = {
   label: PropTypes.string,
   href: PropTypes.string,
   className: PropTypes.string,
-  size: PropTypes.string
+  size: PropTypes.string,
+  tabIndex: PropTypes.number
 }
 
 export default withRouter(RouteButton)

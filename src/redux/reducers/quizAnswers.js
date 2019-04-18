@@ -11,11 +11,11 @@ const quizAnswers = (state = [], action) => {
         ...state,
         [action.value.product]: {
           ...prod,
-          ['answers']: {
+          answers: {
             ...prod.answers,
             [action.value.question]: action.value.answers
           },
-          ['id']: action.value.id
+          id: action.value.id
         }
       }
     case ADD_ANSWER_ID:
@@ -23,7 +23,7 @@ const quizAnswers = (state = [], action) => {
         ...state,
         [action.value.product]: {
           ...state[action.value.product],
-          ['id']: action.value.id
+          id: action.value.id
         }
       }
     default:

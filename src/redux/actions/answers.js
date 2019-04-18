@@ -22,13 +22,15 @@ export const addAnswer = (answers, question, product) => (dispatch, getState, ge
       id
     }
   })
+  const result = {
+    ...flatMap(answers).reduce(function (result, value) {
+      result[value.field] = value.value
+      return result
+    }, {}),
+    lastUpdate: Date.now()
+  }
   firebase
       .database()
       .ref('answers/' + id)
-      .update({
-        ...flatMap(getState().quizAnswers[product]['answers']).reduce(function (result, value) {
-          result[value.field] = value.value
-          return result
-        }, {})
-      })
+      .update(result)
 }
