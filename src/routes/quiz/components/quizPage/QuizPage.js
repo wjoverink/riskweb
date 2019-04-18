@@ -159,13 +159,13 @@ const mapStateToProps = createSelector(
   function ({ quiz, pages, quizAnswers }, { match }) {
     return {
       quiz,
-      pages,
+      page: pages.quiz,
       quizAnswers,
       id: match.params.id ? match.params.id : '0',
       type: match.params.type ? match.params.type : 'generic'
     }
   },
-  function ({ quiz, pages, quizAnswers, id, type }) {
+  function ({ quiz, page, quizAnswers, id, type }) {
     const quizQuestions = quiz && quiz[type] && quiz[type].find(q => q.id === id)
     let answer, firstName
     if (quizAnswers[type]) {
@@ -174,7 +174,7 @@ const mapStateToProps = createSelector(
     }
 
     return {
-      page: pages.find(page => page.name === 'quiz'),
+      page,
       quiz: quizQuestions,
       quizType: type,
       isFirst: id === '0',

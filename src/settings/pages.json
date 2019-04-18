@@ -1,7 +1,6 @@
 {
-  "pages": [
-    {
-      "name": "mainPage",
+  "pages": {
+    "mainPage": {
       "title": "Cyber Risk & Analytics Coverage",
       "block1": {
         "header": "Cyber Risk & Analytics Coverage.\nBecause everyone deserves\nto be secure.",
@@ -37,29 +36,25 @@
         ]
       }
     },
-    {
-      "name": "faq",
+    "faq": {
       "title": "Cyber Risk & Analytics Coverage FAQ",
       "block1": {
         "header": "FAQ"
       }
     },
-    {
-      "name": "support",
+    "support": {
       "title": "Cyber Risk & Analytics Coverage support",
       "block1": {
         "header": "Support"
       }
     },
-    {
-      "name": "contact",
+    "contact": {
       "title": "Cyber Risk & Analytics Coverage contact",
       "block1": {
         "header": "Contact"
       }
     },
-    {
-      "name": "404",
+    "notfound": {
       "title": "Cyber Accidents Happen",
       "block1": {
         "header": "nothing we did not foresee"
@@ -71,8 +66,7 @@
         "size": { "width": 136, "height": 136 }
       }
     },
-    {
-      "name": "quiz",
+    "quiz": {
       "title": "Cyber Risk & Analytics Coverage quiz",
       "img": {
         "src": "/images/leonard-navarro@2x.png",
@@ -81,5 +75,5 @@
         "size": { "width": 136, "height": 136 }
       }
     }
-  ]
+  }
 }

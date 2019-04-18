@@ -65,10 +65,10 @@ SupportPage.propTypes = {
 }
 
 const mapStateToProps = createSelector(
-  [state => state.pages],
-  function (pages) {
+  [state => state.pages.support],
+  function (page) {
     return {
-      page: pages.find(page => page.name === 'support')
+      page
     }
   }
 )

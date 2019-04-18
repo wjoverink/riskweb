@@ -56,10 +56,10 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = createSelector(
-  [state => state.pages],
-  function (pages) {
+  [state => state.pages.contact],
+  function (page) {
     return {
-      page: pages.find(page => page.name === 'contact')
+      page
     }
   }
 )

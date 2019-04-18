@@ -61,9 +61,9 @@ Header.propTypes = {
 }
 
 const mapStateToProps = createSelector(
-  [state => state.pages],
-  function (pages) {
-    const mainPage = pages.find(page => page.name === 'mainPage')
+  [state => state.pages.mainPage],
+  function (page) {
+    const mainPage = page
     return {
       header: mainPage.block1.header,
       subHeader: mainPage.block1.subHeader

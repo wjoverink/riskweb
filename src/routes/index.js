@@ -45,7 +45,7 @@ class CreateRoutes extends React.PureComponent {
 
 CreateRoutes.propTypes = {
   getPages: PropTypes.func.isRequired,
-  pages: PropTypes.array
+  pages: PropTypes.object
 }
 
 CreateRoutes.defaultProps = {

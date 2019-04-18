@@ -88,10 +88,10 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = createSelector(
-  [state => state.pages],
-  function (pages) {
+  [state => state.pages.notfound],
+  function (page) {
     return {
-      page: pages.find(page => page.name === '404')
+      page
     }
   }
 )
