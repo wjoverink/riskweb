@@ -1,6 +1,7 @@
 import { css, StyleSheet } from 'aphrodite/no-important'
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
+import { createSelector } from 'reselect'
 import Footer from '../../../../containers/Footer'
 import PropTypes from 'prop-types'
 
@@ -63,10 +64,13 @@ SupportPage.propTypes = {
   }).isRequired
 }
 
-function mapStateToProps({ pages }) {
-  return {
-    page: pages.find(page => page.name === 'support')
+const mapStateToProps = createSelector(
+  [state => state.pages],
+  function (pages) {
+    return {
+      page: pages.find(page => page.name === 'support')
+    }
   }
-}
+)
 
 export default connect(mapStateToProps)(SupportPage)

@@ -8,7 +8,7 @@ export const getProducts = () => (dispatch, getState, getFirebase) => {
       .then(function (snapshot) {
         dispatch({
           type: ADD_PRODUCTS,
-          value: snapshot.val()
+          value: Object.values(snapshot.val())
         })
       })
 }

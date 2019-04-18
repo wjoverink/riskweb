@@ -2,8 +2,10 @@ import { css, StyleSheet } from 'aphrodite/no-important'
 import React, { PureComponent } from 'react'
 import Cards from '../../../../library/components/cardGroup/CardGroup'
 import { connect } from 'react-redux'
+import { createSelector } from 'reselect'
 import { getProducts } from '../../../../redux/actions/products'
 import PropTypes from 'prop-types'
+import { take } from 'lodash'
 
 class ProductCardGroup extends PureComponent {
   componentDidMount() {
@@ -65,20 +67,23 @@ ProductCardGroup.defaultProps = {
   products: undefined
 }
 
-function mapStateToProps({ products }) {
-  return {
-    products: Object.values(products).map(product => ({
-      title: product.name,
-      text: product.text,
-      img: product.img,
-      footer: {
-        // url: `/products/${product.id}`,
-        url: `/quiz/${product.id}/`,
-        buttonText: 'MORE'
-      }
-    }))
+const mapStateToProps = createSelector(
+  [state => state.products],
+  function (products) {
+    return {
+      products: take(products,4).map(product => ({
+        title: product.name,
+        text: product.text,
+        img: product.img,
+        footer: {
+          // url: `/products/${product.id}`,
+          url: `/quiz/${product.id}/`,
+          buttonText: 'MORE'
+        }
+      }))
+    }
   }
-}
+)
 
 export default connect(
   mapStateToProps,

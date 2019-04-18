@@ -2,6 +2,7 @@ import { css, StyleSheet } from 'aphrodite/no-important'
 import React, { PureComponent } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
+import { createSelector } from 'reselect'
 import footerInfo from '../../settings/footerInfo'
 import { getSocials } from '../../redux/actions/socials'
 import Nav from 'react-bootstrap/Nav'
@@ -148,13 +149,16 @@ Footer.defaultProps = {
   socials: []
 }
 
-function mapStateToProps({ socials }) {
-  return {
-    socials: Object.values(socials).map(item => ({
-      url: item
-    }))
+const mapStateToProps = createSelector(
+  [state => state.socials],
+  function (socials) {
+    return {
+      socials: socials.map(item => ({
+        url: item
+      }))
+    }
   }
-}
+)
 
 export default withRouter(
   compose(

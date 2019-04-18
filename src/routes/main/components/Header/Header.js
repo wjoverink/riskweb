@@ -1,6 +1,7 @@
 import { css, StyleSheet } from 'aphrodite/no-important'
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
+import { createSelector } from 'reselect'
 import PropTypes from 'prop-types'
 import RouteButton from '../../../../library/components/buttons/RouteButton'
 import SkoutLogo from '../../../../library/components/logos/SkoutLogo'
@@ -52,10 +53,6 @@ const styles = StyleSheet.create({
     position: 'relative',
     minHeight: 500
   }
-  // form: {
-  //   maxWidth: 480,
-  //   marginTop: 58
-  // }
 })
 
 Header.propTypes = {
@@ -63,12 +60,15 @@ Header.propTypes = {
   subHeader: PropTypes.string.isRequired
 }
 
-function mapStateToProps({ pages }) {
-  const mainPage = pages.find(page => page.name === 'mainPage')
-  return {
-    header: mainPage.block1.header,
-    subHeader: mainPage.block1.subHeader
+const mapStateToProps = createSelector(
+  [state => state.pages],
+  function (pages) {
+    const mainPage = pages.find(page => page.name === 'mainPage')
+    return {
+      header: mainPage.block1.header,
+      subHeader: mainPage.block1.subHeader
+    }
   }
-}
+)
 
 export default connect(mapStateToProps)(Header)

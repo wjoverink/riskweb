@@ -4,6 +4,7 @@ import { addAnswer } from '../../../../redux/actions/answers'
 import arrowleft from '../../../../images/arrow-left.png'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
+import { createSelector } from 'reselect'
 import { getQuiz } from '../../../../redux/actions/quiz'
 import MiniLoader from '../../../../library/components/miniLoader/MiniLoader'
 import PoweredBySkoutLogo from '../../../../library/components/logos/PoweredBySkoutLogo'
@@ -153,32 +154,38 @@ QuizPage.defaultProps = {
   prevId: -1,
   quiz: undefined
 }
-//function mapStateToProps({ quiz, pages, firestore, quizAnswers }, { match }) {
-// const quiz =
-//   firestore.ordered.quiz && firestore.ordered.quiz.find(q => q.id === id);
-function mapStateToProps({ quiz, pages, quizAnswers }, { match }) {
-  const id = match.params.id ? match.params.id : '0'
-  const type = match.params.type ? match.params.type : 'generic'
 
-  const quizQuestions = quiz && quiz[type] && quiz[type].find(q => q.id === id)
-  const answer = quizAnswers[type] && quizAnswers[type].answers[id] ? quizAnswers[type].answers[id] : undefined
-  const firstName =
-    quizAnswers[type] && quizAnswers[type].answers[0]
-      ? quizAnswers[type].answers[0].find(a => a.field === 'FirstName').value
-      : undefined
-  return {
-    page: pages.find(page => page.name === 'quiz'),
-    quiz: quizQuestions,
-    quizType: type,
-    isFirst: id === '0',
-    answer,
-    firstName
+const mapStateToProps = createSelector(
+  function ({ quiz, pages, quizAnswers }, { match }) {
+    return {
+      quiz,
+      pages,
+      quizAnswers,
+      id: match.params.id ? match.params.id : '0',
+      type: match.params.type ? match.params.type : 'generic'
+    }
+  },
+  function ({ quiz, pages, quizAnswers, id, type }) {
+    const quizQuestions = quiz && quiz[type] && quiz[type].find(q => q.id === id)
+    let answer, firstName
+    if (quizAnswers[type]) {
+      answer = quizAnswers[type].answers[id]
+      firstName = quizAnswers[type].answers[0] && quizAnswers[type].answers[0].find(a => a.field === 'FirstName').value
+    }
+
+    return {
+      page: pages.find(page => page.name === 'quiz'),
+      quiz: quizQuestions,
+      quizType: type,
+      isFirst: id === '0',
+      answer,
+      firstName
+    }
   }
-}
+)
 
 export default withRouter(
   compose(
-    // firestoreConnect([{ collection: 'quiz' }]),
     connect(
       mapStateToProps,
       {

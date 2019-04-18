@@ -2,6 +2,7 @@ import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import ContactPage from './contact'
 import CoreLayout from '../layouts/CoreLayout'
+import { createSelector } from 'reselect'
 import FAQPage from './faq'
 import { getPages } from '../redux/actions/pages'
 import HomePage from './main'
@@ -51,11 +52,14 @@ CreateRoutes.defaultProps = {
   pages: undefined
 }
 
-function mapStateToProps({ pages }) {
-  return {
-    pages
+const mapStateToProps = createSelector(
+  [state => state.pages],
+  function (pages) {
+    return {
+      pages
+    }
   }
-}
+)
 
 export default connect(
   mapStateToProps,

@@ -4,6 +4,7 @@ import arrowleft from '../../../../images/arrow-left.png'
 import arrowRight from '../../../../images/arrow-right.png'
 import Carousel from 'react-bootstrap/Carousel'
 import { connect } from 'react-redux'
+import { createSelector } from 'reselect'
 import { getCarousel } from '../../../../redux/actions/carousel'
 import PreloadImage from 'react-preload-image'
 import PropTypes from 'prop-types'
@@ -84,11 +85,14 @@ MainCarousel.defaultProps = {
   items: []
 }
 
-function mapStateToProps({ carousel }) {
-  return {
-    items: carousel
+const mapStateToProps = createSelector(
+  [state => state.carousel],
+  function (items) {
+    return {
+      items
+    }
   }
-}
+)
 
 export default connect(
   mapStateToProps,

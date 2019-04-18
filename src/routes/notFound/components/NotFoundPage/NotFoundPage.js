@@ -2,6 +2,7 @@ import { css, StyleSheet } from 'aphrodite/no-important'
 import React, { PureComponent } from 'react'
 import Button from 'react-bootstrap/Button'
 import { connect } from 'react-redux'
+import { createSelector } from 'reselect'
 import PoweredBySkoutLogo from '../../../../library/components/logos/PoweredBySkoutLogo'
 import PreloadImage from 'react-preload-image'
 import PropTypes from 'prop-types'
@@ -86,11 +87,14 @@ const styles = StyleSheet.create({
   }
 })
 
-function mapStateToProps({ pages }) {
-  return {
-    page: pages.find(page => page.name === '404')
+const mapStateToProps = createSelector(
+  [state => state.pages],
+  function (pages) {
+    return {
+      page: pages.find(page => page.name === '404')
+    }
   }
-}
+)
 
 NotFoundPage.propTypes = {
   page: PropTypes.shape({

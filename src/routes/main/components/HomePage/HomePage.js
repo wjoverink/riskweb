@@ -2,6 +2,7 @@ import { css, StyleSheet } from 'aphrodite/no-important'
 import React, { lazy, PureComponent, Suspense } from 'react'
 import Cards from '../../../../library/components/cardGroup/CardGroup'
 import { connect } from 'react-redux'
+import { createSelector } from 'reselect'
 import Footer from '../../../../containers/Footer'
 import Header from '../Header'
 import MiniLoader from '../../../../library/components/miniLoader/MiniLoader'
@@ -112,11 +113,14 @@ const styles = StyleSheet.create({
   }
 })
 
-function mapStateToProps({ pages }) {
-  return {
-    page: pages.find(page => page.name === 'mainPage')
+const mapStateToProps = createSelector(
+  [state => state.pages],
+  function (pages) {
+    return {
+      page: pages.find(page => page.name === 'mainPage')
+    }
   }
-}
+)
 
 MainPage.propTypes = {
   page: PropTypes.shape({

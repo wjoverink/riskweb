@@ -21,7 +21,8 @@
     "redux": "^4.0.1",
     "redux-firebase": "^0.3.3",
     "redux-firestore": "^0.7.3",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0"
   },
   "devDependencies": {
     "eslint": "5.12.0",
