@@ -75,9 +75,6 @@ const styles = StyleSheet.create({
   },
   cards: {
     margin: '0px 20px',
-    ':nth-child(1n) .card>div:first-child': {
-      marginLeft: -8
-    },
     ':nth-child(1n) .card': {
       padding: '0 40px',
       '@media (max-width: 500px)': {
