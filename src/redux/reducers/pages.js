@@ -1,7 +1,9 @@
-import pagesJSON from '../../settings/pages'
+import { ADD_PAGES } from '../types'
 
-const pages = (state = pagesJSON.pages, action) => {
+const pages = (state = [], action) => {
   switch (action.type) {
+    case ADD_PAGES:
+      return action.value
     default:
       return state
   }

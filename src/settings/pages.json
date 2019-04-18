@@ -35,34 +35,6 @@
             "text": "Your Cyber insurance policy can always be up to date, providing you with complete peace of mind."
           }
         ]
-      },
-      "block4": {
-        "carousel": [
-          {
-            "id": "id0",
-            "img": "images/gary.png",
-            "size": { "width": 164, "height": 143 },
-            "name": "Gary Vaynerchuk",
-            "company": "VaynerMedia",
-            "text": "SkOUT connected with our team, provided us insights into the risks associated with cyber risk. Their affordable, world class Cyber Risk Insurance has provided our company and employees complete peace of mind."
-          },
-          {
-            "id": "id1",
-            "img": "images/gary.png",
-            "size": { "width": 164, "height": 143 },
-            "name": "Gary Vaynerchuk",
-            "company": "VaynerMedia",
-            "text": "SkOUT connected with our team, provided us insights into the risks associated with cyber risk. Their affordable, world class Cyber Risk Insurance has provided our company and employees complete peace of mind."
-          },
-          {
-            "id": "id2",
-            "img": "images/gary.png",
-            "size": { "width": 164, "height": 143 },
-            "name": "Gary Vaynerchuk",
-            "company": "VaynerMedia",
-            "text": "SkOUT connected with our team, provided us insights into the risks associated with cyber risk. Their affordable, world class Cyber Risk Insurance has provided our company and employees complete peace of mind."
-          }
-        ]
       }
     },
     {

@@ -48,9 +48,9 @@ const styles = StyleSheet.create({
 Cards.propTypes = {
   cards: PropTypes.arrayOf(
     PropTypes.shape({
-      img: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      text: PropTypes.string.isRequired,
+      img: PropTypes.string,
+      title: PropTypes.string,
+      text: PropTypes.string,
       footer: PropTypes.shape({
         text: PropTypes.string,
         url: PropTypes.string,
