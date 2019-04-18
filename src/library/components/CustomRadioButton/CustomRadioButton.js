@@ -53,7 +53,8 @@ CustomRadioButton.propTypes = {
   onChange: PropTypes.func,
   onClick: PropTypes.func,
   style: PropTypes.object,
-  autoFocus: PropTypes.bool
+  autoFocus: PropTypes.bool,
+  tabIndex: PropTypes.number
 }
 
 CustomRadioButton.defaultProps = {
@@ -64,6 +65,8 @@ CustomRadioButton.defaultProps = {
   required: false,
   checked: false,
   style: undefined,
+  autoFocus: false,
+  tabIndex: 0,
   onChange() {},
   onClick() {}
 }
