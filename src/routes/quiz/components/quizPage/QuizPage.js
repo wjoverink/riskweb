@@ -6,9 +6,8 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createSelector } from 'reselect'
 import { getQuiz } from '../../../../redux/actions/quiz'
-import MiniLoader from '../../../../library/components/miniLoader/MiniLoader'
+import ImageLoader from '../../../../library/components/PreloadImage'
 import PoweredBySkoutLogo from '../../../../library/components/logos/PoweredBySkoutLogo'
-import PreloadImage from 'react-preload-image'
 import PropTypes from 'prop-types'
 import Quiz from '../Quiz/Quiz'
 import { withRouter } from 'react-router-dom'
@@ -69,21 +68,17 @@ class QuizPage extends Component {
           )}
 
           <div className={css(styles.mainInfo, styles.popular)}>
-            <PreloadImage
+            <ImageLoader
+              className={css(styles.img)}
               style={{
-                ...img.size,
-                margin: '0 auto',
-                display: 'block',
-                backgroundColor: img.color,
-                position: 'relative',
-                marginBottom: 36
+                backgroundColor: img.color
               }}
+              size={img.size}
               duration="0ms"
-              src={img.src}
+              img={quiz ? img.src : undefined}
               alt={img.alt}
             />
-            {quiz && <Quiz onSubmit={this.onSubmit} firstName={firstName} answer={answer} quiz={quiz} />}
-            {!quiz && <MiniLoader />}
+            <Quiz onSubmit={this.onSubmit} firstName={firstName} answer={answer} quiz={quiz} />
             <PoweredBySkoutLogo className={`${css(styles.skout)} d-lg-block`} />
           </div>
         </div>
@@ -95,6 +90,12 @@ class QuizPage extends Component {
 const styles = StyleSheet.create({
   skout: {
     margin: '300px auto 0 auto'
+  },
+  img: {
+    position: 'relative',
+    marginBottom: 36,
+    margin: '0 auto 10px auto',
+    display: 'block'
   },
   backLink: {
     width: 90,

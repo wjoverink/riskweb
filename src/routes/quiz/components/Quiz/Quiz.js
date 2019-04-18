@@ -3,8 +3,10 @@ import React, { Component } from 'react'
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
+import getText from '../../../../library/util/skeletonText'
 import PropTypes from 'prop-types'
 import QuizFormControl from './QuizFormControl'
+import SkeletonLoader from '../../../../library/components/SkeletonLoader'
 
 class Quiz extends Component {
   constructor(props) {
@@ -61,7 +63,7 @@ class Quiz extends Component {
     let autoFocus = true
     return (
       <React.Fragment>
-        <h1 className={css(styles.quiz)}>{question}</h1>
+        <h1 className={css(styles.quiz)}>{getText(question, 2)}</h1>
 
         <Form onSubmit={this.formSubmit} className={css(styles.form)}>
           <Form.Row>
@@ -95,6 +97,7 @@ class Quiz extends Component {
                     })}
                 </Form.Group>
               ))}
+            {!hasGroups && <SkeletonLoader widthRandomness={0} width={'400px'} height={'38px'} count={1} />}
           </Form.Row>
           {hasButtons &&
             quiz.buttons.map(item => (
@@ -111,6 +114,7 @@ class Quiz extends Component {
                 {item.text}
               </Button>
             ))}
+          {!hasButtons && <SkeletonLoader widthRandomness={0} width={'200px'} height={'38px'} count={1} />}
         </Form>
       </React.Fragment>
     )
@@ -134,6 +138,7 @@ const styles = StyleSheet.create({
   },
   quiz: {
     fontSize: 62,
+    minWidth: 300,
     '@media (max-width: 768px)': {
       fontSize: 38
     }

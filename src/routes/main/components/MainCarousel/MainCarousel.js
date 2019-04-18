@@ -6,7 +6,9 @@ import Carousel from 'react-bootstrap/Carousel'
 import { connect } from 'react-redux'
 import { createSelector } from 'reselect'
 import { getCarousel } from '../../../../redux/actions/carousel'
-import PreloadImage from 'react-preload-image'
+import getText from '../../../../library/util/skeletonText'
+import ImageLoader from '../../../../library/components/PreloadImage'
+import { isEmpty } from 'lodash'
 import PropTypes from 'prop-types'
 
 class MainCarousel extends PureComponent {
@@ -17,7 +19,8 @@ class MainCarousel extends PureComponent {
   }
 
   render() {
-    const { items } = this.props
+    const items = isEmpty(this.props.items) ? [{}] : this.props.items
+
     return (
       <Carousel
         nextIcon={<img alt="next slide" src={arrowRight} />}
@@ -27,21 +30,19 @@ class MainCarousel extends PureComponent {
       >
         {items.map(item => (
           <Carousel.Item key={item.id}>
-            <PreloadImage
+            <ImageLoader
               style={{
-                ...item.size,
-                margin: '0 auto',
-                display: 'block',
-                backgroundColor: '#ddd',
-                position: 'relative'
+                backgroundColor: '#ddd'
               }}
-              src={item.img}
+              className={css(styles.img)}
+              size={item.size || { width: 150, height: 150 }}
+              img={item.img}
               alt={item.name}
             />
             <Carousel.Caption>
-              <p>{`« ${item.text} »`}</p>
-              <p className={css(styles.name)}>{item.name}</p>
-              {item.company && <p className={css(styles.company)}>{item.company}</p>}
+              <p>{getText(item.text ? `« ${item.text} »` : undefined, 3)}</p>
+              <p className={css(styles.name)}>{getText(item.name)}</p>
+              {item.company && <p className={css(styles.company)}>{getText(item.company)}</p>}
             </Carousel.Caption>
           </Carousel.Item>
         ))}
@@ -63,6 +64,11 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 21
   },
+  img: {
+    margin: '0 auto',
+    display: 'block',
+    position: 'relative'
+  },
   company: {
     fontSize: 12,
     color: '#bebebe'
@@ -75,14 +81,18 @@ MainCarousel.propTypes = {
       img: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       text: PropTypes.string.isRequired,
-      company: PropTypes.string
+      company: PropTypes.string,
+      size: PropTypes.shape({
+        width: PropTypes.number.isRequired,
+        height: PropTypes.number.isRequired
+      })
     })
   ),
   getCarousel: PropTypes.func.isRequired
 }
 
 MainCarousel.defaultProps = {
-  items: []
+  items: [{}]
 }
 
 const mapStateToProps = createSelector(

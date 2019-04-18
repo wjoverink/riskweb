@@ -16,15 +16,7 @@ class ProductCardGroup extends PureComponent {
 
   render() {
     const { products } = this.props
-    const loadProducts =
-      products.length > 0
-        ? products
-        : [
-            { img: '', isLoading: true },
-            { img: '', isLoading: true },
-            { img: '', isLoading: true },
-            { img: '', isLoading: true }
-        ]
+    const loadProducts = products.length > 0 ? products : [{}, {}, {}, {}]
     return <Cards className={css(styles.cardsProducts)} cards={loadProducts} size={{ width: 233, height: 296 }} />
   }
 }
@@ -64,14 +56,14 @@ ProductCardGroup.propTypes = {
 }
 
 ProductCardGroup.defaultProps = {
-  products: undefined
+  products: []
 }
 
 const mapStateToProps = createSelector(
   [state => state.products],
   function (products) {
     return {
-      products: take(products,4).map(product => ({
+      products: take(products, 4).map(product => ({
         title: product.name,
         text: product.text,
         img: product.img,

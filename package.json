@@ -17,6 +17,7 @@
     "react-redux-firebase": "latest",
     "react-router-dom": "^5.0.0",
     "react-scripts": "^2.1.8",
+    "react-skeleton-loader": "^1.0.4",
     "react-social-icons": "^4.1.0",
     "redux": "^4.0.1",
     "redux-firebase": "^0.3.3",
