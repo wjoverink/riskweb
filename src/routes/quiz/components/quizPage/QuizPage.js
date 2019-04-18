@@ -61,7 +61,7 @@ class QuizPage extends Component {
     return (
       <main>
         <div className={css(styles.border)}>
-          {!isFirst && (
+          {isFirst && (
             <button className={css(styles.backLink)} onClick={history.goBack}>
               <img className={css(styles.arrowLeft)} alt="previous question" src={arrowleft} />
             </button>
@@ -74,7 +74,7 @@ class QuizPage extends Component {
                 backgroundColor: img.color
               }}
               size={img.size}
-              duration="0ms"
+              duration={!isFirst ? '0ms' : '150ms'}
               img={quiz ? img.src : undefined}
               alt={img.alt}
             />
