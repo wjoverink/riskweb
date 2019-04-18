@@ -1,9 +1,5 @@
-import { lazy } from 'react'
+import RoutePage from './components/RoutePage'
 
-const QuizPage = lazy(() => import('./components/QuizPage'))
 export default {
-  path: '/quiz',
-  pathWithId: '/quiz/:type',
-  pathWithTypeAndId: '/quiz/:type/:id',
-  component: QuizPage
+  component: RoutePage
 }

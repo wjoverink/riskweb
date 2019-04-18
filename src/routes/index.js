@@ -25,13 +25,16 @@ class CreateRoutes extends React.PureComponent {
       <CoreLayout>
         <Switch>
           <Route exact path={HomePage.path} component={HomePage.component} />
-          <Route path={FAQPage.path} component={FAQPage.component} />
-          <Route path={SupportPage.path} component={SupportPage.component} />
-          <Route path={ContactPage.path} component={ContactPage.component} />
-          <Route path={ProductPage.path} component={ProductPage.component} />
-          <Route exact path={QuizPage.pathWithTypeAndId} component={QuizPage.component} />
-          <Route exact path={QuizPage.pathWithId} component={QuizPage.component} />
-          <Route exact path={QuizPage.path} component={QuizPage.component} />
+          {[
+            FAQPage,
+            SupportPage,
+            ContactPage,
+            ProductPage,
+            QuizPage
+            /* Add More Routes Here */
+          ].map((settings, index) => (
+            <Route key={`Route-${index}`} {...settings} />
+          ))}
           <Route component={NotFoundPage.component} />
         </Switch>
       </CoreLayout>
