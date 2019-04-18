@@ -4,10 +4,17 @@ import arrowleft from '../../../../images/arrow-left.png'
 import arrowRight from '../../../../images/arrow-right.png'
 import Carousel from 'react-bootstrap/Carousel'
 import { connect } from 'react-redux'
+import { getCarousel } from '../../../../redux/actions/carousel'
 import PreloadImage from 'react-preload-image'
 import PropTypes from 'prop-types'
 
 class MainCarousel extends PureComponent {
+  componentDidMount() {
+    if (this.props.items.length === 0) {
+      this.props.getCarousel()
+    }
+  }
+
   render() {
     const { items } = this.props
     return (
@@ -69,17 +76,21 @@ MainCarousel.propTypes = {
       text: PropTypes.string.isRequired,
       company: PropTypes.string
     })
-  )
+  ),
+  getCarousel: PropTypes.func.isRequired
 }
 
 MainCarousel.defaultProps = {
   items: []
 }
 
-function mapStateToProps({ pages }) {
+function mapStateToProps({ carousel }) {
   return {
-    items: pages.find(page => page.name === 'mainPage').block4.carousel
+    items: carousel
   }
 }
 
-export default connect(mapStateToProps)(MainCarousel)
+export default connect(
+  mapStateToProps,
+  { getCarousel }
+)(MainCarousel)

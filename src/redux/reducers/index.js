@@ -1,4 +1,5 @@
 import 'firebase/firestore' // make sure you add this for firestore
+import carousel from './carousel'
 import { combineReducers } from 'redux'
 import { firebaseReducer } from 'react-redux-firebase'
 import { firestoreReducer } from 'redux-firestore'
@@ -14,6 +15,7 @@ export default combineReducers({
   quiz,
   quizAnswers,
   socials,
+  carousel,
   firebase: firebaseReducer,
   firestore: firestoreReducer
 })
