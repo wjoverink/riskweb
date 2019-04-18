@@ -14,7 +14,8 @@ const quizAnswers = (state = [], action) => {
           ['answers']: {
             ...prod.answers,
             [action.value.question]: action.value.answers
-          }
+          },
+          ['id']: action.value.id
         }
       }
     case ADD_ANSWER_ID:
