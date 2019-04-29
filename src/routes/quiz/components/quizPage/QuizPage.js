@@ -62,7 +62,7 @@ class QuizPage extends Component {
       history,
       firstName
     } = this.props
-
+    const imgSize = img.size
     return (
       <main>
         <div className={css(styles.border)}>
@@ -78,7 +78,7 @@ class QuizPage extends Component {
               style={{
                 backgroundColor: img.color
               }}
-              size={img.size}
+              size={imgSize}
               duration={!isFirst ? '0ms' : '150ms'}
               img={quiz ? img.src : undefined}
               alt={img.alt}
@@ -100,7 +100,11 @@ const styles = StyleSheet.create({
     position: 'relative',
     marginBottom: 36,
     margin: '0 auto 10px auto',
-    display: 'block'
+    display: 'block',
+    '@media (max-width: 768px)': {
+      maxWidth: 100,
+      maxHeight: 100
+    }
   },
   backLink: {
     width: 90,
@@ -133,7 +137,10 @@ const styles = StyleSheet.create({
     borderTop: 0,
     padding: '54px 0px 100px 0px',
     marginTop: -1,
-    backgroundColor: '#f6f6f6'
+    backgroundColor: '#f6f6f6',
+    '@media (max-width: 768px)': {
+      padding: '0px 0px 100px 0px'
+    }
   }
 })
 

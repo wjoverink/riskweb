@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     fontSize: 62,
     minWidth: 300,
     '@media (max-width: 768px)': {
-      fontSize: 38
+      fontSize: 24
     }
   },
   form: {
@@ -125,6 +125,9 @@ const styles = StyleSheet.create({
       '@media (max-width: 500px)': {
         flexDirection: 'column'
       }
+    },
+    '@media (max-width: 768px)': {
+      margin: '30px auto'
     }
   }
 })
