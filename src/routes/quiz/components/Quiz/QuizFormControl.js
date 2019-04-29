@@ -11,6 +11,12 @@ class QuizFormControl extends React.Component {
       value: this.props.value,
       oldvalue: this.props.value
     }
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick(ev) {
+    this.setState({ value: ev.target.checked })
+    this.props.onClick(ev)
   }
 
   static getDerivedStateFromProps(nextProps, state) {
@@ -26,30 +32,45 @@ class QuizFormControl extends React.Component {
   render() {
     const { label, type, inputValue, onClick, name, ...other } = this.props
     const { value } = this.state
-    if (type === 'radio') {
-      return (
-        <CustomRadioButton
-          {...other}
-          checked={!!(value && inputValue && value === inputValue)}
-          label={label}
-          autoComplete={name}
-          name={name}
-          value={inputValue}
-          onClick={onClick}
-        />
-      )
+    switch (type) {
+      case 'radio':
+        return (
+          <CustomRadioButton
+            {...other}
+            checked={!!(value && inputValue && value === inputValue)}
+            label={label}
+            autoComplete={name}
+            name={name}
+            value={inputValue}
+            onClick={onClick}
+          />
+        )
+      case 'checkbox':
+        return (
+          <Form.Check
+            {...other}
+            autoComplete={name}
+            name={name}
+            label={label}
+            onChange={this.handleClick}
+            checked={!!value}
+            value={value}
+            type={type}
+          />
+        )
+      default:
+        return (
+          <Form.Control
+            {...other}
+            autoComplete={name}
+            name={name}
+            onChange={onClick}
+            value={value}
+            type={type}
+            placeholder={label}
+          />
+        )
     }
-    return (
-      <Form.Control
-        {...other}
-        autoComplete={name}
-        name={name}
-        onChange={onClick}
-        value={value}
-        type={type}
-        placeholder={label}
-      />
-    )
   }
 }
 
