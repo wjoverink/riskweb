@@ -60,7 +60,7 @@ class Quiz extends Component {
     const hasGroups = quiz && quiz.groups
     const hasButtons = quiz && quiz.buttons
     let tabindex = 1
-    let autoFocus = true
+
     return (
       <React.Fragment>
         <h1 className={css(styles.quiz)}>{getText(question, 2)}</h1>
@@ -74,8 +74,7 @@ class Quiz extends Component {
                     group.map(item => {
                       const an = answer && answer.find(a => a.field === item.field)
                       const value = an && an.value
-                      const focus = autoFocus
-                      autoFocus = false
+
                       return (
                         <QuizFormControl
                           key={item.placeHolder.trim()}
@@ -84,7 +83,6 @@ class Quiz extends Component {
                           onClick={ev => {
                             this.handleClick(ev, item.field, item.type !== 'radio' ? ev.target.value : item.value)
                           }}
-                          autoFocus={focus}
                           tabIndex={tabindex++}
                           style={item.style}
                           type={item.type}
@@ -155,7 +153,7 @@ const styles = StyleSheet.create({
 })
 
 Quiz.propTypes = {
-  quiz: PropTypes.object.isRequired,
+  quiz: PropTypes.object,
   answer: PropTypes.object,
   onSubmit: PropTypes.func,
   firstName: PropTypes.string

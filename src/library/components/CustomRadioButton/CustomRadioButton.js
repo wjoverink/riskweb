@@ -22,7 +22,7 @@ class CustomRadioButton extends React.PureComponent {
   }
 
   render() {
-    const { className, label, value, name, required, onClick, style, autoFocus, tabIndex } = this.props
+    const { className, label, value, name, required, onClick, style, autoFocus, autoComplete, tabIndex } = this.props
     return (
       <label style={style} className={`customRadioButton ${className}`}>
         {label}
@@ -36,6 +36,7 @@ class CustomRadioButton extends React.PureComponent {
           name={name}
           value={value}
           tabIndex={tabIndex}
+          autoComplete={autoComplete}
         />
         <span className="checkmark" />
       </label>
@@ -44,6 +45,7 @@ class CustomRadioButton extends React.PureComponent {
 }
 
 CustomRadioButton.propTypes = {
+  autoComplete: PropTypes.string,
   className: PropTypes.string,
   label: PropTypes.string,
   name: PropTypes.string,
@@ -58,6 +60,7 @@ CustomRadioButton.propTypes = {
 }
 
 CustomRadioButton.defaultProps = {
+  autoComplete: undefined,
   className: undefined,
   label: '',
   name: undefined,

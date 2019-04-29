@@ -3,19 +3,35 @@ import Form from 'react-bootstrap/Form'
 import PropTypes from 'prop-types'
 import React from 'react'
 //checked="checked"
-function QuizFormControl({ label, value, type, inputValue, onClick, ...other }) {
-  if (type === 'radio') {
+
+class QuizFormControl extends React.Component {
+  render() {
+    const { label, value, type, inputValue, onClick, name, ...other } = this.props
+    if (type === 'radio') {
+      return (
+        <CustomRadioButton
+          {...other}
+          checked={!!(value && inputValue && value === inputValue)}
+          label={label}
+          autoComplete={name}
+          name={name}
+          value={inputValue}
+          onClick={onClick}
+        />
+      )
+    }
     return (
-      <CustomRadioButton
+      <Form.Control
         {...other}
-        checked={!!(value && inputValue && value === inputValue)}
-        label={label}
-        value={inputValue}
-        onClick={onClick}
+        autoComplete={name}
+        name={name}
+        onChange={onClick}
+        value={value}
+        type={type}
+        placeholder={label}
       />
     )
   }
-  return <Form.Control onChange={onClick} {...other} value={value} type={type} placeholder={label} />
 }
 
 QuizFormControl.propTypes = {

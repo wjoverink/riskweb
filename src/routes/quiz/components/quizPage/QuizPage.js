@@ -171,7 +171,7 @@ const mapStateToProps = createSelector(
     let answer, firstName
     if (quizAnswers[type]) {
       answer = quizAnswers[type].answers[id]
-      firstName = quizAnswers[type].answers[0] && quizAnswers[type].answers[0].find(a => a.field === 'FirstName').value
+      firstName = quizAnswers[type].answers[0] && quizAnswers[type].answers[0].find(a => a.field === 'given-name').value
     }
 
     return {
