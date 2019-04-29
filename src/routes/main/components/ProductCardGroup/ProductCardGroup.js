@@ -48,7 +48,7 @@ ProductCardGroup.propTypes = {
       img: PropTypes.string,
       footer: PropTypes.shape({
         url: PropTypes.string,
-        buttonText: PropTypes.object
+        buttonText: PropTypes.string
       })
     })
   ),

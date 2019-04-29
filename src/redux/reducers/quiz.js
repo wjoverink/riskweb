@@ -7,7 +7,7 @@ import { ADD_QUIZ } from '../types'
 
 const quiz = (
   //state = { ...analyticsJSON, ...brokerageJSON, ...carrierJSON, ...genericJSON, ...insuranceJSON },
-  state = {},
+  state = [],
   action
 ) => {
   switch (action.type) {

@@ -31,7 +31,12 @@ class QuizPage extends Component {
 
     const data = new FormData(ev.target)
 
-    var arr = Array.from(data.entries()).map(item => ({ field: item[0], value: item[1] }))
+    var arr = Array.from(data.entries()).reduce(function (result, item) {
+      if (item[1]) {
+        result.push({ field: item[0], value: item[1] })
+      }
+      return result
+    }, [])
     this.props.addAnswer(arr, quiz.id, quizType)
 
     const button = quiz.buttons[0]
@@ -61,7 +66,7 @@ class QuizPage extends Component {
     return (
       <main>
         <div className={css(styles.border)}>
-          {isFirst && (
+          {!isFirst && (
             <button className={css(styles.backLink)} onClick={history.goBack}>
               <img className={css(styles.arrowLeft)} alt="previous question" src={arrowleft} />
             </button>
@@ -134,7 +139,7 @@ const styles = StyleSheet.create({
 
 QuizPage.propTypes = {
   addAnswer: PropTypes.func.isRequired,
-  answer: PropTypes.object,
+  answer: PropTypes.array,
   firstName: PropTypes.string,
   history: PropTypes.object.isRequired,
   getQuiz: PropTypes.func.isRequired,

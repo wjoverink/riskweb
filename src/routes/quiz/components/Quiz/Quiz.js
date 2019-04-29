@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import getText from '../../../../library/util/skeletonText'
+import { isArray } from 'lodash'
 import PropTypes from 'prop-types'
 import QuizFormControl from './QuizFormControl'
 import SkeletonLoader from '../../../../library/components/SkeletonLoader'
@@ -16,32 +17,9 @@ class Quiz extends Component {
     this.handleClick = this.handleClick.bind(this)
 
     this.submitButtonRef = React.createRef()
-
-    this.state = {
-      answer: this.props.answer,
-      oldanswer: this.props.answer
-    }
   }
 
-  static getDerivedStateFromProps(nextProps, state) {
-    if (nextProps.answer && nextProps.answer !== state.oldanswer) {
-      return {
-        answer: nextProps.answer,
-        oldanswer: nextProps.answer
-      }
-    }
-    return state
-  }
-
-  handleClick(checked, field, value) {
-    let answer = []
-    if (this.state.answer) {
-      answer = this.state.answer.filter(a => a.field !== field)
-    }
-
-    answer.push({ field, value })
-    this.setState({ answer })
-
+  handleClick() {
     const { quiz } = this.props
     if (quiz.buttons[0] && quiz.buttons[0].hidden) {
       this.submitButtonRef.current.click()
@@ -54,11 +32,10 @@ class Quiz extends Component {
   }
 
   render() {
-    const { quiz, firstName } = this.props
-    const { answer } = this.state
+    const { answer, quiz, firstName } = this.props
     const question = quiz && quiz.question.replace('FirstName', firstName)
-    const hasGroups = quiz && quiz.groups
-    const hasButtons = quiz && quiz.buttons
+    const hasGroups = quiz && isArray(quiz.groups)
+    const hasButtons = quiz && isArray(quiz.buttons)
     let tabindex = 1
 
     return (
@@ -80,9 +57,7 @@ class Quiz extends Component {
                           key={item.placeHolder.trim()}
                           value={value}
                           inputValue={item.value}
-                          onClick={ev => {
-                            this.handleClick(ev, item.field, item.type !== 'radio' ? ev.target.value : item.value)
-                          }}
+                          onClick={this.handleClick}
                           tabIndex={tabindex++}
                           style={item.style}
                           type={item.type}
@@ -95,7 +70,9 @@ class Quiz extends Component {
                     })}
                 </Form.Group>
               ))}
-            {!hasGroups && <SkeletonLoader widthRandomness={0} width={'400px'} height={'38px'} count={1} />}
+            {!hasGroups && !hasButtons && (
+              <SkeletonLoader widthRandomness={0} width={'400px'} height={'38px'} count={1} />
+            )}
           </Form.Row>
           {hasButtons &&
             quiz.buttons.map(item => (
@@ -154,7 +131,7 @@ const styles = StyleSheet.create({
 
 Quiz.propTypes = {
   quiz: PropTypes.object,
-  answer: PropTypes.object,
+  answer: PropTypes.array,
   onSubmit: PropTypes.func,
   firstName: PropTypes.string
 }

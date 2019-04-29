@@ -19,7 +19,7 @@ class MainCarousel extends PureComponent {
   }
 
   render() {
-    const items = isEmpty(this.props.items) ? [{}] : this.props.items
+    const items = isEmpty(this.props.items) ? [] : this.props.items
 
     return (
       <Carousel

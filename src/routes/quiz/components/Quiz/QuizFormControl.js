@@ -5,8 +5,27 @@ import React from 'react'
 //checked="checked"
 
 class QuizFormControl extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      value: this.props.value,
+      oldvalue: this.props.value
+    }
+  }
+
+  static getDerivedStateFromProps(nextProps, state) {
+    if (nextProps.value && nextProps.value !== state.oldvalue) {
+      return {
+        value: nextProps.value,
+        oldvalue: nextProps.value
+      }
+    }
+    return state
+  }
+
   render() {
-    const { label, value, type, inputValue, onClick, name, ...other } = this.props
+    const { label, type, inputValue, onClick, name, ...other } = this.props
+    const { value } = this.state
     if (type === 'radio') {
       return (
         <CustomRadioButton
