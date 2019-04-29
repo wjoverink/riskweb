@@ -1,7 +1,7 @@
 import { css, StyleSheet } from 'aphrodite/no-important'
 import React, { Component } from 'react'
 import { addAnswer } from '../../../../redux/actions/answers'
-import arrowleft from '../../../../images/arrow-left.png'
+import arrowleft from '../../../../images/icon-left-arrow.svg'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createSelector } from 'reselect'
