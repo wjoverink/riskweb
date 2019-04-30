@@ -1,0 +1,12 @@
+/* TEAM */
+	UI developer: Willem-Jan Overink
+	From:Regensburg, Bavaria, Germany
+
+  Designer: Matt Hogan
+	From:Regensburg, Bavaria, Germany
+
+/* SITE */
+	Last update:2019/04/30
+	Language:English
+	Doctype:HTML5
+	IDE: VisualStudio Code, Photoshop, Sketch
